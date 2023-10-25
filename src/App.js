@@ -11,8 +11,7 @@ function App() {
       <NavBar />
       <Suspense>
         <Routes>
-          <Route exact path="/" element={<Navigate replace="/home" />} />
-
+          <Route exact path="/" element={<Navigate replace to="/home" />} />
           <Route exact path="/home" element={<HomePage />}>
             <Route path=":matricule" element={<Employee />} />
           </Route>

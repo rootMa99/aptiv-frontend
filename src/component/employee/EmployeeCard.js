@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux";
 import c from "./EmployeeCard.module.css";
 import EmployeeFormation from "./EmployeeFormation";
 
 const EmployeeCard = (p) => {
+
+  const empl= useSelector((s) => s.empls );
+  console.log(empl);
+
   return (
     <div className={c.wrapper}>
       <h1>Employee</h1>
@@ -22,31 +27,31 @@ const EmployeeCard = (p) => {
         <tbody>
           <tr>
             <td>
-              <div>{p.matricule} </div>
+              <div>{empl.empl.matricule} </div>
             </td>
             <td>
-              <div>{p.nom} </div>
+              <div>{empl.empl.nom} </div>
             </td>
             <td>
-              <div>{p.prenom} </div>
+              <div>{empl.empl.prenom} </div>
             </td>
             <td>
-              <div>{p.cin} </div>
+              <div>{empl.empl.cin} </div>
             </td>
             <td>
-              <div>{p.categorie}</div>
+              <div>{empl.empl.categorie}</div>
             </td>
             <td>
-              <div>{p.fonctionEntreprise}</div>
+              <div>{empl.empl.fonctionEntreprise}</div>
             </td>
             <td>
-              <div>{p.departement}</div>
+              <div>{empl.empl.departement}</div>
             </td>
             <td>
-              <div>{p.dateEmbauche}</div>
+              <div>{empl.empl.dateEmbauche}</div>
             </td>
             <td>
-              <div>{p.dateDepart}</div>
+              <div>{empl.empl.dateDepart}</div>
             </td>
           </tr>
         </tbody>
@@ -69,7 +74,7 @@ const EmployeeCard = (p) => {
           </tr>
         </thead>
         <tbody>
-          {p.formations.map((m) => (
+          {empl.empl.formations.map((m) => (
             <EmployeeFormation
               key={m.formationId}
               id={m.formationId}

@@ -4,7 +4,7 @@
     background-color: rgba(192, 192, 192, 0);
     backdrop-filter: blur(6px);
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     top: 0;
     left: 0;
     animation: backdrop 1s ease-out forwards;
