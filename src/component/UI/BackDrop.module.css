@@ -1,0 +1,21 @@
+.backdrop{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0);
+    backdrop-filter: blur(6px);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    animation: backdrop 1s ease-out forwards;
+}
+@keyframes backdrop {
+    from{
+        opacity: 0;
+        transform: translateX(20rem);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
