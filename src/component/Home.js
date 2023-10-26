@@ -10,11 +10,12 @@ const Home = (p) => {
 
   const onChangeHandler = (e) => {
     setTyping(true);
-    setValue(+e.target.value);
     console.log(+e.target.value + 1);
 
-    if (+e.target.value === 0) {
+    if (e.target.value.trim() === "") {
       setTyping(false);
+    } else {
+      setValue(+e.target.value);
     }
   };
   const onBlurHandler = (e) => {
@@ -23,9 +24,9 @@ const Home = (p) => {
     }
   };
   const onClickHandler = (e) => {
-    navigate(`/home/${value}`);
-    setValue("");
     setTyping(false);
+    setValue("");
+    navigate(`/home/${value}`);
   };
 
   const classBtn = !typing ? c.buttonOut : c.buttonIn;
@@ -40,7 +41,6 @@ const Home = (p) => {
             <h1>The Bridge to Success: Training and Transformation</h1>
             <input
               type="number"
-              value={value}
               placeholder="Search By matricule"
               onChange={onChangeHandler}
               onBlur={onBlurHandler}

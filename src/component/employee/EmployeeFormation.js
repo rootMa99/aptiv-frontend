@@ -1,19 +1,26 @@
 import { Fragment } from "react";
 import c from "./EmployeeFormation.module.css";
 
-
 const EmployeeFormation = (p) => {
-
-
-  const onclickHandler =e=>{
+  const onclickHandler = (e) => {
     p.onSetId(p.id);
-  }
-
- 
+  };
+  const onEditHandler = (e) => {
+    p.onSetIdEdit({
+      formationId:p.id,
+      type: p.type,
+      categorieFormation: p.categorieFormation,
+      modalite: p.modalite,
+      dureePerHour: p.duree,
+      dateDebut: p.debut,
+      dateFin: p.fin,
+      presentataire: p.presentataire,
+      formatteur: p.formatteur,
+    });
+  };
 
   return (
     <Fragment>
-      
       <tr>
         <td>
           <div>{p.type} </div>
@@ -52,8 +59,12 @@ const EmployeeFormation = (p) => {
       <tr>
         <td colSpan="11">
           <div className={c.btnContainer}>
-            <button className={c.delete} onClick={onclickHandler}>delete</button>
-            <button className={c.edit}>edit</button>
+            <button className={c.delete} onClick={onclickHandler}>
+              delete
+            </button>
+            <button className={c.edit} onClick={onEditHandler}>
+              edit
+            </button>
           </div>
         </td>
       </tr>

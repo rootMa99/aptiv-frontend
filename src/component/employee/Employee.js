@@ -4,6 +4,7 @@ import Loading from "../UI/Loading";
 import c from "./Employee.module.css";
 import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
+import { useParams } from "react-router-dom";
 
 const EMPLOYEE_DEMO = {
   matricule: 5,
@@ -68,18 +69,26 @@ const EMPLOYEE_DEMO = {
     },
   },
 };
+let i=1;
 const Employee = (p) => {
+  console.log('this comp is runnig for: '+i);
+  i++;
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const { matricule }=useParams();
+  console.log(matricule);
 
   const callback = useCallback(() => {
+    console.log("callback running...");
+    setIsLoading(true);
     dispatch(EmployeeSlice.actions.addEmployee(EMPLOYEE_DEMO));
+    setIsLoading(false);
   }, [dispatch]);
 
   useEffect(() => {
+    console.log("useEffect running...");
     callback();
-    console.log("effect runing");
-  });
+  }, [callback]);
 
   return (
     <div className={c.container}>

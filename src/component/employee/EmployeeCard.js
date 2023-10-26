@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { useSelector } from "react-redux";
 import c from "./EmployeeCard.module.css";
 import EmployeeFormation from "./EmployeeFormation";
@@ -6,22 +8,31 @@ import BackDrop from "../UI/BackDrop";
 import DeleteFormation from "./DeleteFormation";
 import EmployeeCardTr from "./EmployeeCardTr";
 import AddFormationForm from "./AddFormationForm";
+import EditFormation from './EditFormation';
 
 const EmployeeCard = (p) => {
   const [notify, setNotify] = useState(false);
   const [showForm, setShowFrom]= useState(false);
   const [idDel, setIdDel] = useState();
+  const [idEdit, setIdEdit] = useState();
+  const [showEdit, setShowEdit]= useState(false);
 
   const onSetId = (id) => {
     setIdDel(id);
     setNotify(true);
   };
+  const onSetIdEdit = (formationEdit)=>{
+  console.log("this trigger");
+    setIdEdit(formationEdit);
+    setShowEdit(true);
+  } 
 
   const empl = useSelector((s) => s.empls);
   console.log(empl);
   const onclose = () => {
     setNotify(false);
     setShowFrom(false);
+    setShowEdit(false);
   };
 
   const onAddHandler = (e) => {
@@ -29,13 +40,14 @@ const EmployeeCard = (p) => {
     setShowFrom(true);
   };
 
-  let logic = notify || showForm;
+  let logic = notify || showForm || showEdit;
 
   return (
     <div className={c.wrapper}>
       {logic && <BackDrop click={onclose} />}
       {notify && <DeleteFormation close={onclose} id={idDel} />}
       {showForm && <AddFormationForm id={empl.empl.matricule} close={onclose} />}
+      {showEdit && <EditFormation formationEdit={idEdit} close={onclose} />}
       <h1>Employee</h1>
       <table>
         <thead>
@@ -116,6 +128,7 @@ const EmployeeCard = (p) => {
               eva={m.evaluationAFrois}
               bilan={m.bilan}
               onSetId={onSetId}
+              onSetIdEdit={onSetIdEdit}
             />
           ))}
         </tbody>
@@ -124,4 +137,4 @@ const EmployeeCard = (p) => {
   );
 };
 
-export default EmployeeCard;
+export default React.memo(EmployeeCard);
