@@ -12,10 +12,10 @@
 @keyframes backdrop {
     from{
         opacity: 0;
-        transform: translateX(20rem);
+       
     }
     to{
         opacity: 1;
-        transform: translateX(0);
+       
     }
 }

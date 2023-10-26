@@ -1,132 +1,137 @@
-.mainContainer{
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    min-height: 100%;
-    width:100vw;
-    overflow: hidden;
+.mainContainer {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  min-height: 100%;
+  width: 100vw;
+  overflow: hidden;
 }
-.videoBg{
-    object-fit: cover;
-    position: fixed;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    margin: 6rem 0 0 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
+.videoBg {
+  object-fit: cover;
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  margin: 6rem 0 0 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
 }
-.inputContainer{
-    z-index: 1;
-    height: 100vh;
-    width: 100vw;
-    background-color: #0000006b;
-    position: relative;
+.inputContainer {
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0000006b;
+  position: relative;
 }
-.inputHolder{
-    width: 100vw;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.inputHolder {
+  width: 100vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.inputHolder h1{
-    font-weight: bold;
-    color: whitesmoke;
-    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 2rem;
+.inputHolder h1 {
+  font-weight: bold;
+  color: whitesmoke;
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
 }
-.inputHolder input{
-    padding: 1rem;
-    background-color: rgba(17, 17, 17, 0.37);
-    border: 2px solid rgb(224, 223, 223);
-    border-radius:50px;
-    width: 20rem;
-    font-weight: bold;
-    color: rgb(253, 251, 251);
-    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-    outline: none;
+.inputHolder input {
+  padding: 1rem;
+  background-color: rgba(17, 17, 17, 0.37);
+  border: 2px solid rgb(224, 223, 223);
+  border-radius: 50px;
+  width: 20rem;
+  font-weight: bold;
+  color: rgb(253, 251, 251);
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
 }
 .inputHolder input:hover,
-.inputHolder input:focus-visible{
-    border: 2px solid rgb(131, 13, 13);
+.inputHolder input:focus-visible {
+  border: 2px solid rgb(131, 13, 13);
 }
 .inputHolder input::-webkit-input-placeholder {
-    font-weight: bold;
-    color: rgb(151, 33, 33);
-    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-  
-  }
-  .inputHolder input::-webkit-inner-spin-button,
-  .inputHolder input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  .inputContainer button{
-    padding: 1rem;
-    background-color: rgba(17, 17, 17, 0.37);
-    border: 2px solid rgb(156, 10, 10);
-    color: rgb(151, 33, 33);
-    border-radius:50px;
-    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: bold;
-    margin-left: 1rem;
-    cursor: pointer;
-  }
-  .inputHolder button:hover{
-    border: 2px solid rgb(255, 255, 255);
-    color: rgb(235, 235, 235);
-
+  font-weight: bold;
+  color: rgb(151, 33, 33);
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
 }
-.buttonOut{
-    animation: homeout 1s ease-out forwards;
-
+.inputHolder input::-webkit-inner-spin-button,
+.inputHolder input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
-.buttonIn{
-    animation: home 1s ease-out forwards;
+.inputContainer button {
+  padding: 1rem;
+  background-color: rgba(17, 17, 17, 0.37);
+  border: 2px solid rgb(156, 10, 10);
+  color: rgb(151, 33, 33);
+  border-radius: 50px;
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+.inputHolder button:hover {
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(235, 235, 235);
+}
+.buttonOut {
+  animation: homeout 1s ease-out forwards;
+}
+.buttonIn {
+  animation: home 1s ease-out forwards;
 }
 
-  @keyframes home {
-    0% {
-      opacity: 0;
-      transform: translateX(-3rem);
-      display:none;
-    }
-    50% {
-      opacity: 0.5;
-      transform: translateX(0.5rem);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
+@keyframes home {
+  0% {
+    opacity: 0;
+    transform: translateX(-3rem);
+    display: none;
   }
-  @keyframes homeout {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    50% {
-      opacity: 0.5;
-      transform: translateX(0.5rem);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-3rem);
-      display:none;
-    }
+  50% {
+    opacity: 0.5;
+    transform: translateX(0.5rem);
   }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes homeout {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(0.5rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-3rem);
+    display: none;
+  }
+}

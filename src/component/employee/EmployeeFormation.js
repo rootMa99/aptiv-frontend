@@ -1,28 +1,19 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import c from "./EmployeeFormation.module.css";
-import { useDispatch } from "react-redux";
-import { emplAction } from "../../store/EmployeeSlice";
-import BackDrop from "../UI/BackDrop";
-import DeleteFormation from "./DeleteFormation";
+
 
 const EmployeeFormation = (p) => {
-  const [notify, setNotify]= useState(false);
 
-  const dispatch= useDispatch();
 
   const onclickHandler =e=>{
-    setNotify(true);
-     // dispatch(emplAction.deleteFormation(p.id));
+    p.onSetId(p.id);
   }
-  const onclose=()=>{
-    setNotify(false);
-  }
+
+ 
 
   return (
     <Fragment>
-      {notify && <BackDrop click={onclose}/> }
-      {notify && <DeleteFormation />}
-
+      
       <tr>
         <td>
           <div>{p.type} </div>

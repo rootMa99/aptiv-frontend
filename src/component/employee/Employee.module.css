@@ -10,8 +10,8 @@
   left: 0;
   z-index: 100;
   background-color: rgba(187, 186, 186, 0.521);
-  backdrop-filter: blur(12px);
-  animation: home 1.3s ease-out forwards;
+  backdrop-filter: blur(30px);
+  animation: home 1s ease-out forwards;
 }
 @keyframes home {
   0% {

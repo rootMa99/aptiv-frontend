@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import EmployeeCard from "./EmployeeCard";
 import Loading from "../UI/Loading";
 import c from "./Employee.module.css";
@@ -70,19 +70,20 @@ const EMPLOYEE_DEMO = {
 };
 const Employee = (p) => {
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
+  const callback = useCallback(() => {
     dispatch(EmployeeSlice.actions.addEmployee(EMPLOYEE_DEMO));
+  }, [dispatch]);
+
+  useEffect(() => {
+    callback();
+    console.log("effect runing");
   });
 
   return (
     <div className={c.container}>
-      {!isLoading ? (
-        <EmployeeCard/>
-      ) : (
-        <Loading />
-      )}
+      {!isLoading ? <EmployeeCard /> : <Loading />}
     </div>
   );
 };

@@ -1,0 +1,161 @@
+.form{
+    position: fixed;
+    z-index: 11111;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    background-color: rgba(31, 14, 14, 0.253);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgb(99, 3, 3);
+    border-radius: 1px;
+    width: 26rem;
+    height: 70vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: backdrop 2s ease-out forwards;
+    box-shadow: 5px 5px 15px rgba(53, 22, 22, 0.651);
+}
+.form::-webkit-scrollbar {
+    width: 5px;
+    background-color: #535151;
+  }
+  .form::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #8a0101;
+  }
+  .form h1{
+    color: #e2e0e0;
+  }
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+.inputContainer label{
+    font-weight: bold;
+    color: rgb(151, 33, 33);
+    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align:left;
+    outline: none;
+    margin: 1rem 0;
+}
+
+.inputContainer input,
+.inputContainer select{
+    padding: 0.5rem;
+    background-color: rgba(230, 219, 219, 0.603);
+    border: 2px solid rgb(224, 223, 223);
+    border-radius:5px;
+    width: 20rem;
+    font-weight: bold;
+    color: rgb(83, 71, 71);
+    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    letter-spacing: 2px;
+    text-align: center;
+    outline: none;
+}
+.inputContainer select{
+  width: 21rem;
+}
+.inputContainer input::-webkit-input-placeholder {
+    font-weight:lighter;
+    color: rgb(151, 33, 33);
+    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+  
+  }
+  .inputContainer input::-webkit-inner-spin-button,
+  .inputContainer input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .inputContainer input:hover,
+  .inputContainer select:hover,
+.inputContainer input:focus-visible,
+.inputContainer select:focus-visible {
+  border: 2px solid rgb(131, 13, 13);
+}
+
+  
+  .inputContainer select option {
+    font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    color: #961919;
+   
+  }
+  .error{
+    padding: 0.3rem;
+    background-color: #fa0c0c38;
+    backdrop-filter: blur(6px);
+    color:rgb(245, 196, 196);
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.63);
+    animation: come 3s ease-out forwards, example-animation 2s ease infinite;
+  }
+  @keyframes come {
+    from{
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+  @keyframes example-animation {
+    0% {
+      transform: scale(0.99);
+    }
+    50% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0.99);
+    }
+  }
+  .btnContainer{
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    width: 21rem;
+  }
+
+  .btnContainer button {
+    width: 100%;
+    padding:0.5rem;
+    background-color: rgba(104, 57, 57, 0.37);
+    border: 2px solid rgb(156, 10, 10);
+    color: rgb(156, 10, 10);
+    border-radius: 5px;
+    font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    letter-spacing: 2px;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+  }
+  .btnContainer button:hover {
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgba(24, 13, 13, 0.37);
+    color: rgb(235, 235, 235);
+  }
+  
+
+  @keyframes backdrop {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

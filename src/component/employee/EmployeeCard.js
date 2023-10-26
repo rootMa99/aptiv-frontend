@@ -1,14 +1,41 @@
 import { useSelector } from "react-redux";
 import c from "./EmployeeCard.module.css";
 import EmployeeFormation from "./EmployeeFormation";
+import { useState } from "react";
+import BackDrop from "../UI/BackDrop";
+import DeleteFormation from "./DeleteFormation";
+import EmployeeCardTr from "./EmployeeCardTr";
+import AddFormationForm from "./AddFormationForm";
 
 const EmployeeCard = (p) => {
+  const [notify, setNotify] = useState(false);
+  const [showForm, setShowFrom]= useState(false);
+  const [idDel, setIdDel] = useState();
 
-  const empl= useSelector((s) => s.empls );
+  const onSetId = (id) => {
+    setIdDel(id);
+    setNotify(true);
+  };
+
+  const empl = useSelector((s) => s.empls);
   console.log(empl);
+  const onclose = () => {
+    setNotify(false);
+    setShowFrom(false);
+  };
+
+  const onAddHandler = (e) => {
+    console.log("show form here"+empl.empl.matricule );
+    setShowFrom(true);
+  };
+
+  let logic = notify || showForm;
 
   return (
     <div className={c.wrapper}>
+      {logic && <BackDrop click={onclose} />}
+      {notify && <DeleteFormation close={onclose} id={idDel} />}
+      {showForm && <AddFormationForm id={empl.empl.matricule} close={onclose} />}
       <h1>Employee</h1>
       <table>
         <thead>
@@ -25,33 +52,25 @@ const EmployeeCard = (p) => {
           </tr>
         </thead>
         <tbody>
+          <EmployeeCardTr
+            matricule={empl.empl.matricule}
+            nom={empl.empl.nom}
+            prenom={empl.empl.prenom}
+            cin={empl.empl.cin}
+            categorie={empl.empl.categorie}
+            fonctionEntreprise={empl.empl.fonctionEntreprise}
+            departement={empl.empl.departement}
+            dateEmbauche={empl.empl.dateEmbauche}
+            dateDepart={empl.empl.dateDepart}
+          />
+
           <tr>
-            <td>
-              <div>{empl.empl.matricule} </div>
-            </td>
-            <td>
-              <div>{empl.empl.nom} </div>
-            </td>
-            <td>
-              <div>{empl.empl.prenom} </div>
-            </td>
-            <td>
-              <div>{empl.empl.cin} </div>
-            </td>
-            <td>
-              <div>{empl.empl.categorie}</div>
-            </td>
-            <td>
-              <div>{empl.empl.fonctionEntreprise}</div>
-            </td>
-            <td>
-              <div>{empl.empl.departement}</div>
-            </td>
-            <td>
-              <div>{empl.empl.dateEmbauche}</div>
-            </td>
-            <td>
-              <div>{empl.empl.dateDepart}</div>
+            <td colSpan="9">
+              <div className={c.addbtnholder}>
+                <button className={c.addbtn} onClick={onAddHandler}>
+                  add formation
+                </button>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -74,6 +93,13 @@ const EmployeeCard = (p) => {
           </tr>
         </thead>
         <tbody>
+          {empl.empl.formations.length === 0 && (
+            <tr>
+              <td colSpan="11">
+                <p className={c.notfoundform}>no formation found!</p>
+              </td>
+            </tr>
+          )}
           {empl.empl.formations.map((m) => (
             <EmployeeFormation
               key={m.formationId}
@@ -89,6 +115,7 @@ const EmployeeCard = (p) => {
               formatteur={m.formatteur}
               eva={m.evaluationAFrois}
               bilan={m.bilan}
+              onSetId={onSetId}
             />
           ))}
         </tbody>

@@ -12,9 +12,7 @@ const EmployeeSlice= createSlice({
             departement: "",
             dateEmbauche: "",
             dateDepart: null,
-            formations:[
-              
-            ]}
+            formations:[]}
     },
     reducers:{
         addEmployee(s,p){
@@ -27,6 +25,7 @@ const EmployeeSlice= createSlice({
 
             s.empl.matricule=payload.matricule;
             s.empl.nom= payload.nom;
+            s.empl.prenom= payload.prenom;
             s.empl.cin=payload.cin;
             s.empl.categorie=payload.categorie;
             s.empl.fonctionEntreprise=payload.fonctionEntreprise;
@@ -43,6 +42,16 @@ const EmployeeSlice= createSlice({
             if (existing !== undefined){
                 s.empl.formations = s.empl.formations.filter((f)=>f.formationId !==id );
             }
+        },
+        addFormation(s,p){
+            console.log("this method is running");
+            const matricule=p.payload.matricule;
+            const foramtion= p.payload.formation;
+            console.log(foramtion);
+            s.empl.formations.push(foramtion);
+        },
+        updateFormation(s,p){
+
         }
     }
 })
