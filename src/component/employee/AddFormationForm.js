@@ -2,6 +2,9 @@ import { Fragment, useState } from "react";
 import c from "./AddFormationForm.module.css";
 import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
+import { v4 as generateId } from "uuid";
+
+
 
 const f = {
   formationId: "tYSgcuPesWlZxSYYJBS1xA",
@@ -92,10 +95,11 @@ const AddFormationForm = (p) => {
       return;
     }
     const month = dateDebut.split("-")[1];
+    const id=generateId();
     const payload = {
       matricule: matricule,
       formation: {
-        formationId: Math.random(),
+        formationId: id,
         type: typeFormation,
         categorieFormation: categorieFormation,
         modalite: modalite,
@@ -252,7 +256,7 @@ const AddFormationForm = (p) => {
 
   const onChangeDureePerHour = (e) => {
     const value = e.target.value;
-    if (value.trim() !== "") {
+    if (value.trim() !== "" && /^[0-9]*\.?[0-9]*$/.test(value)) {
       setDureePerHour(+value);
       setClassError((p) => {
         return {
@@ -411,7 +415,7 @@ const AddFormationForm = (p) => {
 
   return (
     <form className={c.form} onSubmit={onSubmitHandler}>
-      <h1>add fromation to employee with matricule: {p.id} </h1>
+      <h1>Add Training for Employee ( {p.id} )</h1>
       <div className={c.inputsContainer}>
         <div className={c.inputContainer}>
           <label htmlFor="categorieFormation">Categorie De Formation</label>
@@ -477,14 +481,14 @@ const AddFormationForm = (p) => {
         <div className={c.inputContainer}>
           <label htmlFor="dureePerHour">Duree Par Heure</label>
           <input
-            type="number"
+            type="text"
             id="dureePerHour"
             placeholder="Please Enter Duree Par Heure"
             onChange={onChangeDureePerHour}
             onBlur={onChangeDureePerHour}
           />
           {classError.dureePerHour && (
-            <p className={c.error}>Please Enter Duree/Heure </p>
+            <p className={c.error}>Please Enter Duree/Heure <br/> Or Incorrect Format</p>
           )}
         </div>
         <div className={c.inputContainer}>

@@ -44,18 +44,6 @@ const EditFormation = (p) => {
     formatteur: false,
     addCat: false,
   }); 
-  //this just for not showing error from the first render of this component
-  const [isEmpty, setIsEmpty] = useState({
-    type: true,
-    categorieFormation: true,
-    modalite: true,
-    dureePerHour: true,
-    dateDebut: true,
-    dateFin: true,
-    presentataire: true,
-    formatteur: true,
-    addCat: true,
-  });
   const dispatch = useDispatch();
   const matricule = p.id;
 
@@ -70,35 +58,16 @@ const EditFormation = (p) => {
       classError.modalite ||
       classError.presentataire ||
       classError.type ||
-      classError.addCat ||
-      isEmpty.categorieFormation ||
-      isEmpty.dateDebut ||
-      isEmpty.dateFin ||
-      isEmpty.dureePerHour ||
-      isEmpty.formatteur ||
-      isEmpty.modalite ||
-      isEmpty.presentataire ||
-      isEmpty.type ||
-      isEmpty.addCat;
+      classError.addCat ;
     if (error) {
       alert("We Can't Valid this Form");
-      console.log({
-        'cate':isEmpty.categorieFormation,
-        'dateDB': isEmpty.dateDebut,
-        'dateF':isEmpty.dateFin,
-        'dr':isEmpty.dureePerHour,
-        'modalite':isEmpty.modalite,
-        'presta':isEmpty.presentataire,
-        'type':isEmpty.type,
-        'addcat':isEmpty.addCat
-      });
       return;
     }
     const month = dateDebut.split("-")[1];
     const payload = {
       matricule: matricule,
       formation: {
-        formationId: Math.random(),
+        formationId: formationId,
         type: typeFormation,
         categorieFormation: categorieFormation,
         modalite: modalite,
@@ -112,8 +81,8 @@ const EditFormation = (p) => {
         bilan: "done",
       },
     };
-
-    dispatch(EmployeeSlice.actions.addFormation(payload));
+      console.log(payload);
+    dispatch(EmployeeSlice.actions.updateFormation(payload));
     p.close();
   };
 
@@ -122,6 +91,7 @@ const EditFormation = (p) => {
     const value = e.target.value;
     if (value === "+") {
       setAddCat(true);
+      setCategorieFormaation(value);
       return;
     }
     console.log("add categrie");
@@ -134,21 +104,8 @@ const EditFormation = (p) => {
           categorieFormation: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          categorieFormation: false,
-          addCat:false
-        };
-      });
     } else {
       setClassError((p) => {
-        return {
-          ...p,
-          categorieFormation: true,
-        };
-      });
-      setIsEmpty((p) => {
         return {
           ...p,
           categorieFormation: true,
@@ -158,6 +115,7 @@ const EditFormation = (p) => {
   };
   const onChangeAddCat = (e) => {
     const value = e.target.value;
+    setCategorieFormaation(value);
     if (value.trim() !== "") {
       setCategorieFormaation(value);
       setClassError((p) => {
@@ -166,21 +124,8 @@ const EditFormation = (p) => {
           addCat: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          categorieFormation: false,
-          addCat:false
-        };
-      });
     } else {
       setClassError((p) => {
-        return {
-          ...p,
-          addCat: true,
-        };
-      });
-      setIsEmpty((p) => {
         return {
           ...p,
           addCat: true,
@@ -191,6 +136,7 @@ const EditFormation = (p) => {
 
   const onChageFormation = (e) => {
     const value = e.target.value;
+    setTypeFormation(value);
     if (value.trim() !== "") {
       setTypeFormation(value);
       setClassError((p) => {
@@ -199,19 +145,7 @@ const EditFormation = (p) => {
           type: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          type: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          type: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -223,6 +157,7 @@ const EditFormation = (p) => {
 
   const onChangeModalite = (e) => {
     const value = e.target.value;
+    setModalite(value);
     if (value.trim() !== "") {
       setModalite(value);
       setClassError((p) => {
@@ -231,19 +166,7 @@ const EditFormation = (p) => {
           modalite: false,
         };
       });
-    setIsEmpty((p) => {
-        return {
-          ...p,
-          modalite: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          modalite: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -255,6 +178,7 @@ const EditFormation = (p) => {
 
   const onChangeDureePerHour = (e) => {
     const value = e.target.value;
+    setDureePerHour(value);
     if (value.trim() !== "") {
       setDureePerHour(+value);
       setClassError((p) => {
@@ -263,19 +187,7 @@ const EditFormation = (p) => {
           dureePerHour: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          dureePerHour: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          dureePerHour: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -294,19 +206,7 @@ const EditFormation = (p) => {
           dateDebut: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          dateDebut: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          dateDebut: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -326,19 +226,7 @@ const EditFormation = (p) => {
           dateFin: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          dateFin: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          dateFin: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -350,6 +238,7 @@ const EditFormation = (p) => {
 
   const onCahngePresentataire = (e) => {
     const value = e.target.value;
+    setPresentataire(value);
     if (value.trim() !== "") {
       setPresentataire(value);
       setClassError((p) => {
@@ -358,19 +247,7 @@ const EditFormation = (p) => {
           presentataire: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          presentataire: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          presentataire: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -382,6 +259,7 @@ const EditFormation = (p) => {
 
   const onChangeFormatteur = (e) => {
     const value = e.target.value;
+    setFormatteur(value);
     if (value.trim() !== "") {
       setFormatteur(value);
       setClassError((p) => {
@@ -390,19 +268,7 @@ const EditFormation = (p) => {
           formatteur: false,
         };
       });
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          formatteur: false,
-        };
-      });
     } else {
-      setIsEmpty((p) => {
-        return {
-          ...p,
-          formatteur: true,
-        };
-      });
       setClassError((p) => {
         return {
           ...p,
@@ -411,10 +277,9 @@ const EditFormation = (p) => {
       });
     }
   };
-
   return (
     <form className={c.form} onSubmit={onSubmitHandler}>
-      <h1>add fromation to employee with matricule: {formationId} </h1>
+      <h1>Edit Employee's Formation, matricule: {matricule} </h1>
       <div className={c.inputsContainer}>
         <div className={c.inputContainer}>
           <label htmlFor="categorieFormation">Categorie De Formation</label>
@@ -430,6 +295,7 @@ const EditFormation = (p) => {
             <option value="Soft Skills">Soft skills</option>
             <option value="Qualité">Qualité</option>
             <option value="Technique">Technique</option>
+            <option value={categorieFormation}>{categorieFormation} </option>
             <option value="+">+</option>
           </select>
           {classError.categorieFormation && (

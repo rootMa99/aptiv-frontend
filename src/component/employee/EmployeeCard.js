@@ -47,7 +47,7 @@ const EmployeeCard = (p) => {
       {logic && <BackDrop click={onclose} />}
       {notify && <DeleteFormation close={onclose} id={idDel} />}
       {showForm && <AddFormationForm id={empl.empl.matricule} close={onclose} />}
-      {showEdit && <EditFormation formationEdit={idEdit} close={onclose} />}
+      {showEdit && <EditFormation id={empl.empl.matricule} formationEdit={idEdit} close={onclose} />}
       <h1>Employee</h1>
       <table>
         <thead>
