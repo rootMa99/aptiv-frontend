@@ -8,6 +8,7 @@ const Home = (p) => {
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
+
   const onChangeHandler = (e) => {
     setTyping(true);
     console.log(+e.target.value + 1);
@@ -42,6 +43,7 @@ const Home = (p) => {
             <input
               type="number"
               placeholder="Search By matricule"
+              value={value}
               onChange={onChangeHandler}
               onBlur={onBlurHandler}
             />

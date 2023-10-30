@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: backdrop 2s ease-out forwards;
+    animation: backdrop 1s ease-out forwards;
     box-shadow: 5px 5px 15px rgba(53, 22, 22, 0.651);
 }
 .card h1{
@@ -71,3 +71,4 @@
         opacity: 1;
     }
 }
+

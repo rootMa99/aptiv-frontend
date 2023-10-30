@@ -1,5 +1,5 @@
 .container {
-  margin-top: 3rem;
+  margin-top: 2rem;
   min-width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: rgba(187, 186, 186, 0.521);
+  background-color: rgb(104, 104, 104);
   backdrop-filter: blur(30px);
   animation: home 1s ease-out forwards;
 }
