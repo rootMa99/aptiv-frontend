@@ -13,8 +13,9 @@ const Home = (p) => {
     setTyping(true);
     console.log(+e.target.value + 1);
 
-    if (e.target.value.trim() === "") {
+    if (e.target.value.trim() === ""|| e.target.value<=0) {
       setTyping(false);
+      setValue(e.target.value);
     } else {
       setValue(+e.target.value);
     }

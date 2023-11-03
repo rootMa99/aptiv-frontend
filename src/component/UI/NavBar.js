@@ -34,9 +34,9 @@ const NavBar =()=>{
 
                 <li>
                     <NavLink
-                    to="/addFormation" 
+                    to="/reporting" 
                     className={({ isActive }) => (isActive ? c.activeLink : c.link)}>
-                        Add Formation
+                        reporting
                     </NavLink>
                 </li>
             </ul>

@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
 import { v4 as generateId } from "uuid";
 
-
-
 const f = {
   formationId: "tYSgcuPesWlZxSYYJBS1xA",
   type: "Qualification FA USW",
@@ -20,9 +18,8 @@ const f = {
   evaluationAFrois: false,
   bilan: "Done",
 };
-console.log(f);
 const AddFormationForm = (p) => {
-
+  console.log(f);
   const [categorieFormation, setCategorieFormaation] = useState();
   const [typeFormation, setTypeFormation] = useState();
   const [modalite, setModalite] = useState();
@@ -43,7 +40,7 @@ const AddFormationForm = (p) => {
     presentataire: false,
     formatteur: false,
     addCat: false,
-  }); 
+  });
   //this just for not showing error from the first render of this component
   const [isEmpty, setIsEmpty] = useState({
     type: true,
@@ -83,19 +80,19 @@ const AddFormationForm = (p) => {
     if (error) {
       alert("We Can't Valid this Form");
       console.log({
-        'cate':isEmpty.categorieFormation,
-        'dateDB': isEmpty.dateDebut,
-        'dateF':isEmpty.dateFin,
-        'dr':isEmpty.dureePerHour,
-        'modalite':isEmpty.modalite,
-        'presta':isEmpty.presentataire,
-        'type':isEmpty.type,
-        'addcat':isEmpty.addCat
+        cate: isEmpty.categorieFormation,
+        dateDB: isEmpty.dateDebut,
+        dateF: isEmpty.dateFin,
+        dr: isEmpty.dureePerHour,
+        modalite: isEmpty.modalite,
+        presta: isEmpty.presentataire,
+        type: isEmpty.type,
+        addcat: isEmpty.addCat,
       });
       return;
     }
     const month = dateDebut.split("-")[1];
-    const id=generateId();
+    const id = generateId();
     const payload = {
       matricule: matricule,
       formation: {
@@ -139,7 +136,7 @@ const AddFormationForm = (p) => {
         return {
           ...p,
           categorieFormation: false,
-          addCat:false
+          addCat: false,
         };
       });
     } else {
@@ -171,7 +168,7 @@ const AddFormationForm = (p) => {
         return {
           ...p,
           categorieFormation: false,
-          addCat:false
+          addCat: false,
         };
       });
     } else {
@@ -232,7 +229,7 @@ const AddFormationForm = (p) => {
           modalite: false,
         };
       });
-    setIsEmpty((p) => {
+      setIsEmpty((p) => {
         return {
           ...p,
           modalite: false,
@@ -446,10 +443,9 @@ const AddFormationForm = (p) => {
                 onBlur={onChangeAddCat}
               />
               {classError.addCat && (
-            <p className={c.error}>Please Enter Categorie de Formation </p>
-          )}
+                <p className={c.error}>Please Enter Categorie de Formation </p>
+              )}
             </Fragment>
-          
           )}
         </div>
         <div className={c.inputContainer}>
@@ -488,7 +484,9 @@ const AddFormationForm = (p) => {
             onBlur={onChangeDureePerHour}
           />
           {classError.dureePerHour && (
-            <p className={c.error}>Please Enter Duree/Heure <br/> Or Incorrect Format</p>
+            <p className={c.error}>
+              Please Enter Duree/Heure <br /> Or Incorrect Format
+            </p>
           )}
         </div>
         <div className={c.inputContainer}>

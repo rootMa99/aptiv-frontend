@@ -69,24 +69,20 @@ const EMPLOYEE_DEMO = {
     },
   },
 };
-let i=1;
 const Employee = (p) => {
-  console.log('this comp is runnig for: '+i);
-  i++;
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const { matricule }=useParams();
   console.log(matricule);
 
   const callback = useCallback(() => {
-    console.log("callback running...");
     setIsLoading(true);
     dispatch(EmployeeSlice.actions.addEmployee(EMPLOYEE_DEMO));
     setIsLoading(false);
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("useEffect running...");
     callback();
   }, [callback]);
 

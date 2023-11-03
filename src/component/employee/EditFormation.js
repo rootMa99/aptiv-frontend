@@ -94,7 +94,6 @@ const EditFormation = (p) => {
       setCategorieFormaation(value);
       return;
     }
-    console.log("add categrie");
     if (value !== "none") {
       setAddCat(false);
       setCategorieFormaation(value);
