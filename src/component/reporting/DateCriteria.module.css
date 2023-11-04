@@ -23,7 +23,7 @@
   }
   .datecriteria {
     width: 18rem;
-    padding: 0.6rem;
+    padding: 0.3rem;
     background-color: #474b4d;
     color: #f3f3f3;
     font-weight: bold;
@@ -37,7 +37,7 @@
     border: 2px solid rgb(131, 13, 13);
   }
   .labelC input{
-    padding: 0.5rem;
+    padding: 0.3rem;
     background-color: #474b4d;
     border: 2px solid rgb(131, 13, 13);
     border-radius:5px;

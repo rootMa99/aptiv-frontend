@@ -1,25 +1,10 @@
 import { Fragment, useState } from "react";
 import c from "./AddFormationForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
 import { v4 as generateId } from "uuid";
 
-const f = {
-  formationId: "tYSgcuPesWlZxSYYJBS1xA",
-  type: "Qualification FA USW",
-  categorieFormation: "Softskills",
-  modalite: "Présentielle",
-  dureePerHour: 8.0,
-  dateDebut: "2023-09-12",
-  dateFin: "2023-07-15",
-  month: 9,
-  presentataire: "AUTRE",
-  formatteur: "NJOUMI Tarek",
-  evaluationAFrois: false,
-  bilan: "Done",
-};
 const AddFormationForm = (p) => {
-  console.log(f);
   const [categorieFormation, setCategorieFormaation] = useState();
   const [typeFormation, setTypeFormation] = useState();
   const [modalite, setModalite] = useState();
@@ -53,7 +38,10 @@ const AddFormationForm = (p) => {
     formatteur: true,
     addCat: true,
   });
+  const typos = useSelector((s) => s.typeS);
   const dispatch = useDispatch();
+  const keys = Object.keys(typos.catList);
+  console.log(keys);
   const matricule = p.id;
 
   const onSubmitHandler = (e) => {
@@ -412,7 +400,10 @@ const AddFormationForm = (p) => {
 
   return (
     <form className={c.form} onSubmit={onSubmitHandler}>
-      <h1>Add Training for Employee ( {p.id} )</h1>
+      <h1>
+        Add Training for Employee
+        <br /> ( {p.id} )
+      </h1>
       <div className={c.inputsContainer}>
         <div className={c.inputContainer}>
           <label htmlFor="categorieFormation">Categorie De Formation</label>
@@ -422,11 +413,7 @@ const AddFormationForm = (p) => {
             onBlur={onChangeSelect}
           >
             <option value="none">None</option>
-            <option value="H&S">H&S</option>
-            <option value="Process">Process</option>
-            <option value="Soft Skills">Soft skills</option>
-            <option value="Qualité">Qualité</option>
-            <option value="Technique">Technique</option>
+            {keys.map((m) => <option value={m}>{m}</option>)}
             <option value="+">+</option>
           </select>
           {classError.categorieFormation && (

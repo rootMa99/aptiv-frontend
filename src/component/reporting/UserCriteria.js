@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import c from "./UserCriteria.module.css";
 import Select from "react-select";
 import { useSelector } from "react-redux";
@@ -7,7 +7,6 @@ const customStyles = {
   control: (provided, state) => ({
     ...provided,
     width: "30rem",
-    padding: "0.2rem",
     fontWeight: "bold",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -47,13 +46,14 @@ const customStyles = {
   })
 };
 const UserCriteria = (p) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const typos = useSelector((s) => s.typeS);
-  const options = [];
+  const [selectedOption, setSelectedOption] = useState("");
+  const options = useMemo(()=>{
+    return [];
+  } , []) ;
 
   useEffect(() => {
     console.log('effect run')
-    typos.categoriePersonel.map((m) => {
+    p.option.map((m) => {
      
 
       const optionN = {
@@ -63,14 +63,16 @@ const UserCriteria = (p) => {
       
       return options.push(optionN);
     });
-  }, [typos,options]);
+  }, [p.option,options]);
   const handleChange = (e) => {
     console.log(e);
     setSelectedOption(e);
   };
 
+
   return (
     <div className={c.inputContainerUC}>
+    
       <div className={c.labelC}>
         <label htmlFor="userCriteria">user criteria</label>
         <Select

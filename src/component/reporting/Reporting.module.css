@@ -1,15 +1,13 @@
-main {
+.main {
   background-color: #181919;
-  height: 100vh;
   overflow: hidden;
-  margin-top: 3rem;
 }
 
 .container {
-  margin-top: 1rem;
   width: 100vw;
   height: 100vh;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .container::-webkit-scrollbar {
@@ -23,10 +21,8 @@ main {
   background-color: #b80000;
 }
 
-.inputContainer:first-of-type {
-  margin-top: 2rem;
-}
 .inputContainer{
+  margin-top: 5rem;
   margin-bottom: 6rem;
 }
 

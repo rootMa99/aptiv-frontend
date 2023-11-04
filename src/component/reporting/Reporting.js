@@ -2,13 +2,14 @@ import { useSelector } from "react-redux";
 import c from "./Reporting.module.css";
 import DateCriteria from "./DateCriteria";
 import UserCriteria from "./UserCriteria";
+import AdvancedCriteria from "./AdvancedCriteria";
 
 const Reporting = (p) => {
   const typos = useSelector((s) => s.typeS);
   
   console.log(typos);
   return (
-    <main>
+    <main className={c.main}> 
       <form className={c.container}>
         <div className={c.inputContainer}>
           <div className={c.title}>
@@ -18,8 +19,14 @@ const Reporting = (p) => {
           <div className={c.title}>
             <h3>user criteria</h3>
           </div>
-          <UserCriteria  />
+          <UserCriteria option={typos.categoriePersonel} />
+          <div className={c.title}>
+            <h3>advanced criteria</h3>
+          </div>
+          <AdvancedCriteria option={typos.catList} />
+          
         </div>
+       
       </form>
     </main>
   );
