@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import c from "./UserCriteria.module.css";
 import Select from "react-select";
-import { useSelector } from "react-redux";
+
 
 const customStyles = {
   control: (provided, state) => ({
