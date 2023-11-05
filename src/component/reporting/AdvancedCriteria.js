@@ -6,7 +6,7 @@ const customStyles = {
   control: (provided, state) => ({
     ...provided,
     width: "33rem",
-    fontWeight: "bold",
+    fontWeight: "600",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -20,8 +20,7 @@ const customStyles = {
     "&:hover": {
       border: "2px solid #b80000",
       backgroundColor: "#676c6e",
-    cursor: 'pointer'
-      
+      cursor: "pointer",
     },
   }),
   option: (provided, state) => ({
@@ -34,8 +33,7 @@ const customStyles = {
         "Segoe UI Symbol"`,
     outline: "none",
     "&:hover": {
-    cursor: 'pointer'
-      
+      cursor: "pointer",
     },
   }),
   input: (provided) => ({
@@ -47,33 +45,52 @@ const customStyles = {
     color: "#f3f3f3",
   }),
   menuList: (provided) => ({
-    maxHeight: '200px', // Set a maximum height to enable scrolling
-    overflowY: 'auto', // Add a vertical scrollbar if needed
-  }),
-  scrollbar: (provided) => ({
-    width: '8px', // Set the width of the scrollbar
-  }),
-  scrollbarThumb: (provided) => ({
-    backgroundColor: '#888', // Change the background color of the thumb
-    borderRadius: '4px', // Add rounded corners to the thumb
+    maxHeight: "350px", // Set a maximum height to enable scrolling
+    overflowY: "auto", // Add a vertical scrollbar if needed
+    scrollbarWidth: "thin", // For Firefox
+    msOverflowStyle: "none", // For Internet Explorer
+    "&::-webkit-scrollbar": {
+      width: "9px", // Width of the scrollbar
+      backgroundColor: "#535151",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#8a0101", // Scrollbar thumb color
+    },
+    "&::-webkit-scrollbar-track": {
+      backgroundColor: "transparent", // Scrollbar track color
+    },
   }),
 };
 
 const AdvancedCriteria = (p) => {
+  console.log("this AC run");
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionType, setSelectedOptionType] = useState(null);
   const [trainigType, setTrainigType] = useState([]);
-
+  
   const options = useMemo(() => {
     return [];
   }, []);
 
   const keys = Object.keys(p.option);
-  console.log(p.option);
+  console.log(keys, options);
+
   useEffect(() => {
+    console.log("effect AC run");
+    const newOptions = [];
     keys.map((m) => {
-      return options.push({ value: m, label: m });
+      const optionN = {
+        value: m,
+        label: m,
+      };
+      if (!options.some((option) => option.value === m)) {
+        newOptions.push(optionN);
+      }
+      return options;
     });
+    if (newOptions.length > 0) {
+      options.push(...newOptions);
+    }
   }, [keys, options]);
 
   const getTypeOpt = (opt) => {
@@ -99,7 +116,7 @@ const AdvancedCriteria = (p) => {
   const handleChangeType = (e) => {
     setSelectedOptionType(e);
   };
-  
+
   return (
     <div className={c.inputContainerUC}>
       <div className={c.labelC}>
@@ -110,24 +127,23 @@ const AdvancedCriteria = (p) => {
           onChange={handleChange}
           options={options}
           styles={customStyles}
-        />
-      </div>
-
-      {
-        trainigType.length>0 && (
-      <div className={`${c.labelC} ${c.anim}` }>
-        <label htmlFor="advancedCriteria">trainig type</label>
-        <Select
-          id="advancedCriteria"
-          value={selectedOptionType}
-          onChange={handleChangeType}
-          options={trainigType}
-          styles={customStyles}
           menuPlacement="top"
         />
       </div>
-        )
-      }
+
+      {trainigType.length > 0 && (
+        <div className={`${c.labelC} ${c.anim}`}>
+          <label htmlFor="advancedCriteria">trainig type</label>
+          <Select
+            id="advancedCriteria"
+            value={selectedOptionType}
+            onChange={handleChangeType}
+            options={trainigType}
+            styles={customStyles}
+            menuPlacement="top"
+          />
+        </div>
+      )}
     </div>
   );
 };

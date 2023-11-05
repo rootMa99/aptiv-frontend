@@ -7,7 +7,7 @@ const customStyles = {
   control: (provided, state) => ({
     ...provided,
     width: "30rem",
-    fontWeight: "bold",
+    fontWeight: "600",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",

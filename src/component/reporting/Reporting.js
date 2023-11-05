@@ -6,7 +6,7 @@ import AdvancedCriteria from "./AdvancedCriteria";
 
 const Reporting = (p) => {
   const typos = useSelector((s) => s.typeS);
-  
+  console.log("Cr run");
   console.log(typos);
   return (
     <main className={c.main}> 
@@ -24,7 +24,10 @@ const Reporting = (p) => {
             <h3>advanced criteria</h3>
           </div>
           <AdvancedCriteria option={typos.catList} />
-          
+          <div className={c.title}>
+            <h3>process Reporting</h3>
+          </div>
+
         </div>
        
       </form>

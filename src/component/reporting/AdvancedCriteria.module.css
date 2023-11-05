@@ -14,7 +14,7 @@
     margin-bottom: 1rem;
   }
   .labelC label {
-    font-weight: bold;
+    font-weight:600;
     color: whitesmoke;
     font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -27,7 +27,7 @@
 
   }
   .anim{
-    animation: come 2s ease-out forwards;
+    animation: come 1.5s ease-out forwards;
   }
   @keyframes come {
     from{
