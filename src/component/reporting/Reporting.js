@@ -3,11 +3,14 @@ import c from "./Reporting.module.css";
 import DateCriteria from "./DateCriteria";
 import UserCriteria from "./UserCriteria";
 import AdvancedCriteria from "./AdvancedCriteria";
+import ReportingProcess from "./ReportingProcess";
 
 const Reporting = (p) => {
   const typos = useSelector((s) => s.typeS);
-  console.log("Cr run");
-  console.log(typos);
+
+
+
+
   return (
     <main className={c.main}> 
       <form className={c.container}>
@@ -27,7 +30,7 @@ const Reporting = (p) => {
           <div className={c.title}>
             <h3>process Reporting</h3>
           </div>
-
+            <ReportingProcess />
         </div>
        
       </form>

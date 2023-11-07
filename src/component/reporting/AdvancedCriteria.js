@@ -69,7 +69,10 @@ const AdvancedCriteria = (p) => {
   const [trainigType, setTrainigType] = useState([]);
   
   const options = useMemo(() => {
-    return [];
+    return [{
+      value: null,
+      label: "none",
+    }];
   }, []);
 
   const keys = Object.keys(p.option);
@@ -94,13 +97,19 @@ const AdvancedCriteria = (p) => {
   }, [keys, options]);
 
   const getTypeOpt = (opt) => {
-    console.log("thi");
+    console.log(opt);
+
+    if (opt===null){
+      setTrainigType([]);
+    setSelectedOptionType(null);
+    }
+
     const existing = keys.find((f) => {
       return f === opt;
     });
-    console.log(opt);
+    
     if (existing !== undefined && Object.keys(p.option).length > 0) {
-      const types = [];
+      const types = [{ value: null, label: "none" }];
       p.option[opt].map((m) => {
         return types.push({ value: m, label: m });
       });
@@ -109,6 +118,7 @@ const AdvancedCriteria = (p) => {
   };
 
   const handleChange = (e) => {
+
     console.log(e);
     setSelectedOption(e);
     getTypeOpt(e.value);
@@ -117,12 +127,14 @@ const AdvancedCriteria = (p) => {
     setSelectedOptionType(e);
   };
 
+  console.log(selectedOption, selectedOptionType);
+
   return (
     <div className={c.inputContainerUC}>
       <div className={c.labelC}>
-        <label htmlFor="advancedCriteria">trainig title</label>
+        <label htmlFor="ac">trainig title</label>
         <Select
-          id="advancedCriteria"
+          id="ac"
           value={selectedOption}
           onChange={handleChange}
           options={options}
@@ -133,9 +145,9 @@ const AdvancedCriteria = (p) => {
 
       {trainigType.length > 0 && (
         <div className={`${c.labelC} ${c.anim}`}>
-          <label htmlFor="advancedCriteria">trainig type</label>
+          <label htmlFor="act">trainig type</label>
           <Select
-            id="advancedCriteria"
+            id="act"
             value={selectedOptionType}
             onChange={handleChangeType}
             options={trainigType}

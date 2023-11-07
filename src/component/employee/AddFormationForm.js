@@ -397,6 +397,7 @@ const AddFormationForm = (p) => {
       });
     }
   };
+  console.log(categorieFormation);
 
   return (
     <form className={c.form} onSubmit={onSubmitHandler}>
@@ -409,11 +410,12 @@ const AddFormationForm = (p) => {
           <label htmlFor="categorieFormation">Categorie De Formation</label>
           <select
             id="categorieFormation"
+            value={categorieFormation}
             onChange={onChangeSelect}
             onBlur={onChangeSelect}
           >
             <option value="none">None</option>
-            {keys.map((m) => <option value={m}>{m}</option>)}
+            {keys.map((m) => <option key={Math.random()} value={m}>{m}</option>)}
             <option value="+">+</option>
           </select>
           {classError.categorieFormation && (

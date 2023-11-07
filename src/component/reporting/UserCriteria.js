@@ -74,9 +74,9 @@ const UserCriteria = (p) => {
     <div className={c.inputContainerUC}>
     
       <div className={c.labelC}>
-        <label htmlFor="userCriteria">user criteria</label>
+        <label htmlFor="uc">user criteria</label>
         <Select
-          id="userCriteria"
+          id="uc"
           value={selectedOption}
           onChange={handleChange}
           options={options}

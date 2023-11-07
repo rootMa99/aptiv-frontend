@@ -5,24 +5,10 @@ import c from "./AddFormationForm.module.css";
 import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
 
-const f = {
-  formationId: "tYSgcuPesWlZxSYYJBS1xA",
-  type: "Qualification FA USW",
-  categorieFormation: "Softskills",
-  modalite: "Présentielle",
-  dureePerHour: 8.0,
-  dateDebut: "2023-09-12",
-  dateFin: "2023-07-15",
-  month: 9,
-  presentataire: "AUTRE",
-  formatteur: "NJOUMI Tarek",
-  evaluationAFrois: false,
-  bilan: "Done",
-};
-console.log(f);
+
 const EditFormation = (p) => {
 
-  const [formationId, setFormaationId] = useState(p.formationEdit.formationId);
+  const [formationId] = useState(p.formationEdit.formationId);
   const [categorieFormation, setCategorieFormaation] = useState(p.formationEdit.categorieFormation);
   const [typeFormation, setTypeFormation] = useState(p.formationEdit.type);
   const [modalite, setModalite] = useState(p.formationEdit.modalite);
