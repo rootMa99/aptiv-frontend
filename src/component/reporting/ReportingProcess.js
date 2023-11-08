@@ -1,8 +1,32 @@
+import { useState } from "react";
 import c from "./ReportingProcess.module.css";
 
 const ReportingProcess = (p) => {
+
+const [fileName, setFileName]=useState("");
+
+
+const onchangeHandler=e=>{
+  
+    setFileName(e.target.value);
+    if(e.target.value.trim()===""){
+     p.modifyFileExcelName('EXPORTED_DATA') 
+    }else{
+      p.modifyFileExcelName(e.target.value);
+    }
+  
+} 
+
+  const submitHandler=(e)=>{
+    e.preventDefault();
+    p.submitDataTofetch();
+    setFileName('')
+
+  }
+
+
   return (
-    <form className={c.formc}>
+    <form className={c.formc} onSubmit={submitHandler}>
       <div className={c.reportingHolder}>
         <label htmlFor="ec" className={c.label}>
           Report Title
@@ -15,6 +39,9 @@ const ReportingProcess = (p) => {
               placeholder="E&C"
               required=""
               type="text"
+              value={fileName}
+              onChange={onchangeHandler}
+
             />
             <span className={`${c.inputborder} ${c.inputborderalt}`}></span>
           </div>

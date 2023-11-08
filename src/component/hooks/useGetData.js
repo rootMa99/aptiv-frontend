@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
-const useGetData=(url, dataBody)=> {
-  const [data, setData] = useState(null);
+const useGetData=()=> {
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  const fetchData = async (url, dataBody) => {
     try {
       setLoading(true);
       const response = await fetch(url, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -19,6 +19,7 @@ const useGetData=(url, dataBody)=> {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      console.log(data);
       setData(data);
       setLoading(false);
       setError(null);

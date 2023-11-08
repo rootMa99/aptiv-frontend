@@ -63,7 +63,6 @@ const customStyles = {
 };
 
 const AdvancedCriteria = (p) => {
-  console.log("this AC run");
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionType, setSelectedOptionType] = useState(null);
   const [trainigType, setTrainigType] = useState([]);
@@ -76,10 +75,8 @@ const AdvancedCriteria = (p) => {
   }, []);
 
   const keys = Object.keys(p.option);
-  console.log(keys, options);
 
   useEffect(() => {
-    console.log("effect AC run");
     const newOptions = [];
     keys.map((m) => {
       const optionN = {
@@ -97,7 +94,6 @@ const AdvancedCriteria = (p) => {
   }, [keys, options]);
 
   const getTypeOpt = (opt) => {
-    console.log(opt);
 
     if (opt===null){
       setTrainigType([]);
@@ -122,12 +118,13 @@ const AdvancedCriteria = (p) => {
     console.log(e);
     setSelectedOption(e);
     getTypeOpt(e.value);
+    p.advancedC(e.value)
   };
   const handleChangeType = (e) => {
     setSelectedOptionType(e);
+    p.trainingC(e.value)
   };
 
-  console.log(selectedOption, selectedOptionType);
 
   return (
     <div className={c.inputContainerUC}>

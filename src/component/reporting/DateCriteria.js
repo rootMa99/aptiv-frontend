@@ -1,16 +1,13 @@
 import { useState } from "react";
 import c from "./DateCriteria.module.css";
-import { formatDate, getCurrentMonth, getCurrentWeek, getCurrentYear, getLastMonth } from "../hooks/dateCriteriaFunctions";
+import { getCurrentMonth, getCurrentWeek, getCurrentYear, getLastMonth } from "../hooks/dateCriteriaFunctions";
 
 
-const curretDate = new Date();
-const currentYear = curretDate.getFullYear();
-const firstJan = new Date(currentYear, 0, 1);
-const dec = new Date(currentYear, 11, 31);
+
 
 const DateCriteria = (p) => {
-  const [startDate, setStartDate] = useState(formatDate(firstJan));
-  const [endDate, setendDate] = useState(formatDate(dec));
+  const [startDate, setStartDate] = useState(p.jan);
+  const [endDate, setendDate] = useState(p.dec);
   const [valueSlected, selectValuec]= useState("all");
 
 
@@ -20,26 +17,37 @@ const DateCriteria = (p) => {
       const{firstJan, dec}= getCurrentYear();
       setStartDate(firstJan);
       setendDate(dec);
+      p.setDateRange(firstJan);
+      p.setEndDateC(dec);
     }
     if (e.target.value==="thisWeek"){
       const {startDWeek, endDWeek}=getCurrentWeek("current");
       setStartDate(startDWeek);
       setendDate(endDWeek);
+      p.setDateRange(startDWeek);
+      p.setEndDateC(endDWeek);
     }
     if (e.target.value==="lastWeek"){
       const {startDWeek, endDWeek}=getCurrentWeek("last");
       setStartDate(startDWeek);
       setendDate(endDWeek);
+      p.setDateRange(startDWeek);
+      p.setEndDateC(endDWeek);
     }
     if(e.target.value==="month"){
       const { firstDayOfMonth, lastDayOfMonth}= getCurrentMonth();
       setStartDate(firstDayOfMonth);
       setendDate(lastDayOfMonth);
+      p.setDateRange(firstDayOfMonth);
+      p.setEndDateC(lastDayOfMonth);
     }
     if(e.target.value==="lastMonth"){
       const { firstDayOfMonth, lastDayOfMonth}= getLastMonth();
       setStartDate(firstDayOfMonth);
       setendDate(lastDayOfMonth);
+   p.setDateRange(firstDayOfMonth);
+   p.setEndDateC(lastDayOfMonth);
+
     }
 
 
@@ -48,12 +56,13 @@ const DateCriteria = (p) => {
   const changeStartDate = (e) => {
     selectValuec("all");
 
-   setStartDate(e.target.value)
-   
+   setStartDate(e.target.value);
+   p.setDateRange(e.target.value);
   };
   const changeEndDate = (e) => {
     selectValuec("all");
-   setendDate(e.target.value)
+   setendDate(e.target.value);
+   p.setEndDateC(e.target.value);
   };
 
 

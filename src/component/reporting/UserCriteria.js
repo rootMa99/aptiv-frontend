@@ -48,11 +48,13 @@ const customStyles = {
 const UserCriteria = (p) => {
   const [selectedOption, setSelectedOption] = useState("");
   const options = useMemo(()=>{
-    return [];
+    return [{
+      value: null,
+      label: 'none',
+    }];
   } , []) ;
 
   useEffect(() => {
-    console.log('effect run')
     p.option.map((m) => {
      
 
@@ -65,8 +67,8 @@ const UserCriteria = (p) => {
     });
   }, [p.option,options]);
   const handleChange = (e) => {
-    console.log(e);
     setSelectedOption(e);
+    p.setUC(e.value)
   };
 
 
