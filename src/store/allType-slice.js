@@ -16,5 +16,6 @@ const alltypeSlice = createSlice({
         }
     }
 })
+
 export const typeAction= alltypeSlice.actions;
 export default alltypeSlice;

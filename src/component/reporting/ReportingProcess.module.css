@@ -24,6 +24,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
+  z-index: 0;
   transition: width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 

@@ -28,8 +28,30 @@ const useGetData=()=> {
       setError(error);
     }
   };
+  const getData = async (url) => {
+    try {
+      setLoading(true);
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data);
+      setData(data);
+      setLoading(false);
+      setError(null);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
 
-  return { data, loading, error, fetchData };
+  return { data, loading, error, fetchData, getData };
 }
 
 export default useGetData;

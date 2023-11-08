@@ -55,6 +55,7 @@ const UserCriteria = (p) => {
   } , []) ;
 
   useEffect(() => {
+    const newOptions=[]
     p.option.map((m) => {
      
 
@@ -63,8 +64,11 @@ const UserCriteria = (p) => {
         label: m,
       };
       
-      return options.push(optionN);
+      return newOptions.push(optionN);
     });
+    if (newOptions.length > 0) {
+      options.push(...newOptions);
+    }
   }, [p.option,options]);
   const handleChange = (e) => {
     setSelectedOption(e);

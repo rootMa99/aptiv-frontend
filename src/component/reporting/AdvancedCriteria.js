@@ -136,12 +136,11 @@ const AdvancedCriteria = (p) => {
           onChange={handleChange}
           options={options}
           styles={customStyles}
-          menuPlacement="top"
         />
       </div>
 
       {trainigType.length > 0 && (
-        <div className={`${c.labelC} ${c.anim}`}>
+        <div className={`${c.labelC}`}>
           <label htmlFor="act">trainig type</label>
           <Select
             id="act"
@@ -149,7 +148,6 @@ const AdvancedCriteria = (p) => {
             onChange={handleChangeType}
             options={trainigType}
             styles={customStyles}
-            menuPlacement="top"
           />
         </div>
       )}

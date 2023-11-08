@@ -16,6 +16,7 @@ const curretDate = new Date();
 const currentYear = curretDate.getFullYear();
 const firstJan = new Date(currentYear, 0, 1);
 const dec = new Date(currentYear, 11, 31);
+
 const Reporting = (p) => {
   const typos = useSelector((s) => s.typeS);
   const [datecriteria, setDateCriteria] = useState(formatDate(firstJan));
