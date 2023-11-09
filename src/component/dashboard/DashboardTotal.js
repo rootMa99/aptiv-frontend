@@ -18,7 +18,7 @@ const DashboardTotal=p=>{
             <div className={c.totalHeure}>
             <span>total heure</span>
                 <span>
-                    {p.total.totalHeure}
+                    {p.total.totalHeure.toFixed(2)}
                 </span>
             </div>
         </div>

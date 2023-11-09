@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../hooks/dateCriteriaFunctions";
 import useGetData from "../hooks/useGetData";
 import LoadingFetch from "../UI/LoadingFetch";
-import BackDrop from "../UI/BackDrop";
 import useExportData from "../hooks/useExportToExcel";
+import BackDropAlter from "../UI/BackDropAlter";
 
 const curretDate = new Date();
 const currentYear = curretDate.getFullYear();
@@ -92,9 +92,10 @@ const Reporting = (p) => {
     trainingCriteria,
     fileExcelName
   );
+ 
   return (
     <main className={c.main}>
-      {loading && <BackDrop />}
+      {loading && <BackDropAlter />}
       {loading && <LoadingFetch />}
       <div className={c.container}>
         <div className={c.inputContainer}>

@@ -10,6 +10,8 @@ import Reporting from "./component/reporting/Reporting";
 import LoadingFetch from "./component/UI/LoadingFetch";
 import DashBoard from "./component/dashboard/DashBoard";
 import BackDropAlter from "./component/UI/BackDropAlter";
+import { formatDate } from "./component/hooks/dateCriteriaFunctions";
+import { dashboardActions } from "./store/dashboardSlice";
 
 
 
@@ -30,12 +32,22 @@ const getData = async (url) => {
   }
 };
 
+const curretDate = new Date();
+const currentYear = curretDate.getFullYear();
+const jan = new Date(currentYear, 0, 1);
+const dec = new Date(currentYear, 11, 31);
+
 
 function App() {
   console.log("App run")
   const [isLoading, setIsLoading]=useState(true);
 
   const dispatch= useDispatch();
+  dispatch(dashboardActions.setSelectedDate({
+    startDate: formatDate(jan),
+    endDate: formatDate(dec),
+  },));
+
 
   const dispatchType= useCallback(async()=>{
     //http req 
@@ -63,7 +75,7 @@ function App() {
             <Route path=":matricule" element={<Employee />} />
           </Route>
           <Route exact path="/reporting" element={<Reporting />} />
-          <Route exact path="/dashboard" element={<DashBoard />} />
+          <Route exact path="/dashboard" element={<DashBoard yearDate={{jan:formatDate(jan), dec:formatDate(dec)}} />} />
         </Routes>
       </Suspense>
     </div>

@@ -34,4 +34,5 @@
 }
 .date input:hover{
     background-color: #6c7a81;
+    cursor: pointer;
 }

@@ -119,6 +119,9 @@ const AdvancedCriteria = (p) => {
     setSelectedOption(e);
     getTypeOpt(e.value);
     p.advancedC(e.value)
+    if(e.value===null){
+    p.trainingC(null)
+    }
   };
   const handleChangeType = (e) => {
     setSelectedOptionType(e);
