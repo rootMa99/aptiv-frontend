@@ -2,16 +2,38 @@ import { useDispatch } from "react-redux";
 import c from "./DeleteFormation.module.css";
 import { emplAction } from "../../store/EmployeeSlice";
 
+const deleteData = async (url) => {
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {}
+};
+
 const DeleteFormation = (p) => {
 
     const dispatch= useDispatch();
 
+    console.log(p.id);
+    const formationId=p.id;
     const onClickHandler=e=>{
         p.close();
     }
 
-    const onDeleteHandler=e=>{
-        dispatch(emplAction.deleteFormation(p.id));
+    const onDeleteHandler=async (e)=>{
+
+      await deleteData(
+        `http://localhost:8081/formation/${formationId}`
+      );
+        dispatch(emplAction.deleteFormation(formationId));
         p.close();
     }
 

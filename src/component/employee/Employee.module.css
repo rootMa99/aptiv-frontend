@@ -9,8 +9,8 @@
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: rgb(104, 104, 104);
-  backdrop-filter: blur(30px);
+  background-color: #181919dc;
+  backdrop-filter: blur(60px);
   animation: home 1s ease-out forwards;
 }
 @keyframes home {

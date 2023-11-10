@@ -1,21 +1,44 @@
-
-
 import { Fragment, useState } from "react";
 import c from "./AddFormationForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
 
 
-const EditFormation = (p) => {
 
+
+const getData = async (url, body) => {
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {}
+};
+
+
+const EditFormation = (p) => {
   const [formationId] = useState(p.formationEdit.formationId);
-  const [categorieFormation, setCategorieFormaation] = useState(p.formationEdit.categorieFormation);
+  const [categorieFormation, setCategorieFormaation] = useState(
+    p.formationEdit.categorieFormation
+  );
   const [typeFormation, setTypeFormation] = useState(p.formationEdit.type);
   const [modalite, setModalite] = useState(p.formationEdit.modalite);
-  const [dureePerHour, setDureePerHour] = useState(p.formationEdit.dureePerHour);
+  const [dureePerHour, setDureePerHour] = useState(
+    p.formationEdit.dureePerHour
+  );
   const [dateDebut, setDateDebut] = useState(p.formationEdit.dateDebut);
   const [dateFin, setDateFin] = useState(p.formationEdit.dateFin);
-  const [presentataire, setPresentataire] = useState(p.formationEdit.presentataire);
+  const [presentataire, setPresentataire] = useState(
+    p.formationEdit.presentataire
+  );
   const [formatteur, setFormatteur] = useState(p.formationEdit.formatteur);
   const [addCat, setAddCat] = useState(false);
 
@@ -29,11 +52,26 @@ const EditFormation = (p) => {
     presentataire: false,
     formatteur: false,
     addCat: false,
-  }); 
+  });
   const dispatch = useDispatch();
   const matricule = p.id;
+  const typos = useSelector((s) => s.typeS);
 
-  const onSubmitHandler = (e) => {
+  const keys = Object.keys(typos.catList);
+  const seletedType = [];
+
+  if (
+    categorieFormation !== null &&
+    categorieFormation !== "+" &&
+    categorieFormation !== undefined
+  ) {
+    const existing = keys.find((f) => f === categorieFormation);
+    if (existing !== undefined) {
+      seletedType.push(...typos.catList[categorieFormation]);
+    }
+  }
+
+  const onSubmitHandler = async(e) => {
     e.preventDefault();
     const error =
       classError.categorieFormation ||
@@ -44,30 +82,53 @@ const EditFormation = (p) => {
       classError.modalite ||
       classError.presentataire ||
       classError.type ||
-      classError.addCat ;
+      classError.addCat;
     if (error) {
       alert("We Can't Valid this Form");
       return;
     }
     const month = dateDebut.split("-")[1];
+    const formation= {
+      type: typeFormation,
+      categorieFormation: categorieFormation,
+      modalite: modalite,
+      dureePerHour: dureePerHour,
+      dateDebut: dateDebut,
+      dateFin: dateFin,
+      month: month,
+      prestataire: presentataire,
+      formatteur: formatteur,
+      evaluationAFrois: true,
+      bilan: "done",
+    };
+
+    console.log('data sent...');
+    const data= await getData(
+      `http://localhost:8081/formation/${formationId}`,
+      formation
+    );
+console.log("data fetched....");
+      console.log(data);
+
+
+
     const payload = {
       matricule: matricule,
       formation: {
-        formationId: formationId,
-        type: typeFormation,
-        categorieFormation: categorieFormation,
-        modalite: modalite,
-        dureePerHour: dureePerHour,
-        dateDebut: dateDebut,
-        dateFin: dateFin,
-        month: month,
-        presentataire: presentataire,
-        formatteur: formatteur,
+        formationId: data.formationId,
+        type: data.type,
+        categorieFormation: data.categorieFormation,
+        modalite: data.modalite,
+        dureePerHour: data.dureePerHour,
+        dateDebut: data.dateDebut,
+        dateFin: data.dateFin,
+        month: data.month,
+        presentataire: data.presentataire,
+        formatteur: data.formatteur,
         evaluationAFrois: true,
         bilan: "done",
       },
     };
-      console.log(payload);
     dispatch(EmployeeSlice.actions.updateFormation(payload));
     p.close();
   };
@@ -135,6 +196,17 @@ const EditFormation = (p) => {
         return {
           ...p,
           type: true,
+        };
+      });
+    }
+  };
+  const onChangeTf = (e) => {
+    if (e.target.value.trim() !== "") {
+      setTypeFormation(e.target.value);
+      setClassError((p) => {
+        return {
+          ...p,
+          type: false,
         };
       });
     }
@@ -264,7 +336,9 @@ const EditFormation = (p) => {
   };
   return (
     <form className={c.form} onSubmit={onSubmitHandler}>
-      <h1>Edit Employee's Formation, matricule: {matricule} </h1>
+      <div className={c.formHeader}>
+        <h1>Edit Employee's Formation, matricule: {matricule} </h1>
+      </div>
       <div className={c.inputsContainer}>
         <div className={c.inputContainer}>
           <label htmlFor="categorieFormation">Categorie De Formation</label>
@@ -272,16 +346,15 @@ const EditFormation = (p) => {
             id="categorieFormation"
             value={categorieFormation}
             onChange={onChangeSelect}
-            onBlur={onChangeSelect}
           >
             <option value="none">None</option>
-            <option value="H&S">H&S</option>
-            <option value="Process">Process</option>
-            <option value="Soft Skills">Soft skills</option>
-            <option value="Qualité">Qualité</option>
-            <option value="Technique">Technique</option>
-            <option value={categorieFormation}>{categorieFormation} </option>
+            {keys.map((m) => (
+              <option key={Math.random()} value={m}>
+                {m}
+              </option>
+            ))}
             <option value="+">+</option>
+            <option value={categorieFormation}>{categorieFormation}</option>
           </select>
           {classError.categorieFormation && (
             <p className={c.error}>Please Choose Categorie de Formation </p>
@@ -294,25 +367,37 @@ const EditFormation = (p) => {
                 id="addCat"
                 placeholder="Please Enter Formation"
                 onChange={onChangeAddCat}
-                onBlur={onChangeAddCat}
               />
               {classError.addCat && (
-            <p className={c.error}>Please Enter Categorie de Formation </p>
-          )}
+                <p className={c.error}>Please Enter Categorie de Formation </p>
+              )}
             </Fragment>
-          
           )}
         </div>
         <div className={c.inputContainer}>
           <label htmlFor="formation">Theme de Formation</label>
-          <input
-            type="text"
-            value={typeFormation}
-            id="formation"
-            placeholder="Please Enter Formation"
-            onChange={onChageFormation}
-            onBlur={onChageFormation}
-          />
+          {seletedType.length !== 0 && (
+            <select
+              id="formation"
+              onChange={onChageFormation}
+              value={typeFormation}
+            >
+              <option value="none">None</option>
+              {seletedType.map((m) => (
+                <option key={Math.random()} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+          )}
+          {seletedType.length === 0 && (
+            <input
+              type="text"
+              id="addCat"
+              placeholder="Please Enter Theme de Formation"
+              onChange={onChangeTf}
+            />
+          )}
           {classError.type && (
             <p className={c.error}>Please Enter Formation </p>
           )}
@@ -325,7 +410,6 @@ const EditFormation = (p) => {
             value={modalite}
             placeholder="Please Enter Modalite"
             onChange={onChangeModalite}
-            onBlur={onChangeModalite}
           />
           {classError.modalite && (
             <p className={c.error}>Please Enter Modalite </p>
@@ -339,7 +423,6 @@ const EditFormation = (p) => {
             value={dureePerHour}
             placeholder="Please Enter Duree Par Heure"
             onChange={onChangeDureePerHour}
-            onBlur={onChangeDureePerHour}
           />
           {classError.dureePerHour && (
             <p className={c.error}>Please Enter Duree/Heure </p>
@@ -354,7 +437,6 @@ const EditFormation = (p) => {
             value={dateDebut}
             placeholder="Please Enter Date de Debut"
             onChange={onChangeDateDebut}
-            onBlur={onChangeDateDebut}
           />
           {classError.dateDebut && (
             <p className={c.error}>Please Choose Date de Debut </p>
@@ -369,7 +451,6 @@ const EditFormation = (p) => {
             value={dateFin}
             placeholder="Please Enter Date de Fin"
             onChange={onChangeDateFin}
-            onBlur={onChangeDateFin}
           />
           {classError.dateFin && (
             <p className={c.error}>Please Choose Date de Fin </p>
@@ -383,7 +464,6 @@ const EditFormation = (p) => {
             value={presentataire}
             placeholder="Please Enter Prestataire"
             onChange={onCahngePresentataire}
-            onBlur={onCahngePresentataire}
           />
           {classError.presentataire && (
             <p className={c.error}>Please Enter Presentataire </p>
@@ -397,7 +477,6 @@ const EditFormation = (p) => {
             value={formatteur}
             placeholder="Please Enter Formatteur"
             onChange={onChangeFormatteur}
-            onBlur={onChangeFormatteur}
           />
           {classError.formatteur && (
             <p className={c.error}>Please Enter Formatteur </p>

@@ -24,6 +24,8 @@ const DashboardBarChart = (p) => {
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
   const options = {
+    maintainAspectRatio: false,
+    responsive: true,
     scales: {
         x: {
             grid: {

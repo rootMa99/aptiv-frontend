@@ -57,7 +57,7 @@ const EmployeeFormation = (p) => {
         </td>
       </tr>
       <tr>
-        <td colSpan="11">
+        <td colSpan="11" className={c.line}>
           <div className={c.btnContainer}>
             <button className={c.delete} onClick={onclickHandler}>
               delete

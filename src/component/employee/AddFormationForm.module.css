@@ -4,12 +4,11 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    padding: 1rem;
-    background-color: rgb(190, 190, 190);
+    background-color: #303233;
     border: 1px solid rgb(99, 3, 3);
     border-radius: 8px;
-    width: 50%;
-    height: 80vh;
+    width: 50vw;
+    height: 85vh;
     overflow-y: auto;
     scroll-behavior: smooth;
     display: flex;
@@ -30,8 +29,17 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #8a0101;
   }
-  .form h1{
-    color: #080808;
+  .formHeader{
+    width: 100%;
+    min-height: 10rem;
+    background-color: #171818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .formHeader h1{
+    color: white;
+    outline: none;
   }
   .inputsContainer{
     width: 90%;
@@ -60,8 +68,9 @@
     border: 2px solid rgb(224, 223, 223);
     border-radius:5px;
     width: 100%;
-    font-weight: bold;
-    color: rgb(83, 71, 71);
+    height: 3rem;
+    font-weight: 700;
+    color: rgb(5, 5, 5);
     font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     letter-spacing: 2px;
     text-align: center;
@@ -133,11 +142,12 @@
   }
 
   .btnContainer button {
-    width: 100%;
+    width: 50%;
+    height: 3rem;
     padding:0.5rem;
-    background-color: rgba(104, 57, 57, 0.37);
-    border: 2px solid rgb(156, 10, 10);
-    color: rgb(156, 10, 10);
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgba(24, 13, 13, 0.37);
+    color: rgb(235, 235, 235);
     border-radius: 5px;
     font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -149,9 +159,8 @@
     cursor: pointer;
   }
   .btnContainer button:hover {
-    border: 2px solid rgb(255, 255, 255);
-    background-color: rgba(24, 13, 13, 0.37);
-    color: rgb(235, 235, 235);
+    background-color: rgba(104, 57, 57, 0.37);
+    border: 2px solid rgb(156, 10, 10);
   }
   
 

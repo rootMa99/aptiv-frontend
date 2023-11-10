@@ -22,7 +22,8 @@
   z-index: 1;
   height: 100vh;
   width: 100vw;
-  background-color: #0000006b;
+  background-color: #0000009a;
+  backdrop-filter: blur(6px);
   position: relative;
 }
 .inputHolder {
@@ -45,7 +46,7 @@
 }
 .inputHolder input {
   padding: 1rem;
-  background-color: rgba(17, 17, 17, 0.37);
+  background-color: rgba(17, 17, 17, 0.733);
   border: 2px solid rgb(224, 223, 223);
   border-radius: 50px;
   width: 20rem;

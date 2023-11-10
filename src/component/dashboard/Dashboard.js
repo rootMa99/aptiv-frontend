@@ -6,7 +6,12 @@ import DashboardDateRange from "./DashboardDateRange";
 import DashboardTotal from "./DashboardTotal";
 import { dashboardActions } from "../../store/dashboardSlice";
 import LoadingFetch from "../UI/LoadingFetch";
-import { filterFormation, nbHour, nbMonth, totalDataC } from "../hooks/filterFormation";
+import {
+  filterFormation,
+  nbHour,
+  nbMonth,
+  totalDataC,
+} from "../hooks/filterFormation";
 import BackDropAlter from "../UI/BackDropAlter";
 import DashboardBarChart from "./DashboardBarChart";
 import Notification from "../UI/Notification";
@@ -34,7 +39,7 @@ let body = {
   endDate: 0,
 };
 console.log(body);
-let monthChange=false;
+let monthChange = false;
 let monthHour;
 const DashBoard = (p) => {
   const typos = useSelector((s) => s.typeS);
@@ -89,12 +94,12 @@ const DashBoard = (p) => {
   const { nomberPF, nombreSF, totalHeure } = totalDataC(
     dashboards.dashboardData
   );
-    
-    if(!monthChange && dashboards.dashboardData.length>0){
-      monthHour=nbMonth(dashboards.dashboardData);
-      monthChange=true;
-    }
-    console.log(monthHour);
+
+  if (!monthChange && dashboards.dashboardData.length > 0) {
+    monthHour = nbMonth(dashboards.dashboardData);
+    monthChange = true;
+  }
+  console.log(monthHour);
 
   const filtredDashboard = filterFormation(
     dashboards.dashboardData,
@@ -190,23 +195,27 @@ const DashBoard = (p) => {
           ) : (
             <div className={classes.chartContainer}>
               {filtredDashboard.length > 0 && (
-                <DashboardBarChart
-                  data={catPerHour}
-                  nameLabel="Personnel/Hour"
-                />
+                <div className={classes.barcontainer}>
+                  <DashboardBarChart
+                    data={catPerHour}
+                    nameLabel="Personnel/Hour"
+                  />
+                </div>
               )}
               {filtredDashboard.length > 0 && (
-                <DashboardBarChart
-                  data={catForHour}
-                  nameLabel="Formation/Hour"
-                />
+                <div className={classes.barcontainer}>
+                  <DashboardBarChart
+                    data={catForHour}
+                    nameLabel="Formation/Hour"
+                  />
+                </div>
               )}
             </div>
           )}
           <div className={classes.lineChart}>
-            {
-              dashboards.dashboardData.length>0 && <DashboardLineChart data={monthHour} labelName="Month/Hour" />
-            }
+            {dashboards.dashboardData.length > 0 && (
+              <DashboardLineChart data={monthHour} labelName="Month/Hour" />
+            )}
           </div>
         </div>
       </div>

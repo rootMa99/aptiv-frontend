@@ -6,69 +6,24 @@ import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
 import { useParams } from "react-router-dom";
 
-const EMPLOYEE_DEMO = {
-  matricule: 5,
-  nom: "EL HAMMIOUI",
-  prenom: "RACHIDA",
-  cin: "D510261",
-  categorie: "IH",
-  fonctionEntreprise: "Technicien Ingénierie",
-  departement: "ENGINEERING-4-",
-  dateEmbauche: "2002-02-04",
-  dateDepart: null,
-  formations: [
-    {
-      formationId: "tYSgcuPesWlZxSYYJBS1xA",
-      type: "Qualification FA USW",
-      categorieFormation: "Softskills",
-      modalite: "Présentielle",
-      dureePerHour: 8.0,
-      dateDebut: "2023-09-12",
-      dateFin: "2023-07-15",
-      month: 9,
-      presentataire: "AUTRE",
-      formatteur: "NJOUMI Tarek",
-      evaluationAFrois: false,
-      bilan: "Done",
-    },
-    {
-      formationId: "irBro5DLSQBFaLrxpa3nBm",
-      type: "BBS Training",
-      categorieFormation: "H&S",
-      modalite: "Présentielle",
-      dureePerHour: 4.0,
-      dateDebut: "2023-03-17",
-      dateFin: "2023-03-17",
-      month: 3,
-      presentataire: "APTIV",
-      formatteur: "FATEN Karim",
-      evaluationAFrois: true,
-      bilan: "Done",
-    },
-    {
-      formationId: "2zCdqKQjjY2jJylwdXo1W2",
-      type: "Lean basics training",
-      categorieFormation: "Lean 2.0",
-      modalite: "Présentielle",
-      dureePerHour: 4.0,
-      dateDebut: "2023-03-04",
-      dateFin: "2023-03-04",
-      month: 3,
-      presentataire: "APTIV",
-      formatteur: "HAIDAR Ouassil",
-      evaluationAFrois: true,
-      bilan: "Done",
-    },
-  ],
-  _links: {
-    personels: {
-      href: "http://localhost:8081/personel/personels",
-    },
-    self: {
-      href: "http://localhost:8081/personel/personel/5",
-    },
-  },
+const getData = async (url) => {
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+   return data;
+  } catch (error) {
+  }
 };
+
+
 const Employee = (p) => {
 
   const [isLoading, setIsLoading] = useState(false);
@@ -76,16 +31,33 @@ const Employee = (p) => {
   const { matricule }=useParams();
   console.log(matricule);
 
-  const callback = useCallback(() => {
+  // const callback = useCallback(() => {
+  //   setIsLoading(true);
+  //   dispatch(EmployeeSlice.actions.addEmployee(EMPLOYEE_DEMO));
+  //   setIsLoading(false);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   callback();
+  // }, [callback]);
+
+  const dispatchType= useCallback(async()=>{
     setIsLoading(true);
-    dispatch(EmployeeSlice.actions.addEmployee(EMPLOYEE_DEMO));
+    const data=await getData(`http://localhost:8081/personel/personel/${matricule}`);
+    console.log(data);
+    console.log("can dispatch")
     setIsLoading(false);
-  }, [dispatch]);
+    if(data!==undefined){
+      dispatch(EmployeeSlice.actions.addEmployee(data));
+    }else{
+      dispatch(EmployeeSlice.actions.addEmployee({}));
+    }
+  }, [dispatch, setIsLoading, matricule])
 
-  useEffect(() => {
-    callback();
-  }, [callback]);
-
+  useEffect(()=>{
+    console.log('useEffect')
+    dispatchType();
+  },[dispatchType])
   return (
     <div className={c.container}>
       {!isLoading ? <EmployeeCard /> : <Loading />}

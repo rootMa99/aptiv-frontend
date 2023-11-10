@@ -2,7 +2,24 @@ import { Fragment, useState } from "react";
 import c from "./AddFormationForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
-import { v4 as generateId } from "uuid";
+
+const getData = async (url, body) => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {}
+};
+
 
 const AddFormationForm = (p) => {
   const [categorieFormation, setCategorieFormaation] = useState();
@@ -40,11 +57,29 @@ const AddFormationForm = (p) => {
   });
   const typos = useSelector((s) => s.typeS);
   const dispatch = useDispatch();
+
+
   const keys = Object.keys(typos.catList);
+  const seletedType = [];
+
+  if (
+    categorieFormation !== null &&
+    categorieFormation !== "+" &&
+    categorieFormation !== undefined
+  ) {
+    const existing = keys.find((f) => f === categorieFormation);
+    if (existing !== undefined) {
+      seletedType.push(...typos.catList[categorieFormation]);
+    }
+    console.log("check run" + categorieFormation);
+  }
+  console.log(seletedType);
   console.log(keys);
   const matricule = p.id;
+  console.log(matricule);
 
-  const onSubmitHandler = (e) => {
+
+  const onSubmitHandler =async (e) => {
     e.preventDefault();
     const error =
       classError.categorieFormation ||
@@ -80,22 +115,44 @@ const AddFormationForm = (p) => {
       return;
     }
     const month = dateDebut.split("-")[1];
-    const id = generateId();
+    
+    const formation= [{
+      type: typeFormation,
+      categorieFormation: categorieFormation,
+      modalite: modalite,
+      dureePerHour: dureePerHour,
+      dateDebut: dateDebut,
+      dateFin: dateFin,
+      month: month,
+      prestataire: presentataire,
+      formatteur: formatteur,
+      evaluationAFrois: true,
+      bilan: "done",
+    }];
+    console.log('data sent...');
+    const data= await getData(
+      `http://localhost:8081/formation/${matricule}`,
+      formation
+    );
+console.log("data fetched....");
+      console.log(data);
+      console.log(data._embedded.formationPersonelRests);
+
     const payload = {
       matricule: matricule,
       formation: {
-        formationId: id,
-        type: typeFormation,
-        categorieFormation: categorieFormation,
-        modalite: modalite,
-        dureePerHour: dureePerHour,
-        dateDebut: dateDebut,
-        dateFin: dateFin,
-        month: month,
-        presentataire: presentataire,
-        formatteur: formatteur,
-        evaluationAFrois: true,
-        bilan: "done",
+        formationId: data._embedded.formationPersonelRests[0].formationId,
+        type: data._embedded.formationPersonelRests[0].type,
+        categorieFormation: data._embedded.formationPersonelRests[0].categorieFormation,
+        modalite: data._embedded.formationPersonelRests[0].modalite,
+        dureePerHour: data._embedded.formationPersonelRests[0].dureePerHour,
+        dateDebut: data._embedded.formationPersonelRests[0].dateDebut.split('T')[0],
+        dateFin: data._embedded.formationPersonelRests[0].dateFin.split('T')[0],
+        month: data._embedded.formationPersonelRests[0].month,
+        prestataire: data._embedded.formationPersonelRests[0].prestataire,
+        formatteur: data._embedded.formationPersonelRests[0].formatteur,
+        evaluationAFrois: data._embedded.formationPersonelRests[0].evaluationAFrois,
+        bilan: data._embedded.formationPersonelRests[0].bilan,
       },
     };
 
@@ -108,6 +165,7 @@ const AddFormationForm = (p) => {
     const value = e.target.value;
     if (value === "+") {
       setAddCat(true);
+      setCategorieFormaation(e.target.value);
       return;
     }
     console.log("add categrie");
@@ -138,6 +196,23 @@ const AddFormationForm = (p) => {
         return {
           ...p,
           categorieFormation: true,
+        };
+      });
+    }
+  };
+  const onChangeTf = (e) => {
+    if (e.target.value.trim() !== "") {
+      setTypeFormation(e.target.value);
+      setClassError((p) => {
+        return {
+          ...p,
+          type: false,
+        };
+      });
+      setIsEmpty((p) => {
+        return {
+          ...p,
+          type: false,
         };
       });
     }
@@ -177,6 +252,7 @@ const AddFormationForm = (p) => {
 
   const onChageFormation = (e) => {
     const value = e.target.value;
+    console.log(value);
     if (value.trim() !== "") {
       setTypeFormation(value);
       setClassError((p) => {
@@ -401,10 +477,9 @@ const AddFormationForm = (p) => {
 
   return (
     <form className={c.form} onSubmit={onSubmitHandler}>
-      <h1>
-        Add Training for Employee
-        <br /> ( {p.id} )
-      </h1>
+      <div className={c.formHeader}>
+        <h1>Add Training to Employee ( {p.id} )</h1>
+      </div>
       <div className={c.inputsContainer}>
         <div className={c.inputContainer}>
           <label htmlFor="categorieFormation">Categorie De Formation</label>
@@ -412,11 +487,15 @@ const AddFormationForm = (p) => {
             id="categorieFormation"
             value={categorieFormation}
             onChange={onChangeSelect}
-            onBlur={onChangeSelect}
           >
             <option value="none">None</option>
-            {keys.map((m) => <option key={Math.random()} value={m}>{m}</option>)}
+            {keys.map((m) => (
+              <option key={Math.random()} value={m}>
+                {m}
+              </option>
+            ))}
             <option value="+">+</option>
+            <option value={categorieFormation}>{categorieFormation}</option>
           </select>
           {classError.categorieFormation && (
             <p className={c.error}>Please Choose Categorie de Formation </p>
@@ -429,7 +508,6 @@ const AddFormationForm = (p) => {
                 id="addCat"
                 placeholder="Please Enter Formation"
                 onChange={onChangeAddCat}
-                onBlur={onChangeAddCat}
               />
               {classError.addCat && (
                 <p className={c.error}>Please Enter Categorie de Formation </p>
@@ -439,13 +517,28 @@ const AddFormationForm = (p) => {
         </div>
         <div className={c.inputContainer}>
           <label htmlFor="formation">Theme de Formation</label>
-          <input
-            type="text"
-            id="formation"
-            placeholder="Please Enter Formation"
-            onChange={onChageFormation}
-            onBlur={onChageFormation}
-          />
+          {seletedType.length !== 0 && (
+            <select
+              id="formation"
+              onChange={onChageFormation}
+              value={typeFormation}
+            >
+            <option value="none">None</option>
+              {seletedType.map((m) => (
+                <option key={Math.random()} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+          )}
+          {seletedType.length === 0 && (
+            <input
+              type="text"
+              id="addCat"
+              placeholder="Please Enter Theme de Formation"
+              onChange={onChangeTf}
+            />
+          )}
           {classError.type && (
             <p className={c.error}>Please Enter Formation </p>
           )}
@@ -457,7 +550,6 @@ const AddFormationForm = (p) => {
             id="modalite"
             placeholder="Please Enter Modalite"
             onChange={onChangeModalite}
-            onBlur={onChangeModalite}
           />
           {classError.modalite && (
             <p className={c.error}>Please Enter Modalite </p>
@@ -470,7 +562,6 @@ const AddFormationForm = (p) => {
             id="dureePerHour"
             placeholder="Please Enter Duree Par Heure"
             onChange={onChangeDureePerHour}
-            onBlur={onChangeDureePerHour}
           />
           {classError.dureePerHour && (
             <p className={c.error}>
@@ -486,7 +577,6 @@ const AddFormationForm = (p) => {
             id="dateDebut"
             placeholder="Please Enter Date de Debut"
             onChange={onChangeDateDebut}
-            onBlur={onChangeDateDebut}
           />
           {classError.dateDebut && (
             <p className={c.error}>Please Choose Date de Debut </p>
@@ -500,7 +590,6 @@ const AddFormationForm = (p) => {
             id="dateFin"
             placeholder="Please Enter Date de Fin"
             onChange={onChangeDateFin}
-            onBlur={onChangeDateFin}
           />
           {classError.dateFin && (
             <p className={c.error}>Please Choose Date de Fin </p>
@@ -513,7 +602,6 @@ const AddFormationForm = (p) => {
             id="presentataire"
             placeholder="Please Enter Prestataire"
             onChange={onCahngePresentataire}
-            onBlur={onCahngePresentataire}
           />
           {classError.presentataire && (
             <p className={c.error}>Please Enter Presentataire </p>
@@ -526,7 +614,6 @@ const AddFormationForm = (p) => {
             id="formatteur"
             placeholder="Please Enter Formatteur"
             onChange={onChangeFormatteur}
-            onBlur={onChangeFormatteur}
           />
           {classError.formatteur && (
             <p className={c.error}>Please Enter Formatteur </p>

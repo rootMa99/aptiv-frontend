@@ -24,6 +24,9 @@
 .wrapper table td {
   text-align: center;
   padding: 8px;
+  padding-top: 10px;
+  color: #fff;
+
 }
 .wrapper table th {
   background-color: rgba(0, 0, 0, 0.678);
@@ -49,7 +52,7 @@
 }
 .wrapper::-webkit-scrollbar {
   width: 5px;
-  background-color: #535151;
+  background-color: #474b4d;
 }
 .wrapper::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -64,8 +67,8 @@
   margin-left: auto;
 }
 .addbtn{
-  padding: 0.3rem 1rem;
-  border-radius: 40px;
+  padding: 0.6rem 1rem;
+  border-radius: 0px;
   font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
@@ -74,13 +77,14 @@
   text-align: center;
   font-weight: bold;
   cursor: pointer;
-  background-color: rgb(138, 131, 123);
+  background-color: #303233;
   color: whitesmoke;
-  border: 1px solid rgb(2, 2, 143);
+  border: 1px solid rgb(143, 18, 2);
 }
 .addbtn:hover {
   border: 1px solid rgb(255, 255, 255);
-  background-color: rgb(138, 131, 123);
+  background-color: rgb(54, 52, 48);
+  transform: scale(1.02);
 }
 .notfoundform{
   font-size: 18px;
@@ -90,14 +94,13 @@
     "Segoe UI Symbol";
   padding: 1rem;
   background-color: #7e74742a;
-  backdrop-filter: blur(6px);
   color:aliceblue;
   text-transform: uppercase;
   letter-spacing: 2px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.63);
-  animation: example-animation 3s ease infinite;
+  animation: anim 3s ease infinite;
 }
-@keyframes example-animation {
+@keyframes anim {
   0% {
     transform: scale(0.99);
   }

@@ -48,6 +48,10 @@
   justify-content: space-around;
   background-color: #212122;
 }
+.barcontainer{
+  width: 48%;
+  height: 100%;
+}
 
 .lineChart{
   width: 100%;

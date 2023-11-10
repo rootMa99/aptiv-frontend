@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import { useSelector } from "react-redux";
 import c from "./EmployeeCard.module.css";
 import EmployeeFormation from "./EmployeeFormation";
@@ -8,26 +7,26 @@ import BackDrop from "../UI/BackDrop";
 import DeleteFormation from "./DeleteFormation";
 import EmployeeCardTr from "./EmployeeCardTr";
 import AddFormationForm from "./AddFormationForm";
-import EditFormation from './EditFormation';
+import EditFormation from "./EditFormation";
 
 const EmployeeCard = (p) => {
   const [notify, setNotify] = useState(false);
-  const [showForm, setShowFrom]= useState(false);
+  const [showForm, setShowFrom] = useState(false);
   const [idDel, setIdDel] = useState();
   const [idEdit, setIdEdit] = useState();
-  const [showEdit, setShowEdit]= useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const empl = useSelector((s) => s.empls);
 
   const onSetId = (id) => {
     setIdDel(id);
     setNotify(true);
   };
-  const onSetIdEdit = (formationEdit)=>{
-  console.log("this trigger");
+  const onSetIdEdit = (formationEdit) => {
+    console.log("this trigger");
     setIdEdit(formationEdit);
     setShowEdit(true);
-  } 
+  };
 
-  const empl = useSelector((s) => s.empls);
   console.log(empl);
   const onclose = () => {
     setNotify(false);
@@ -36,7 +35,7 @@ const EmployeeCard = (p) => {
   };
 
   const onAddHandler = (e) => {
-    console.log("show form here"+empl.empl.matricule );
+    console.log("show form here" + empl.empl.matricule);
     setShowFrom(true);
   };
 
@@ -46,8 +45,16 @@ const EmployeeCard = (p) => {
     <div className={c.wrapper}>
       {logic && <BackDrop click={onclose} />}
       {notify && <DeleteFormation close={onclose} id={idDel} />}
-      {showForm && <AddFormationForm id={empl.empl.matricule} close={onclose} />}
-      {showEdit && <EditFormation id={empl.empl.matricule} formationEdit={idEdit} close={onclose} />}
+      {showForm && (
+        <AddFormationForm id={empl.empl.matricule} close={onclose} />
+      )}
+      {showEdit && (
+        <EditFormation
+          id={empl.empl.matricule}
+          formationEdit={idEdit}
+          close={onclose}
+        />
+      )}
       <h1>Employee</h1>
       <table>
         <thead>
@@ -63,29 +70,39 @@ const EmployeeCard = (p) => {
             <th>Depart</th>
           </tr>
         </thead>
-        <tbody>
-          <EmployeeCardTr
-            matricule={empl.empl.matricule}
-            nom={empl.empl.nom}
-            prenom={empl.empl.prenom}
-            cin={empl.empl.cin}
-            categorie={empl.empl.categorie}
-            fonctionEntreprise={empl.empl.fonctionEntreprise}
-            departement={empl.empl.departement}
-            dateEmbauche={empl.empl.dateEmbauche}
-            dateDepart={empl.empl.dateDepart}
-          />
+        {empl.empl.matricule!==undefined ? (
+          <tbody>
+            <EmployeeCardTr
+              matricule={empl.empl.matricule}
+              nom={empl.empl.nom}
+              prenom={empl.empl.prenom}
+              cin={empl.empl.cin}
+              categorie={empl.empl.categorie}
+              fonctionEntreprise={empl.empl.fonctionEntreprise}
+              departement={empl.empl.departement}
+              dateEmbauche={empl.empl.dateEmbauche}
+              dateDepart={empl.empl.dateDepart}
+            />
 
-          <tr>
-            <td colSpan="9">
-              <div className={c.addbtnholder}>
-                <button className={c.addbtn} onClick={onAddHandler}>
-                  add formation
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+            <tr>
+              <td colSpan="9">
+                <div className={c.addbtnholder}>
+                  <button className={c.addbtn} onClick={onAddHandler}>
+                    add formation
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td colSpan="11">
+                <p className={c.notfoundform}>no Employee found!</p>
+              </td>
+            </tr>
+          </tbody>
+        )}
       </table>
       <h1>formations</h1>
       <table>
@@ -123,7 +140,7 @@ const EmployeeCard = (p) => {
               debut={m.dateDebut}
               fin={m.dateFin}
               month={m.month}
-              presentataire={m.presentataire}
+              presentataire={m.prestataire}
               formatteur={m.formatteur}
               eva={m.evaluationAFrois}
               bilan={m.bilan}
