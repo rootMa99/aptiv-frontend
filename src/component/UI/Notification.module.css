@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 .card {
     background-color: rgba(192, 192, 192, 0.425) ;

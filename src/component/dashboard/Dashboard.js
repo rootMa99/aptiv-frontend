@@ -10,6 +10,7 @@ import { filterFormation, nbHour, nbMonth, totalDataC } from "../hooks/filterFor
 import BackDropAlter from "../UI/BackDropAlter";
 import DashboardBarChart from "./DashboardBarChart";
 import Notification from "../UI/Notification";
+import DashboardLineChart from "./DashboardLineChart";
 
 const getData = async (url, body) => {
   try {
@@ -202,8 +203,10 @@ const DashBoard = (p) => {
               )}
             </div>
           )}
-          <div>
-            
+          <div className={classes.lineChart}>
+            {
+              dashboards.dashboardData.length>0 && <DashboardLineChart data={monthHour} labelName="Month/Hour" />
+            }
           </div>
         </div>
       </div>
