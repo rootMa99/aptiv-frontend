@@ -19,20 +19,76 @@
   cursor: pointer;
   background-color: #303233;
   color: whitesmoke;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
 }
 .delete {
   border: 1px solid rgb(156, 10, 10);
   margin-right: 0.6rem;
+  z-index: 1;
+  color: rgb(117, 2, 2);
 }
 .edit {
   border: 1px solid rgb(2, 2, 143);
+  z-index: 1;
+  color: rgb(2, 2, 143);
 }
-.btnContainer button:hover {
-  background-color: rgb(48, 46, 43);
-}
-.edit:hover {
-  color: rgb(3, 3, 190);
-}
+
+
 .delete:hover {
-  color: rgb(156, 10, 10);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.delete:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  background: rgb(156, 10, 10);
+  transition: all 0.3s ease;
+}
+.delete:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.delete:active {
+  top: 2px;
+}
+
+
+.edit:hover {
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.edit:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  background: rgb(2, 2, 221);
+  transition: all 0.3s ease;
+}
+
+
+.edit:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.edit:active {
+  top: 2px;
 }

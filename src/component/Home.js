@@ -8,12 +8,11 @@ const Home = (p) => {
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
-
   const onChangeHandler = (e) => {
     setTyping(true);
     console.log(+e.target.value + 1);
 
-    if (e.target.value.trim() === ""|| e.target.value<=0) {
+    if (e.target.value.trim() === "" || e.target.value <= 0) {
       setTyping(false);
       setValue(e.target.value);
     } else {
@@ -51,6 +50,24 @@ const Home = (p) => {
             <button className={classBtn} onClick={onClickHandler}>
               Search
             </button>
+            <div className={c.recentSearch}>
+              <h3>recent search conducted</h3>
+              <ul className={c.listContainer}>
+                <li className={c.listItem}>
+                  <span className={c.matriculeSp}>6778</span>-
+                  <span className={c.nameSp}>roberto baggio</span>-<span className={c.nameSp}>is</span>-<span className={c.nameSp}>LOGISTIC IMPO.EXPO.-4-</span>
+                </li>
+                <li className={c.listItem}>
+                  <span className={c.matriculeSp}>789</span>-
+                  <span className={c.nameSp}>franchesko totti</span>-<span className={c.nameSp}>is</span>-<span className={c.nameSp}>LOGISTIC IMPO.EXPO.-4-</span>
+                </li>
+                <li className={c.listItem}>
+                  <span className={c.matriculeSp}>6778</span>-
+                  <span className={c.nameSp}>andrea pirlo</span>-<span className={c.nameSp}>is</span>-<span className={c.nameSp}>LOGISTIC IMPO.EXPO.-4-</span>
+                </li>
+            
+              </ul>
+            </div>
           </div>
         </div>
       </main>
