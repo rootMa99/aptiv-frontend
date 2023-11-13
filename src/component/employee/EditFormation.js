@@ -25,6 +25,7 @@ const getData = async (url, body) => {
 
 
 const EditFormation = (p) => {
+  console.log(p);
   const [formationId] = useState(p.formationEdit.formationId);
   const [categorieFormation, setCategorieFormaation] = useState(
     p.formationEdit.categorieFormation

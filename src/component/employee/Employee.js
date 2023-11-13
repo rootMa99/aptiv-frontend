@@ -5,6 +5,7 @@ import c from "./Employee.module.css";
 import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
 import { useParams } from "react-router-dom";
+import { typeAction } from "../../store/allType-slice";
 
 const getData = async (url) => {
   try {
@@ -49,6 +50,14 @@ const Employee = (p) => {
     setIsLoading(false);
     if(data!==undefined){
       dispatch(EmployeeSlice.actions.addEmployee(data));
+      const payload={
+        matricule:data.matricule,
+        nom:data.nom,
+        prenom:data.prenom,
+        categorie:data.categorie,
+        departement:data.departement
+      }
+      dispatch(typeAction.addRecentSearch(payload))
     }else{
       dispatch(EmployeeSlice.actions.addEmployee({}));
     }

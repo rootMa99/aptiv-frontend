@@ -34,6 +34,7 @@ const EmployeeSlice = createSlice({
       s.empl.dateEmbauche = payload.dateEmbauche;
       s.empl.dateDepart = payload.dateDepart;
       if (Object.keys(payload).includes("formations")) {
+        s.empl.formations = [];
         for (const i of payload.formations) {
           s.empl.formations.sort((a, b) => b.dateDebut - a.dateDebut);
           s.empl.formations.push(i);

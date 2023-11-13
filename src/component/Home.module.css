@@ -22,7 +22,7 @@
   z-index: 1;
   height: 100vh;
   width: 100vw;
-  background-color: #0000009a;
+  background-color: #000000c7;
   backdrop-filter: blur(6px);
   position: relative;
 }
@@ -118,9 +118,10 @@
   border: 1px solid rgb(151, 33, 33);
   border-radius: 4px;
   padding: 1rem;
+  animation: rsin 3s ease-out forwards;
 }
 .recentSearch::-webkit-scrollbar {
-  width: 6px;
+  width: 2px;
   background-color: #535151;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;    
@@ -150,13 +151,11 @@
   width: 100%;
 }
 .listItem{
-  margin: 5px 0;
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  background-color: #303233;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #ccc;
   cursor: pointer;
-  margin-top: 1rem;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -165,7 +164,7 @@
   color: gold;
 }
 .listItem:hover{
-  background-color: #131414;
+  background-color: #303233;
 
 }
 
@@ -188,6 +187,26 @@
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+@keyframes rsin {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem);
+    display: none;
+  }
+  33% {
+    opacity: 0.3;
+    transform: translateY(5rem);
+    display: none;
+  }
+  66% {
+    opacity: 0.6;
+    transform: translateY(0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 @keyframes homeout {

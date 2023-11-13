@@ -6,8 +6,8 @@ import { useState } from "react";
 import BackDrop from "../UI/BackDrop";
 import DeleteFormation from "./DeleteFormation";
 import EmployeeCardTr from "./EmployeeCardTr";
-import AddFormationForm from "./AddFormationForm";
 import EditFormation from "./EditFormation";
+import AddToFormationForm from "./AddToFormationForm";
 
 const EmployeeCard = (p) => {
   const [notify, setNotify] = useState(false);
@@ -46,14 +46,16 @@ const EmployeeCard = (p) => {
       {logic && <BackDrop click={onclose} />}
       {notify && <DeleteFormation close={onclose} id={idDel} />}
       {showForm && (
-        <AddFormationForm id={empl.empl.matricule} close={onclose} />
+        //<AddFormationForm id={empl.empl.matricule} close={onclose} />
+        <AddToFormationForm id={empl.empl.matricule} formationEdit={false} close={onclose}/>
       )}
       {showEdit && (
-        <EditFormation
+        /* <EditFormation
           id={empl.empl.matricule}
           formationEdit={idEdit}
           close={onclose}
-        />
+        /> */
+        <AddToFormationForm id={empl.empl.matricule} formationEdit={idEdit} close={onclose} />
       )}
       <h1>Employee</h1>
       <table>

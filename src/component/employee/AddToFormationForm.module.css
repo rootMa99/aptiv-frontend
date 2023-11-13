@@ -1,0 +1,82 @@
+.form{
+    position: fixed;
+    z-index: 11111;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #303233;
+    border: 1px solid rgb(99, 3, 3);
+    border-radius: 8px;
+    width: 50vw;
+    height: 85vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: backdrop 2s ease-out forwards;
+    box-shadow: 5px 5px 15px rgba(53, 22, 22, 0.651);
+}
+.form::-webkit-scrollbar {
+    width: 6px;
+    background-color: #535151;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;    
+  }
+  .form::-webkit-scrollbar-thumb {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #8a0101;
+  }
+  .formHeader{
+    width: 100%;
+    min-height: 10rem;
+    background-color: #171818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .formHeader h1{
+    color: white;
+    outline: none;
+  }
+  .inputsContainer{
+    width: 90%;
+  }
+.inputContainer{
+    height: 2rem;
+}
+
+
+.selectHolder{
+    margin-top: 1rem;
+}
+
+  .btnContainer{
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    width: 90%;
+  }
+
+  .btnContainer button {
+    width: 50%;
+    height: 3rem;
+    padding:0.5rem;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgba(24, 13, 13, 0.37);
+    color: rgb(235, 235, 235);
+    border-radius: 5px;
+    font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    letter-spacing: 2px;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+  }
+  .btnContainer button:hover {
+    background-color: rgba(104, 57, 57, 0.37);
+    border: 2px solid rgb(73, 73, 73);
+  }

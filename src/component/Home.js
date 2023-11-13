@@ -2,12 +2,15 @@ import { Fragment, useState } from "react";
 import aptivBgVid from "../assets/AptivVid.mp4";
 import c from "./Home.module.css";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = (p) => {
   const [typing, setTyping] = useState(false);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
+  const recentResearch = useSelector((s) => s.typeS.recentSearch);
 
+  console.log(recentResearch);
   const onChangeHandler = (e) => {
     setTyping(true);
     console.log(+e.target.value + 1);
@@ -29,6 +32,9 @@ const Home = (p) => {
     setValue("");
     navigate(`/home/${value}`);
   };
+  const clickHandler=(matricule)=>{
+    navigate(`/home/${matricule}`);
+  }
 
   const classBtn = !typing ? c.buttonOut : c.buttonIn;
   return (
@@ -50,24 +56,21 @@ const Home = (p) => {
             <button className={classBtn} onClick={onClickHandler}>
               Search
             </button>
-            <div className={c.recentSearch}>
-              <h3>recent search conducted</h3>
-              <ul className={c.listContainer}>
-                <li className={c.listItem}>
-                  <span className={c.matriculeSp}>6778</span>-
-                  <span className={c.nameSp}>roberto baggio</span>-<span className={c.nameSp}>is</span>-<span className={c.nameSp}>LOGISTIC IMPO.EXPO.-4-</span>
-                </li>
-                <li className={c.listItem}>
-                  <span className={c.matriculeSp}>789</span>-
-                  <span className={c.nameSp}>franchesko totti</span>-<span className={c.nameSp}>is</span>-<span className={c.nameSp}>LOGISTIC IMPO.EXPO.-4-</span>
-                </li>
-                <li className={c.listItem}>
-                  <span className={c.matriculeSp}>6778</span>-
-                  <span className={c.nameSp}>andrea pirlo</span>-<span className={c.nameSp}>is</span>-<span className={c.nameSp}>LOGISTIC IMPO.EXPO.-4-</span>
-                </li>
-            
-              </ul>
-            </div>
+            {recentResearch.length > 0 && (
+              <div className={c.recentSearch}>
+                <h3>recent search conducted</h3>
+                <ul className={c.listContainer}>
+                  {recentResearch.toReversed().map((m) => (
+                    <li className={c.listItem} key={m.matricule} onClick={()=>clickHandler(m.matricule)}>
+                      <span className={c.matriculeSp}>{m.matricule}</span>-
+                      <span className={c.nameSp}>{m.nom+" "+m.prenom}</span>-
+                      <span className={c.nameSp}>{m.categorie}</span>-
+                      <span className={c.nameSp}>{m.departement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </main>
