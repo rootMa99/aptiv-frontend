@@ -125,6 +125,7 @@ const customStyles = {
         onChange={handleChange}
         options={options}
         styles={customStyles}
+        defaultValue={' '}
       />
     )
   }

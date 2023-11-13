@@ -6,7 +6,6 @@ import { useState } from "react";
 import BackDrop from "../UI/BackDrop";
 import DeleteFormation from "./DeleteFormation";
 import EmployeeCardTr from "./EmployeeCardTr";
-import EditFormation from "./EditFormation";
 import AddToFormationForm from "./AddToFormationForm";
 
 const EmployeeCard = (p) => {

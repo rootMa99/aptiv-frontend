@@ -3,7 +3,7 @@ import c from "./Inputs.module.css";
 
 const Inputs = (p) => {
   const [isValid, setIsvalid] = useState(true);
-  const [valueInput, setValueInput] = useState("");
+  const [valueInput, setValueInput] = useState(p.valueS);
 
   const onchangeHandler = (e) => {
     setValueInput(e.target.value);

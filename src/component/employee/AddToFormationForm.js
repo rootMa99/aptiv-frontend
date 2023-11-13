@@ -23,6 +23,7 @@ const postData = async (url, body, typeR) => {
 };
 
 const AddToFormationForm = (p) => {
+  console.log(p.formationEdit);
   const typos = useSelector((s) => s.typeS);
   const [tittre, setTitre] = useState("All");
   const [titreFormation, setTitreFormation] = useState("All");
@@ -57,7 +58,7 @@ const AddToFormationForm = (p) => {
       dph: p.formationEdit.dureePerHour,
       dateDebut: p.formationEdit.dateDebut,
       dateFin: p.formationEdit.dateFin,
-      prestataire: p.formationEdit.prestataire,
+      prestataire: p.formationEdit.presentataire,
       formatteur: p.formationEdit.formatteur,
     });
   }
@@ -68,7 +69,6 @@ const AddToFormationForm = (p) => {
       tittre !== "All" &&
       titreFormation !== "All" &&
       valueInp.modalite.trim() !== "" &&
-      valueInp.dph.trim() !== "" &&
       valueInp.dateDebut.trim() !== "" &&
       valueInp.dateFin.trim() !== "" &&
       valueInp.prestataire.trim() !== "" &&
@@ -76,27 +76,27 @@ const AddToFormationForm = (p) => {
     ) {
       const month = valueInp.dateDebut.split("-")[1];
 
-      const formation = [
-        {
-          type: titreFormation,
-          categorieFormation: tittre,
-          modalite: valueInp.modalite,
-          dureePerHour: valueInp.dph,
-          dateDebut: valueInp.dateDebut,
-          dateFin: valueInp.dateFin,
-          month: month,
-          prestataire: valueInp.prestataire,
-          formatteur: valueInp.formatteur,
-          evaluationAFrois: true,
-          bilan: "done",
-        },
-      ];
+      const formation = {
+        type: titreFormation,
+        categorieFormation: tittre,
+        modalite: valueInp.modalite,
+        dureePerHour: valueInp.dph,
+        dateDebut: valueInp.dateDebut,
+        dateFin: valueInp.dateFin,
+        month: month,
+        prestataire: valueInp.prestataire,
+        formatteur: valueInp.formatteur,
+        evaluationAFrois: true,
+        bilan: "done",
+      };
 
       if (!p.formationEdit) {
+        const formations = [];
+        formations.push(formation);
         console.log("data sent...");
         const data = await postData(
           `http://localhost:8081/formation/${matricule}`,
-          formation,
+          formations,
           "POST"
         );
         console.log("data fetched....");
@@ -144,8 +144,8 @@ const AddToFormationForm = (p) => {
             categorieFormation: data.categorieFormation,
             modalite: data.modalite,
             dureePerHour: data.dureePerHour,
-            dateDebut: data.dateDebut,
-            dateFin: data.dateFin,
+            dateDebut: data.dateDebut.split("T")[0],
+            dateFin: data.dateFin.split("T")[0],
             month: data.month,
             presentataire: data.presentataire,
             formatteur: data.formatteur,
@@ -231,7 +231,10 @@ const AddToFormationForm = (p) => {
             cf={true}
             identif="CF"
             chooseTitre={chooseTitre}
-            valueS={tittre}
+            valueS={{
+                value: tittre,
+                label: tittre,
+              }}
           />
         </div>
         {logic && (
@@ -241,19 +244,37 @@ const AddToFormationForm = (p) => {
               tittre={tittre}
               identif="CTF"
               chooseTitreFormation={chooseTitreFormation}
-              valueS={titreFormation}
+              valueS={{
+                value: titreFormation,
+                label: titreFormation,
+              }}
             />
           </div>
         )}
-        <Inputs label="MODALITE" type="text" chooseModalite={chooseModalite} valueS={valueInp.modalite} />
-        <Inputs label="DUREE PAR HEURE" type="number" chooseDph={chooseDph} valueS={valueInp.dph} />
+        <Inputs
+          label="MODALITE"
+          type="text"
+          chooseModalite={chooseModalite}
+          valueS={valueInp.modalite}
+        />
+        <Inputs
+          label="DUREE PAR HEURE"
+          type="number"
+          chooseDph={chooseDph}
+          valueS={valueInp.dph}
+        />
         <Inputs
           label="DATE DE DEBUT"
           type="date"
           chooseDateDebut={chooseDateDebut}
           valueS={valueInp.dateDebut}
         />
-        <Inputs label="DATE DE FIN" type="date" chooseDateFin={chooseDateFin} valueS={valueInp.dateFin} />
+        <Inputs
+          label="DATE DE FIN"
+          type="date"
+          chooseDateFin={chooseDateFin}
+          valueS={valueInp.dateFin}
+        />
         <Inputs
           label="PRESTATAIRE"
           type="text"
