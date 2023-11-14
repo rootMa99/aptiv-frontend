@@ -5,7 +5,7 @@ const customStyles = {
   control: (provided, state) => ({
     ...provided,
     width: "100%",
-    height:"6rem",
+    height: "6rem",
     fontWeight: "600",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -63,7 +63,8 @@ const customStyles = {
 };
 
 const DashboardFilterSelect = (p) => {
-  const [selectedOption, setSelectedOption] = useState("");
+  console.log(p.value);
+  const [selectedOption, setSelectedOption] = useState('');
   const options = useMemo(() => {
     return [
       {
@@ -74,7 +75,7 @@ const DashboardFilterSelect = (p) => {
   }, []);
 
   useEffect(() => {
-    if (p.identif==="CF") {
+    if (p.identif === "CF") {
       const keys = Object.keys(p.option);
 
       const newOptions = [];
@@ -105,31 +106,29 @@ const DashboardFilterSelect = (p) => {
   const handleChange = (e) => {
     setSelectedOption(e);
 
-    switch(p.identif){
-        case "CF" :
-            p.chooseTitre(e.value);
-            break;
-        case "DP" :
-            p.chooseDepartement(e.value);
-            break;
-        case 'CP':
-            p.chooseCategoriePer(e.value);
-            break;
-        case "CTF":
-            p.chooseTitreFormation(e.value);
-            break;
-        default:
-            break;
+    switch (p.identif) {
+      case "CF":
+        p.chooseTitre(e.value);
+        break;
+      case "DP":
+        p.chooseDepartement(e.value);
+        break;
+      case "CP":
+        p.chooseCategoriePer(e.value);
+        break;
+      case "CTF":
+        p.chooseTitreFormation(e.value);
+        break;
+      default:
+        break;
     }
-
-
   };
-
+  console.log(selectedOption, p.identif);
   return (
     <div>
       <Select
         id="ac"
-        value={selectedOption}
+        value={p.value}
         onChange={handleChange}
         options={options}
         styles={customStyles}

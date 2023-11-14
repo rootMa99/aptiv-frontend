@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import c from "./UserCriteria.module.css";
 import Select from "react-select";
 
-
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -20,7 +19,7 @@ const customStyles = {
     boxShadow: "none",
     "&:hover": {
       border: "2px solid #b80000",
-      backgroundColor:"#676c6e"
+      backgroundColor: "#676c6e",
     },
   }),
   option: (provided, state) => ({
@@ -38,49 +37,47 @@ const customStyles = {
   }),
   input: (provided) => ({
     ...provided,
-    color: '#f3f3f3',
+    color: "#f3f3f3",
   }),
-  singleValue:(p)=>({
+  singleValue: (p) => ({
     ...p,
-    color: '#f3f3f3',
-  })
+    color: "#f3f3f3",
+  }),
 };
 const UserCriteria = (p) => {
   const [selectedOption, setSelectedOption] = useState("");
-  const options = useMemo(()=>{
-    return [{
-      value: null,
-      label: 'none',
-    }];
-  } , []) ;
+  const options = useMemo(() => {
+    return [
+      {
+        value: null,
+        label: "none",
+      },
+    ];
+  }, []);
 
   useEffect(() => {
-    const newOptions=[]
+    const newOptions = [];
     p.option.map((m) => {
-     
-
       const optionN = {
         value: m,
         label: m,
       };
-      
+
       return newOptions.push(optionN);
     });
     if (newOptions.length > 0) {
       options.push(...newOptions);
     }
-  }, [p.option,options]);
+  }, [p.option, options]);
   const handleChange = (e) => {
     setSelectedOption(e);
-    p.setUC(e.value)
+    p.setUC(e.value);
   };
-
 
   return (
     <div className={c.inputContainerUC}>
-    
       <div className={c.labelC}>
-        <label htmlFor="uc">user criteria</label>
+        <label htmlFor="uc">Employee Category</label>
         <Select
           id="uc"
           value={selectedOption}
@@ -89,6 +86,12 @@ const UserCriteria = (p) => {
           styles={customStyles}
         />
       </div>
+      <p className={c.desciption}>
+        (Select the category that most accurately represents the role or
+        employment status within the organization - <span>
+        (this field is optional)
+        </span> )*
+      </p>
     </div>
   );
 };

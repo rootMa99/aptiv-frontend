@@ -52,7 +52,26 @@ const DashBoard = (p) => {
   const [endDate, setEndDate] = useState(dashboards.selectedDate.endDate);
   const [isLoading, setIsLoading] = useState(false);
   const [notify, setNotify] = useState(false);
+  const [reset, setReset]= useState(classes.displayNone);
   const dispatch = useDispatch();
+
+  const keyDownHandler = (e) => {
+    if (e.ctrlKey && e.key === "b") {
+      console.log("shortcut");
+      setTitre("All");
+      setTitreFormation("All");
+      setCategorie("All");
+      setDepartement("All");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
 
   const dispatchType = useCallback(async () => {
     if (
@@ -144,19 +163,44 @@ const DashBoard = (p) => {
   console.log(categorie, departement, titreFormation, startDate, endDate);
   const logic = tittre !== undefined && tittre !== "All";
 
+useEffect(()=>{
+  console.log("class effect run");
+  if(departement!=='All'|| categorie!=='All'|| tittre!=='All'){
+    setReset(classes.resetIN);
+  }
+
+    const timeoutId = setTimeout(() => {
+      setReset(classes.resetOUT)
+    }, 4000);
+    
+    return () => {
+      clearTimeout(timeoutId);
+    };
+},[departement, categorie, tittre]
+)
+
+
   return (
     <main className={classes.main}>
       {isLoading && <BackDropAlter />}
       {isLoading && <LoadingFetch />}
       <div className={classes.container}>
         <div className={classes.mainFormatter}>
+          <div className={classes.phold}>
+            <p className={`${classes.reset} ${reset}`} > press crtl+b to reset </p> 
+          </div>
+          
           <div className={classes.filterContainer}>
-            <div className={classes.filterItem}>
+           <div className={classes.filterItem}>
               <h3>category </h3>
               <DashboardFilterSelect
                 option={typos.categoriePersonel}
                 identif="CP"
                 chooseCategoriePer={chooseCategoriePer}
+                value={{
+                  value: categorie,
+                  label: categorie,
+                }}
               />
             </div>
             <div className={classes.filterItem}>
@@ -165,6 +209,10 @@ const DashBoard = (p) => {
                 option={typos.departement}
                 identif="DP"
                 chooseDepartement={chooseDepartement}
+                value={{
+                  value: departement,
+                  label: departement,
+                }}
               />
             </div>
             <div className={classes.filterItem}>
@@ -174,6 +222,10 @@ const DashBoard = (p) => {
                 cf={true}
                 identif="CF"
                 chooseTitre={chooseTitre}
+                value={{
+                  value: tittre,
+                  label: tittre,
+                }}
               />
             </div>
             {logic && (
@@ -184,6 +236,10 @@ const DashBoard = (p) => {
                   tittre={tittre}
                   identif="CTF"
                   chooseTitreFormation={chooseTitreFormation}
+                  value={{
+                    value: titreFormation,
+                    label: titreFormation,
+                  }}
                 />
               </div>
             )}

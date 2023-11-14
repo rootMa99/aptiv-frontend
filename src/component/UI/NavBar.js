@@ -39,6 +39,13 @@ const NavBar =()=>{
                         reporting
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink
+                    to="/uploadFiles" 
+                    className={({ isActive }) => (isActive ? c.activeLink : c.link)}>
+                        upload center
+                    </NavLink>
+                </li>
             </ul>
         </div>
     </header>)

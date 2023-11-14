@@ -20,7 +20,7 @@
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #b80000;
 }
-.mainFormatter{
+.mainFormatter {
   margin-top: 5rem;
   margin-bottom: 6rem;
 }
@@ -38,16 +38,18 @@
   height: 10rem;
   margin-top: 1rem;
 }
-.filterItem{
+.filterItem {
   font-weight: 600;
   color: rgb(151, 33, 33);
-  font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
   letter-spacing: 2px;
   text-transform: uppercase;
-  text-align:center;
+  text-align: center;
   outline: none;
 }
-.chartContainer{
+.chartContainer {
   margin-top: 4rem;
   margin-bottom: 4rem;
   width: 100%;
@@ -57,13 +59,76 @@
   justify-content: space-around;
   background-color: #212122;
 }
-.barcontainer{
+.barcontainer {
   width: 48%;
   height: 100%;
 }
 
-.lineChart{
+.lineChart {
   width: 100%;
   height: 30rem;
   background-color: #212122;
+}
+
+.phold{
+  position:fixed;
+  z-index: 99999;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+}
+.reset {
+  padding: 0.5rem;
+  background-color: #f5e8c7;
+  font-weight: 600;
+  color: #363062;
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+}
+.resetIN{
+  animation: pin 2s ease-out forwards;
+
+}
+.resetOUT{
+  animation: pout 2s ease-out forwards;
+
+}
+.displayNone{
+  display: none !important;
+}
+@keyframes pin {
+  0% {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+  }
+}
+@keyframes pout {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(0.5rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-3rem);
+    display: none;
+  }
 }

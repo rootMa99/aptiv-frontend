@@ -47,7 +47,7 @@ const onchangeHandler=e=>{
           </div>
           <p className={c.parg}>
             (If no Report title is entred, the title of report will default to
-            exported_data)
+            exported_data)*
           </p>
         </div>
       </div>

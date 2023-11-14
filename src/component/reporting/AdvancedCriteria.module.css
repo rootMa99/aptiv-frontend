@@ -13,7 +13,8 @@
     justify-content: center;
     margin-bottom: 1rem;
   }
-  .labelC label {
+  .labelC label,
+  .parg {
     font-weight:600;
     color: whitesmoke;
     font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -25,6 +26,15 @@
     outline: none;
     margin-right: 1rem;
 
+  }
+  .parg{
+    font-size: small;
+    font-weight:400;
+    color: #F5E8C7;
+    text-align: center;
+  }
+  .parg span{
+    color: #FFD28F;
   }
   .anim{
     animation: come 1.5s ease-out forwards;

@@ -30,6 +30,7 @@ const Reporting = (p) => {
   const { data, loading, error, fetchData } = useGetData();
   const exportToExcel = useExportData();
 
+
   const datecriteriaData = (data) => {
     setDateCriteria(data);
   };
@@ -76,6 +77,7 @@ const Reporting = (p) => {
       setIsEmpty(true);
     }
   }, [data]);
+
   const getReport = (e) => {
     if ("_embedded" in data) {
       exportToExcel(fileExcelName, data._embedded.formationPersonelRests);
@@ -94,7 +96,7 @@ const Reporting = (p) => {
   );
  
   return (
-    <main className={c.main}>
+    <main className={c.main}> 
       {loading && <BackDropAlter />}
       {loading && <LoadingFetch />}
       <div className={c.container}>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import c from "./AdvancedCriteria.module.css";
 import Select from "react-select";
 
@@ -66,12 +66,14 @@ const AdvancedCriteria = (p) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionType, setSelectedOptionType] = useState(null);
   const [trainigType, setTrainigType] = useState([]);
-  
+
   const options = useMemo(() => {
-    return [{
-      value: null,
-      label: "none",
-    }];
+    return [
+      {
+        value: null,
+        label: "none",
+      },
+    ];
   }, []);
 
   const keys = Object.keys(p.option);
@@ -94,16 +96,15 @@ const AdvancedCriteria = (p) => {
   }, [keys, options]);
 
   const getTypeOpt = (opt) => {
-
-    if (opt===null){
+    if (opt === null) {
       setTrainigType([]);
-    setSelectedOptionType(null);
+      setSelectedOptionType(null);
     }
 
     const existing = keys.find((f) => {
       return f === opt;
     });
-    
+
     if (existing !== undefined && Object.keys(p.option).length > 0) {
       const types = [{ value: null, label: "none" }];
       p.option[opt].map((m) => {
@@ -114,20 +115,18 @@ const AdvancedCriteria = (p) => {
   };
 
   const handleChange = (e) => {
-
     console.log(e);
     setSelectedOption(e);
     getTypeOpt(e.value);
-    p.advancedC(e.value)
-    if(e.value===null){
-    p.trainingC(null)
+    p.advancedC(e.value);
+    if (e.value === null) {
+      p.trainingC(null);
     }
   };
   const handleChangeType = (e) => {
     setSelectedOptionType(e);
-    p.trainingC(e.value)
+    p.trainingC(e.value);
   };
-
 
   return (
     <div className={c.inputContainerUC}>
@@ -141,18 +140,28 @@ const AdvancedCriteria = (p) => {
           styles={customStyles}
         />
       </div>
-
+      <p className={c.parg}>
+        (refers to the specific designation or name associated with the training
+        program that the employee has completed - 
+        <span>(this field is optional)</span> )*
+      </p>
       {trainigType.length > 0 && (
-        <div className={`${c.labelC}`}>
-          <label htmlFor="act">trainig type</label>
-          <Select
-            id="act"
-            value={selectedOptionType}
-            onChange={handleChangeType}
-            options={trainigType}
-            styles={customStyles}
-          />
-        </div>
+        <React.Fragment>
+          <div className={`${c.labelC}`}>
+            <label htmlFor="act">trainig type</label>
+            <Select
+              id="act"
+              value={selectedOptionType}
+              onChange={handleChangeType}
+              options={trainigType}
+              styles={customStyles}
+            />
+          </div>
+          <p className={c.parg}>
+            (classification that distinguishes the method or format of the
+            employee's training - <span>(this field is optional)</span> )*
+          </p>
+        </React.Fragment>
       )}
     </div>
   );
