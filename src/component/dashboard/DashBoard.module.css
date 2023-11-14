@@ -38,6 +38,15 @@
   height: 10rem;
   margin-top: 1rem;
 }
+.filterItem{
+  font-weight: 600;
+  color: rgb(151, 33, 33);
+  font-family: Formular,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align:center;
+  outline: none;
+}
 .chartContainer{
   margin-top: 4rem;
   margin-bottom: 4rem;

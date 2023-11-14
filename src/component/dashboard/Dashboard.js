@@ -152,7 +152,7 @@ const DashBoard = (p) => {
         <div className={classes.mainFormatter}>
           <div className={classes.filterContainer}>
             <div className={classes.filterItem}>
-            <h3>select by </h3>
+              <h3>category </h3>
               <DashboardFilterSelect
                 option={typos.categoriePersonel}
                 identif="CP"
@@ -160,7 +160,7 @@ const DashBoard = (p) => {
               />
             </div>
             <div className={classes.filterItem}>
-            <h3>select by </h3>
+              <h3>departement </h3>
               <DashboardFilterSelect
                 option={typos.departement}
                 identif="DP"
@@ -168,7 +168,7 @@ const DashBoard = (p) => {
               />
             </div>
             <div className={classes.filterItem}>
-            <h3>select by </h3>
+              <h3>training title </h3>
               <DashboardFilterSelect
                 option={typos.catList}
                 cf={true}
@@ -178,7 +178,7 @@ const DashBoard = (p) => {
             </div>
             {logic && (
               <div className={classes.filterItem}>
-              <h3>select by </h3>
+                <h3>training type </h3>
                 <DashboardFilterSelect
                   option={typos.catList[tittre]}
                   tittre={tittre}

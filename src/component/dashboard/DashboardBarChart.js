@@ -14,7 +14,7 @@ const DashboardBarChart = (p) => {
     datasets: [
       {
         label: p.nameLabel,
-        data: p.data.map((m) => m.nbrHour.toFixed(2)),
+        data: p.data.map((m) => m.nbrHour),
         backgroundColor: "rgb(99, 3, 3)",
         borderColor: "#f3f3f34f",
         borderWidth: 2,
@@ -67,13 +67,13 @@ const DashboardBarChart = (p) => {
           const meta = chart.getDatasetMeta(index);
 
           meta.data.forEach((bar, barIndex) => {
-            const data = dataset.data[barIndex];
+            const data = dataset.data[barIndex].toFixed(2);
             const xPos = bar.x;
             const yPos = bar.y - 10; 
 
             ctx.save();
             ctx.textAlign = "center";
-            ctx.fillStyle = "#f3f3f34f";
+            ctx.fillStyle = "#B9B4C7";
             ctx.font = "12px Arial";
 
             

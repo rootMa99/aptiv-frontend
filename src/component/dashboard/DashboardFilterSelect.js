@@ -5,6 +5,7 @@ const customStyles = {
   control: (provided, state) => ({
     ...provided,
     width: "100%",
+    height:"6rem",
     fontWeight: "600",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

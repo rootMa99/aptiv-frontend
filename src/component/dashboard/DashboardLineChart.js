@@ -29,7 +29,7 @@ const DashboardLineChart = (p) => {
     datasets:[ {
       label: p.labelName,
       data: p.data.map((d) => d.nbHour),
-      backgroundColor: "rgb(188, 3, 3)",
+      backgroundColor: "#B9B4C7",
       pointHoverBorderColor:"rgb(0, 3, 3)",
       borderColor: 'rgb(188, 3, 3)',
       fill: false,
@@ -75,6 +75,33 @@ const DashboardLineChart = (p) => {
           labels: {
             color: 'white',
           },
+        },
+        datalabels: {
+          display: true,
+        },
+      },
+      animation: {
+        onComplete: (animation) => {
+          const { chart } = animation;
+          const ctx = chart.ctx;
+  
+          chart.data.datasets.forEach((dataset, index) => {
+            const meta = chart.getDatasetMeta(index);
+            meta.data.forEach((point) => {
+              const value = point["$context"].raw.toFixed(2);
+              const xPos = point.x;
+              const yPos = point.y - 15; 
+  
+              ctx.save();
+              ctx.textAlign = 'center';
+              ctx.fillStyle = '#B9B4C7';
+              ctx.font = '12px Arial';
+  
+              ctx.fillText(value, xPos, yPos);
+  
+              ctx.restore();
+            });
+          });
         },
       },
   };
