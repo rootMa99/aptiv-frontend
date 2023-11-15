@@ -210,3 +210,30 @@
     }
   }
     
+
+  .unlist{
+    max-height: 70%;
+    width: 40%;
+    z-index: 4566;
+    overflow-y: auto;
+    position: fixed;
+    top: 50;
+    right: 0;
+    list-style: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #363062;
+  }
+  .listItem{
+    padding: 8px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    color: #F5E8C7;
+  }

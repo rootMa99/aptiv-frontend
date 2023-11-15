@@ -34,7 +34,7 @@
   justify-content: space-between;
 }
 .filterItem {
-  width: 16%;
+  width: 15%;
   height: 10rem;
   margin-top: 1rem;
 }
@@ -70,8 +70,8 @@
   background-color: #212122;
 }
 
-.phold{
-  position:fixed;
+.phold {
+  position: fixed;
   z-index: 99999;
   top: 0;
   left: 50%;
@@ -91,16 +91,26 @@
   text-align: center;
   outline: none;
 }
-.resetIN{
+.resetIN {
   animation: pin 2s ease-out forwards;
-
 }
-.resetOUT{
+.resetOUT {
   animation: pout 2s ease-out forwards;
-
 }
-.displayNone{
+.displayNone {
   display: none !important;
+}
+.icon {
+  margin-top: auto;
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid rgb(99, 3, 3);
+  background-color: #232627;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.icon:hover{
+  background-color: #474b4d;
 }
 @keyframes pin {
   0% {

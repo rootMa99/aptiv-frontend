@@ -6,6 +6,8 @@ import DashboardDateRange from "./DashboardDateRange";
 import DashboardTotal from "./DashboardTotal";
 import { dashboardActions } from "../../store/dashboardSlice";
 import LoadingFetch from "../UI/LoadingFetch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import {
   filterFormation,
   nbHour,
@@ -52,22 +54,27 @@ const DashBoard = (p) => {
   const [endDate, setEndDate] = useState(dashboards.selectedDate.endDate);
   const [isLoading, setIsLoading] = useState(false);
   const [notify, setNotify] = useState(false);
-  const [reset, setReset]= useState(classes.displayNone);
+  const [reset, setReset] = useState(classes.displayNone);
   const dispatch = useDispatch();
 
-  const keyDownHandler = (e) => {
-    if (e.ctrlKey && e.key === "b") {
-      console.log("shortcut");
-      setTitre("All");
-      setTitreFormation("All");
-      setCategorie("All");
-      setDepartement("All");
-    }
-  };
-
+  const resetAll=()=>{
+    setTitre("All");
+    setTitreFormation("All");
+    setCategorie("All");
+    setDepartement("All");
+  }
+  const clickResetHandler=e=>{
+    resetAll();
+  }
+  
   useEffect(() => {
+    const keyDownHandler = (e) => {
+      if (e.ctrlKey && (e.key === "b" || e.key === "B")) {
+        console.log("shortcut");
+        resetAll();
+      }
+    };
     document.addEventListener("keydown", keyDownHandler);
-
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
@@ -163,22 +170,20 @@ const DashBoard = (p) => {
   console.log(categorie, departement, titreFormation, startDate, endDate);
   const logic = tittre !== undefined && tittre !== "All";
 
-useEffect(()=>{
-  console.log("class effect run");
-  if(departement!=='All'|| categorie!=='All'|| tittre!=='All'){
-    setReset(classes.resetIN);
-  }
+  useEffect(() => {
+    console.log("class effect run");
+    if (departement !== "All" || categorie !== "All" || tittre !== "All") {
+      setReset(classes.resetIN);
+    }
 
     const timeoutId = setTimeout(() => {
-      setReset(classes.resetOUT)
+      setReset(classes.resetOUT);
     }, 4000);
-    
+
     return () => {
       clearTimeout(timeoutId);
     };
-},[departement, categorie, tittre]
-)
-
+  }, [departement, categorie, tittre]);
 
   return (
     <main className={classes.main}>
@@ -187,11 +192,11 @@ useEffect(()=>{
       <div className={classes.container}>
         <div className={classes.mainFormatter}>
           <div className={classes.phold}>
-            <p className={`${classes.reset} ${reset}`} > press crtl+b to reset </p> 
+            <p className={`${classes.reset} ${reset}`}>press crtl+b to reset</p>
           </div>
-          
+
           <div className={classes.filterContainer}>
-           <div className={classes.filterItem}>
+            <div className={classes.filterItem}>
               <h3>category </h3>
               <DashboardFilterSelect
                 option={typos.categoriePersonel}
@@ -243,6 +248,19 @@ useEffect(()=>{
                 />
               </div>
             )}
+            {(departement !== "All" ||
+              categorie !== "All" ||
+              tittre !== "All") && (
+                <button className={classes.icon} onClick={clickResetHandler}>
+                  <FontAwesomeIcon
+                    icon={faRotateRight}
+                    fade
+                    size="2xl"
+                    style={{ color: "#972121" }}
+                  />
+                </button>
+            )}
+
             <DashboardDateRange
               startDate={startDate}
               endDate={endDate}
