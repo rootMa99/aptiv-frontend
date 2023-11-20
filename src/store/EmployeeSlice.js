@@ -22,6 +22,9 @@ const EmployeeSlice = createSlice({
 
       if (Object.values(s.empl).includes(payload.matricule)) {
         console.log("it's already exist");
+        if (Object.keys(payload).includes("formations")) {
+          s.empl.formations.length!==payload.formations.length && (s.empl.formations=payload.formations);
+        }
         return;
       }
       s.empl.matricule = payload.matricule;

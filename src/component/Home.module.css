@@ -144,6 +144,9 @@
   color: whitesmoke;
   outline: none;
 }
+.nameSp:last-of-type{
+  text-transform: lowercase;
+}
 .listContainer{
   list-style: none;
   padding: 10px;

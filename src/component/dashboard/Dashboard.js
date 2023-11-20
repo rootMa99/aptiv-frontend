@@ -266,7 +266,7 @@ const DashBoard = (p) => {
               endDate={endDate}
               chooseDate={chooseDate}
             />
-            <DashboardTotal total={{ nomberPF, nombreSF, totalHeure }} />
+            <DashboardTotal total={!notify ? { nomberPF, nombreSF, totalHeure } : { nomberPF:0, nombreSF:0, totalHeure:0 }} />
           </div>
           {notify ? (
             <Notification />

@@ -46,7 +46,11 @@ const EmployeeCard = (p) => {
       {notify && <DeleteFormation close={onclose} id={idDel} />}
       {showForm && (
         //<AddFormationForm id={empl.empl.matricule} close={onclose} />
-        <AddToFormationForm id={empl.empl.matricule} formationEdit={false} close={onclose}/>
+        <AddToFormationForm
+          id={empl.empl.matricule}
+          formationEdit={false}
+          close={onclose}
+        />
       )}
       {showEdit && (
         /* <EditFormation
@@ -54,7 +58,11 @@ const EmployeeCard = (p) => {
           formationEdit={idEdit}
           close={onclose}
         /> */
-        <AddToFormationForm id={empl.empl.matricule} formationEdit={idEdit} close={onclose} />
+        <AddToFormationForm
+          id={empl.empl.matricule}
+          formationEdit={idEdit}
+          close={onclose}
+        />
       )}
       <h1>Employee</h1>
       <table>
@@ -71,7 +79,7 @@ const EmployeeCard = (p) => {
             <th>Depart</th>
           </tr>
         </thead>
-        {empl.empl.matricule!==undefined ? (
+        {empl.empl.matricule !== undefined ? (
           <tbody>
             <EmployeeCardTr
               matricule={empl.empl.matricule}
@@ -116,7 +124,7 @@ const EmployeeCard = (p) => {
             <th>Date Debut</th>
             <th>Date Fin</th>
             <th>Month</th>
-            <th>Presentataire</th>
+            <th>Prestataire</th>
             <th>Formatteur</th>
             <th>EAF</th>
             <th>Bilan</th>
@@ -151,6 +159,9 @@ const EmployeeCard = (p) => {
           ))}
         </tbody>
       </table>
+      <div className={c.pcon}>
+        <p>EAF: évaluation à frois*</p>
+      </div>
     </div>
   );
 };

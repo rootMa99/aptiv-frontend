@@ -3,8 +3,9 @@ import c from "./Loading.module.css";
 const Loading = (p) => {
   return (
     <div className={c.wrapper}>
-        <h1>Employee</h1>
-        <table>
+      <h1>Employee</h1>
+      <table>
+        <thead>
           <tr>
             <th>Matricule</th>
             <th>Nom</th>
@@ -16,6 +17,8 @@ const Loading = (p) => {
             <th>Date d'Embauche</th>
             <th>Depart</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
             <td>
               <div className={c.textLine}></div>
@@ -45,9 +48,11 @@ const Loading = (p) => {
               <div className={c.textLine}></div>
             </td>
           </tr>
-        </table>
-        <h1>formations</h1>
-        <table>
+        </tbody>
+      </table>
+      <h1>formations</h1>
+      <table>
+        <thead>
           <tr>
             <th>type</th>
             <th>Categorie</th>
@@ -59,6 +64,8 @@ const Loading = (p) => {
             <th>EAF</th>
             <th>Bilan</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
             <td>
               <div className={c.textLine}></div>
@@ -88,8 +95,9 @@ const Loading = (p) => {
               <div className={c.textLine}></div>
             </td>
           </tr>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

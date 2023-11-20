@@ -55,7 +55,8 @@ const Employee = (p) => {
         nom:data.nom,
         prenom:data.prenom,
         categorie:data.categorie,
-        departement:data.departement
+        departement:data.departement,
+        lastSearch:new Date()
       }
       dispatch(typeAction.addRecentSearch(payload))
     }else{
