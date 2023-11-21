@@ -52,12 +52,20 @@ export const getCurrentMonth = () => {
   };
 };
 
-export const getLastMonth=()=>{
-    const currentDate = new Date();
-    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-    return {
-        firstDayOfMonth: formatDate(firstDayOfMonth),
-        lastDayOfMonth: formatDate(lastDayOfMonth),
-      };
-}
+export const getLastMonth = () => {
+  const currentDate = new Date();
+  const firstDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() - 1,
+    1
+  );
+  const lastDayOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    0
+  );
+  return {
+    firstDayOfMonth: formatDate(firstDayOfMonth),
+    lastDayOfMonth: formatDate(lastDayOfMonth),
+  };
+};

@@ -23,48 +23,38 @@ const UploadFiles = (p) => {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-
-
   const changeHandler = (e) => {
     setDatafile(e.target.files[0]);
   };
 
-  console.log(progress);
-  const sendingData= async(url,formData)=>{
+  const sendingData = async (url, formData) => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       // Start the progress bar
       setProgress(0);
 
-      const response = await axios.post(
-        url,
-        formData,
-        {
-          onUploadProgress:  (progressEvent) => {
-            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            console.log(percentCompleted);
-            setProgress(percentCompleted);
-          },
-        }
-      );
-      console.log(response);
-      console.log(response.data);
+      const response = await axios.post(url, formData, {
+        onUploadProgress: (progressEvent) => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setProgress(percentCompleted);
+        },
+      });
+
       return response.data;
     } catch (error) {
       console.error("Error sending data:", error);
     } finally {
-      
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
-  console.log(datafile);
   const submmitHandler = async (e) => {
     e.preventDefault();
     if (datafile !== null) {
       const formData = new FormData();
       formData.append("file", datafile);
-      console.log("start sending...");
       // setIsLoading(true);
       // const data = await postData(
       //   "http://localhost:8081/personel/personel",
@@ -72,9 +62,8 @@ const UploadFiles = (p) => {
       // );
       // setIsLoading(false);
 
-     await sendingData("http://localhost:8081/personel/personel", formData);
+      await sendingData("http://localhost:8081/personel/personel", formData);
 
-      console.log("data fetched");
       setProgress(100);
     }
   };
@@ -82,13 +71,11 @@ const UploadFiles = (p) => {
   const changeHandlerFormation = (e) => {
     setDatafilef(e.target.files[0]);
   };
-  console.log(datafile);
   const submmitHandlerFormation = async (e) => {
     e.preventDefault();
     if (datafilef !== null) {
       const formData = new FormData();
       formData.append("file", datafilef);
-      console.log("start sending...");
       // setIsLoading(true);
       // const data = await postData(
       //   "http://localhost:8081/formation/uploadFormation",
@@ -96,15 +83,15 @@ const UploadFiles = (p) => {
       // );
       // setIsLoading(false);
       //setDataret(data);
-      const data= await sendingData("http://localhost:8081/formation/uploadFormation", formData);
-      console.log(data);
+      const data = await sendingData(
+        "http://localhost:8081/formation/uploadFormation",
+        formData
+      );
       setDataret(data);
-      console.log("data fetched");
       setProgress(100);
     }
   };
-  console.log(dataret);
-  console.log(datafilef);
+
   return (
     <main className={c.main}>
       <div className={c.inputscontainer}>
@@ -162,7 +149,7 @@ const UploadFiles = (p) => {
             onChange={changeHandlerFormation}
           />
           <button className={c["ui-btn"]}>
-          <span>{!isLoading ?  "upload" : "uploading..."}</span>
+            <span>{!isLoading ? "upload" : "uploading..."}</span>
           </button>
         </form>
       </div>

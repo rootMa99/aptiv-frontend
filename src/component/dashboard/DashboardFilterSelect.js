@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import Select from "react-select";
 
 const customStyles = {
@@ -63,8 +63,7 @@ const customStyles = {
 };
 
 const DashboardFilterSelect = (p) => {
-  console.log(p.value);
-  const [selectedOption, setSelectedOption] = useState('');
+ // const [selectedOption, setSelectedOption] = useState("");
   const options = useMemo(() => {
     return [
       {
@@ -104,7 +103,7 @@ const DashboardFilterSelect = (p) => {
     }
   }, [p.option, options, p.identif]);
   const handleChange = (e) => {
-    setSelectedOption(e);
+    //setSelectedOption(e);
 
     switch (p.identif) {
       case "CF":
@@ -123,7 +122,7 @@ const DashboardFilterSelect = (p) => {
         break;
     }
   };
-  console.log(selectedOption, p.identif);
+  //console.log(selectedOption, p.identif);
   return (
     <div>
       <Select

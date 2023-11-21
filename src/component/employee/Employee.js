@@ -4,33 +4,31 @@ import Loading from "../UI/Loading";
 import c from "./Employee.module.css";
 import { useDispatch } from "react-redux";
 import EmployeeSlice from "../../store/EmployeeSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { typeAction } from "../../store/allType-slice";
 
 const getData = async (url) => {
   try {
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     const data = await response.json();
-   return data;
-  } catch (error) {
-  }
+    return data;
+  } catch (error) {}
 };
 
-
 const Employee = (p) => {
-
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const { matricule }=useParams();
-  console.log(matricule);
+  const { matricule } = useParams();
+  const [dataC, setDataC]= useState('');
+  const navigate = useNavigate();
 
   // const callback = useCallback(() => {
   //   setIsLoading(true);
@@ -42,34 +40,47 @@ const Employee = (p) => {
   //   callback();
   // }, [callback]);
 
-  const dispatchType= useCallback(async()=>{
+  const dispatchType = useCallback(async () => {
     setIsLoading(true);
-    const data=await getData(`http://localhost:8081/personel/personel/${matricule}`);
-    console.log(data);
-    console.log("can dispatch")
+    const data = await getData(
+      `http://localhost:8081/personel/personel/${matricule}`
+    );
     setIsLoading(false);
-    if(data!==undefined){
+    if (data !== undefined) {
       dispatch(EmployeeSlice.actions.addEmployee(data));
-      const payload={
-        matricule:data.matricule,
-        nom:data.nom,
-        prenom:data.prenom,
-        categorie:data.categorie,
-        departement:data.departement,
-        lastSearch:new Date()
-      }
-      dispatch(typeAction.addRecentSearch(payload))
-    }else{
+      const payload = {
+        matricule: data.matricule,
+        nom: data.nom,
+        prenom: data.prenom,
+        categorie: data.categorie,
+        departement: data.departement,
+        lastSearch: new Date(),
+      };
+      dispatch(typeAction.addRecentSearch(payload));
+    } else {
       dispatch(EmployeeSlice.actions.addEmployee({}));
     }
-  }, [dispatch, setIsLoading, matricule])
+  }, [dispatch, setIsLoading, matricule]);
 
-  useEffect(()=>{
-    console.log('useEffect')
+  useEffect(() => {
     dispatchType();
-  },[dispatchType])
+  }, [dispatchType]);
+
+  const onChangeHandler=e=>{
+    setDataC(e.target.value);
+  }
+  const onClickHandler=e=>{
+    if (dataC.trim()!==""){
+    navigate(`/home/${dataC}`);
+    setDataC('');
+    }
+  }
   return (
     <div className={c.container}>
+      <div className={c.inputHolder}>
+        <input type="number" value={dataC} placeholder="Search By matricule" onChange={onChangeHandler}/>
+        <button onClick={onClickHandler}>Search</button>
+      </div>
       {!isLoading ? <EmployeeCard /> : <Loading />}
     </div>
   );

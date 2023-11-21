@@ -36,7 +36,6 @@ const jan = new Date(currentYear, 0, 1);
 const dec = new Date(currentYear, 11, 31);
 
 function App() {
-  console.log("App run");
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -50,14 +49,11 @@ function App() {
   const dispatchType = useCallback(async () => {
     //http req
     const data = await getData("http://localhost:8081/formation/allType");
-    console.log(data);
-    console.log("can dispatch");
     setIsLoading(false);
     dispatch(typeAction.addtypes(data));
   }, [dispatch, setIsLoading]);
 
   useEffect(() => {
-    console.log("useEffect");
     dispatchType();
   }, [dispatchType]);
 
@@ -82,7 +78,7 @@ function App() {
               />
             }
           />
-          <Route exact path="/uploadFiles" element={<UploadFiles/> } />
+          <Route exact path="/uploadFiles" element={<UploadFiles />} />
         </Routes>
       </Suspense>
     </div>

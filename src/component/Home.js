@@ -10,11 +10,8 @@ const Home = (p) => {
   const navigate = useNavigate();
   const recentResearch = useSelector((s) => s.typeS.recentSearch);
 
-
-  console.log(recentResearch);
   const onChangeHandler = (e) => {
     setTyping(true);
-    console.log(+e.target.value + 1);
 
     if (e.target.value.trim() === "" || e.target.value <= 0) {
       setTyping(false);
@@ -46,9 +43,9 @@ const Home = (p) => {
       (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
     );
     const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-    const returnedValue = `${hours !== 0 ?(`${hours}h`):""}${
-      minutes !== 0 ? (`${minutes}m`):""
-    }${seconds !== 0 ? (`${seconds}s`):""}`;
+    const returnedValue = `${hours !== 0 ? `${hours}h` : ""}${
+      minutes !== 0 ? `${minutes}m` : ""
+    }${seconds !== 0 ? `${seconds}s` : ""}`;
 
     return returnedValue;
   };

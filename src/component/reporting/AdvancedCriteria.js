@@ -115,7 +115,6 @@ const AdvancedCriteria = (p) => {
   };
 
   const handleChange = (e) => {
-    console.log(e);
     setSelectedOption(e);
     getTypeOpt(e.value);
     p.advancedC(e.value);
@@ -142,7 +141,7 @@ const AdvancedCriteria = (p) => {
       </div>
       <p className={c.parg}>
         (refers to the specific designation or name associated with the training
-        program that the employee has completed - 
+        program that the employee has completed -
         <span>(this field is optional)</span> )*
       </p>
       {trainigType.length > 0 && (

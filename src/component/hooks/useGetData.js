@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const useGetData=()=> {
+const useGetData = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -9,17 +9,16 @@ const useGetData=()=> {
     try {
       setLoading(true);
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(dataBody),
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
       setData(data);
       setLoading(false);
       setError(null);
@@ -32,16 +31,15 @@ const useGetData=()=> {
     try {
       setLoading(true);
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
       setData(data);
       setLoading(false);
       setError(null);
@@ -52,10 +50,8 @@ const useGetData=()=> {
   };
 
   return { data, loading, error, fetchData, getData };
-}
+};
 
 export default useGetData;
-
-
 
 //fetchData();

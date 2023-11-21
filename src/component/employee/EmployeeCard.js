@@ -21,12 +21,10 @@ const EmployeeCard = (p) => {
     setNotify(true);
   };
   const onSetIdEdit = (formationEdit) => {
-    console.log("this trigger");
     setIdEdit(formationEdit);
     setShowEdit(true);
   };
 
-  console.log(empl);
   const onclose = () => {
     setNotify(false);
     setShowFrom(false);
@@ -34,7 +32,6 @@ const EmployeeCard = (p) => {
   };
 
   const onAddHandler = (e) => {
-    console.log("show form here" + empl.empl.matricule);
     setShowFrom(true);
   };
 
@@ -126,7 +123,7 @@ const EmployeeCard = (p) => {
             <th>Month</th>
             <th>Prestataire</th>
             <th>Formatteur</th>
-            <th>EAF</th>
+            <th>EAF*</th>
             <th>Bilan</th>
           </tr>
         </thead>

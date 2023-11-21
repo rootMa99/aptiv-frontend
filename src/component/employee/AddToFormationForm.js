@@ -23,7 +23,6 @@ const postData = async (url, body, typeR) => {
 };
 
 const AddToFormationForm = (p) => {
-  console.log(p.formationEdit);
   const typos = useSelector((s) => s.typeS);
   const [tittre, setTitre] = useState("All");
   const [titreFormation, setTitreFormation] = useState("All");
@@ -39,6 +38,7 @@ const AddToFormationForm = (p) => {
   const dispatch = useDispatch();
 
   const matricule = p.id;
+  //here to check if the componement render as addFormation or as EditFormation
   if (
     p.formationEdit &&
     tittre === "All" &&
@@ -50,7 +50,6 @@ const AddToFormationForm = (p) => {
     valueInp.prestataire.trim() === "" &&
     valueInp.formatteur.trim() === ""
   ) {
-    console.log("check running...");
     setTitre(p.formationEdit.categorieFormation);
     setTitreFormation(p.formationEdit.type);
     setValueInp({
@@ -93,15 +92,11 @@ const AddToFormationForm = (p) => {
       if (!p.formationEdit) {
         const formations = [];
         formations.push(formation);
-        console.log("data sent...");
         const data = await postData(
           `http://localhost:8081/formation/${matricule}`,
           formations,
           "POST"
         );
-        console.log("data fetched....");
-        console.log(data);
-        console.log(data._embedded.formationPersonelRests);
 
         const payload = {
           matricule: matricule,
@@ -128,14 +123,12 @@ const AddToFormationForm = (p) => {
         dispatch(EmployeeSlice.actions.addFormation(payload));
       } else {
         const formationId = p.formationEdit.formationId;
-        console.log("data sent...");
         const data = await postData(
           `http://localhost:8081/formation/${formationId}`,
           formation,
           "PUT"
         );
-        console.log("data fetched....");
-        console.log(data);
+
         const payload = {
           matricule: matricule,
           formation: {
@@ -218,7 +211,6 @@ const AddToFormationForm = (p) => {
   };
 
   const logic = tittre !== undefined && tittre !== "All";
-  console.log(tittre, titreFormation, valueInp);
   return (
     <form className={c.form} onSubmit={submmitHandler}>
       <div className={c.formHeader}>
@@ -232,9 +224,9 @@ const AddToFormationForm = (p) => {
             identif="CF"
             chooseTitre={chooseTitre}
             valueS={{
-                value: tittre,
-                label: tittre,
-              }}
+              value: tittre,
+              label: tittre,
+            }}
           />
         </div>
         {logic && (

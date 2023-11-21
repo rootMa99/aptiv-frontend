@@ -19,30 +19,29 @@ const deleteData = async (url) => {
 };
 
 const DeleteFormation = (p) => {
+  const dispatch = useDispatch();
 
-    const dispatch= useDispatch();
+  const formationId = p.id;
+  const onClickHandler = (e) => {
+    p.close();
+  };
 
-    console.log(p.id);
-    const formationId=p.id;
-    const onClickHandler=e=>{
-        p.close();
-    }
-
-    const onDeleteHandler=async (e)=>{
-
-      await deleteData(
-        `http://localhost:8081/formation/${formationId}`
-      );
-        dispatch(emplAction.deleteFormation(formationId));
-        p.close();
-    }
+  const onDeleteHandler = async (e) => {
+    await deleteData(`http://localhost:8081/formation/${formationId}`);
+    dispatch(emplAction.deleteFormation(formationId));
+    p.close();
+  };
 
   return (
     <div className={c.card}>
       <h1>are you sure!</h1>
       <div className={c.btnContainer}>
-        <button className={c.cancel} onClick={onClickHandler}>cancel</button>
-        <button className={c.delete} onClick={onDeleteHandler}>delete</button>
+        <button className={c.cancel} onClick={onClickHandler}>
+          cancel
+        </button>
+        <button className={c.delete} onClick={onDeleteHandler}>
+          delete
+        </button>
       </div>
     </div>
   );

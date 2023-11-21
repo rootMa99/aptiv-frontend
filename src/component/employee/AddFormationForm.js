@@ -20,7 +20,6 @@ const getData = async (url, body) => {
   } catch (error) {}
 };
 
-
 const AddFormationForm = (p) => {
   const [categorieFormation, setCategorieFormaation] = useState();
   const [typeFormation, setTypeFormation] = useState();
@@ -58,7 +57,6 @@ const AddFormationForm = (p) => {
   const typos = useSelector((s) => s.typeS);
   const dispatch = useDispatch();
 
-
   const keys = Object.keys(typos.catList);
   const seletedType = [];
 
@@ -73,13 +71,10 @@ const AddFormationForm = (p) => {
     }
     console.log("check run" + categorieFormation);
   }
-  console.log(seletedType);
-  console.log(keys);
+
   const matricule = p.id;
-  console.log(matricule);
 
-
-  const onSubmitHandler =async (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     const error =
       classError.categorieFormation ||
@@ -115,43 +110,44 @@ const AddFormationForm = (p) => {
       return;
     }
     const month = dateDebut.split("-")[1];
-    
-    const formation= [{
-      type: typeFormation,
-      categorieFormation: categorieFormation,
-      modalite: modalite,
-      dureePerHour: dureePerHour,
-      dateDebut: dateDebut,
-      dateFin: dateFin,
-      month: month,
-      prestataire: presentataire,
-      formatteur: formatteur,
-      evaluationAFrois: true,
-      bilan: "done",
-    }];
-    console.log('data sent...');
-    const data= await getData(
+
+    const formation = [
+      {
+        type: typeFormation,
+        categorieFormation: categorieFormation,
+        modalite: modalite,
+        dureePerHour: dureePerHour,
+        dateDebut: dateDebut,
+        dateFin: dateFin,
+        month: month,
+        prestataire: presentataire,
+        formatteur: formatteur,
+        evaluationAFrois: true,
+        bilan: "done",
+      },
+    ];
+    const data = await getData(
       `http://localhost:8081/formation/${matricule}`,
       formation
     );
-console.log("data fetched....");
-      console.log(data);
-      console.log(data._embedded.formationPersonelRests);
 
     const payload = {
       matricule: matricule,
       formation: {
         formationId: data._embedded.formationPersonelRests[0].formationId,
         type: data._embedded.formationPersonelRests[0].type,
-        categorieFormation: data._embedded.formationPersonelRests[0].categorieFormation,
+        categorieFormation:
+          data._embedded.formationPersonelRests[0].categorieFormation,
         modalite: data._embedded.formationPersonelRests[0].modalite,
         dureePerHour: data._embedded.formationPersonelRests[0].dureePerHour,
-        dateDebut: data._embedded.formationPersonelRests[0].dateDebut.split('T')[0],
-        dateFin: data._embedded.formationPersonelRests[0].dateFin.split('T')[0],
+        dateDebut:
+          data._embedded.formationPersonelRests[0].dateDebut.split("T")[0],
+        dateFin: data._embedded.formationPersonelRests[0].dateFin.split("T")[0],
         month: data._embedded.formationPersonelRests[0].month,
         prestataire: data._embedded.formationPersonelRests[0].prestataire,
         formatteur: data._embedded.formationPersonelRests[0].formatteur,
-        evaluationAFrois: data._embedded.formationPersonelRests[0].evaluationAFrois,
+        evaluationAFrois:
+          data._embedded.formationPersonelRests[0].evaluationAFrois,
         bilan: data._embedded.formationPersonelRests[0].bilan,
       },
     };
@@ -161,14 +157,12 @@ console.log("data fetched....");
   };
 
   const onChangeSelect = (e) => {
-    console.log(e.target.value);
     const value = e.target.value;
     if (value === "+") {
       setAddCat(true);
       setCategorieFormaation(e.target.value);
       return;
     }
-    console.log("add categrie");
     if (value !== "none") {
       setAddCat(false);
       setCategorieFormaation(value);
@@ -252,7 +246,6 @@ console.log("data fetched....");
 
   const onChageFormation = (e) => {
     const value = e.target.value;
-    console.log(value);
     if (value.trim() !== "") {
       setTypeFormation(value);
       setClassError((p) => {
@@ -523,7 +516,7 @@ console.log("data fetched....");
               onChange={onChageFormation}
               value={typeFormation}
             >
-            <option value="none">None</option>
+              <option value="none">None</option>
               {seletedType.map((m) => (
                 <option key={Math.random()} value={m}>
                   {m}

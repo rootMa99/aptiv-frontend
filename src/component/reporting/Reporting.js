@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import c from "./Reporting.module.css";
-import cs from './ReportingProcess.module.css';
+import cs from "./ReportingProcess.module.css";
 import DateCriteria from "./DateCriteria";
 import UserCriteria from "./UserCriteria";
 import AdvancedCriteria from "./AdvancedCriteria";
@@ -27,9 +27,8 @@ const Reporting = (p) => {
   const [fileExcelName, setFileExcelName] = useState("EXPORTED_DATA");
   const [isEmpty, setIsEmpty] = useState(true);
 
-  const { data, loading, error, fetchData } = useGetData();
+  const { data, loading, fetchData } = useGetData();
   const exportToExcel = useExportData();
-
 
   const datecriteriaData = (data) => {
     setDateCriteria(data);
@@ -59,16 +58,10 @@ const Reporting = (p) => {
       endDate: endDate,
     };
 
-    console.log("start fetching");
     await fetchData(
       "http://localhost:8081/formation/formations/type/categorie/percat",
       dataBody
     );
-    console.log("start fetching end");
-
-    console.log(data);
-    console.log(loading);
-    console.log(error);
   };
   useEffect(() => {
     if ("_embedded" in data) {
@@ -82,21 +75,10 @@ const Reporting = (p) => {
     if ("_embedded" in data) {
       exportToExcel(fileExcelName, data._embedded.formationPersonelRests);
     }
-    console.log(data._embedded.formationPersonelRests);
   };
-  console.log(data);
 
-  console.log(
-    datecriteria,
-    endDate,
-    userCriteria,
-    advancedCriteria,
-    trainingCriteria,
-    fileExcelName
-  );
- 
   return (
-    <main className={c.main}> 
+    <main className={c.main}>
       {loading && <BackDropAlter />}
       {loading && <LoadingFetch />}
       <div className={c.container}>
@@ -132,13 +114,13 @@ const Reporting = (p) => {
             modifyFileExcelName={modifyFileExcelName}
             submitDataTofetch={submitDataTofetch}
           />
-        {isEmpty ? (
-          <p className={c.para}>no record</p>
-        ) : (
-          <button className={cs["ui-btn"]} onClick={getReport}>
-            <span>export report</span>
-          </button>
-        )}
+          {isEmpty ? (
+            <p className={c.para}>no record</p>
+          ) : (
+            <button className={cs["ui-btn"]} onClick={getReport}>
+              <span>export report</span>
+            </button>
+          )}
         </div>
       </div>
     </main>

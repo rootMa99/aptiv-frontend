@@ -88,9 +88,8 @@ const UserCriteria = (p) => {
       </div>
       <p className={c.desciption}>
         (Select the category that most accurately represents the role or
-        employment status within the organization - <span>
-        (this field is optional)
-        </span> )*
+        employment status within the organization -{" "}
+        <span>(this field is optional)</span> )*
       </p>
     </div>
   );

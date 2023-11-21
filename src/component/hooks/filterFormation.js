@@ -231,36 +231,31 @@ export const totalDataC = (data) => {
   return { nomberPF, nombreSF, totalHeure };
 };
 
+export const nbMonth = (data) => {
+  const monthHour = [];
 
-export const nbMonth=(data)=>{
-  const monthHour=[];
-
-  data.forEach(i=>{
-      const existing= monthHour.find(f=>f.mid===i.month);
-      if (existing===undefined){
-        const monthH={
-          mid:i.month,
-          nbHour:i.dureePerHour,
-        }
-        monthHour.push(monthH);
-      }else{
-        existing.nbHour+=i.dureePerHour;
-      }
-  })
+  data.forEach((i) => {
+    const existing = monthHour.find((f) => f.mid === i.month);
+    if (existing === undefined) {
+      const monthH = {
+        mid: i.month,
+        nbHour: i.dureePerHour,
+      };
+      monthHour.push(monthH);
+    } else {
+      existing.nbHour += i.dureePerHour;
+    }
+  });
 
   return monthHour;
-}
+};
 
 export const nbHour = (data) => {
-  console.log(data);
   const catPerHour = [];
   const catForHour = [];
   if (data.length > 0) {
     data[0].forEach((m) => {
-
-      const existingP = catPerHour.find(
-        (f) => f.name === m.categoriePersonel
-      );
+      const existingP = catPerHour.find((f) => f.name === m.categoriePersonel);
       if (existingP === undefined) {
         const catP = {
           name: m.categoriePersonel,
@@ -270,9 +265,7 @@ export const nbHour = (data) => {
       } else {
         existingP.nbrHour += m.dureePerHour;
       }
-      const existingF = catForHour.find(
-        (f) => f.name === m.categorieFormation
-      );
+      const existingF = catForHour.find((f) => f.name === m.categorieFormation);
       if (existingF === undefined) {
         const catf = {
           name: m.categorieFormation,

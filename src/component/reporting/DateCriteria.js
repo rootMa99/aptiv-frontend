@@ -1,70 +1,67 @@
 import { useState } from "react";
 import c from "./DateCriteria.module.css";
-import { getCurrentMonth, getCurrentWeek, getCurrentYear, getLastMonth } from "../hooks/dateCriteriaFunctions";
-
-
-
+import {
+  getCurrentMonth,
+  getCurrentWeek,
+  getCurrentYear,
+  getLastMonth,
+} from "../hooks/dateCriteriaFunctions";
 
 const DateCriteria = (p) => {
   const [startDate, setStartDate] = useState(p.jan);
   const [endDate, setendDate] = useState(p.dec);
-  const [valueSlected, selectValuec]= useState("all");
-
+  const [valueSlected, selectValuec] = useState("all");
 
   const yearSelectOptChange = (e) => {
     selectValuec(e.target.value);
     if (e.target.value === "year") {
-      const{firstJan, dec}= getCurrentYear();
+      const { firstJan, dec } = getCurrentYear();
       setStartDate(firstJan);
       setendDate(dec);
       p.setDateRange(firstJan);
       p.setEndDateC(dec);
     }
-    if (e.target.value==="thisWeek"){
-      const {startDWeek, endDWeek}=getCurrentWeek("current");
+    if (e.target.value === "thisWeek") {
+      const { startDWeek, endDWeek } = getCurrentWeek("current");
       setStartDate(startDWeek);
       setendDate(endDWeek);
       p.setDateRange(startDWeek);
       p.setEndDateC(endDWeek);
     }
-    if (e.target.value==="lastWeek"){
-      const {startDWeek, endDWeek}=getCurrentWeek("last");
+    if (e.target.value === "lastWeek") {
+      const { startDWeek, endDWeek } = getCurrentWeek("last");
       setStartDate(startDWeek);
       setendDate(endDWeek);
       p.setDateRange(startDWeek);
       p.setEndDateC(endDWeek);
     }
-    if(e.target.value==="month"){
-      const { firstDayOfMonth, lastDayOfMonth}= getCurrentMonth();
+    if (e.target.value === "month") {
+      const { firstDayOfMonth, lastDayOfMonth } = getCurrentMonth();
       setStartDate(firstDayOfMonth);
       setendDate(lastDayOfMonth);
       p.setDateRange(firstDayOfMonth);
       p.setEndDateC(lastDayOfMonth);
     }
-    if(e.target.value==="lastMonth"){
-      const { firstDayOfMonth, lastDayOfMonth}= getLastMonth();
+    if (e.target.value === "lastMonth") {
+      const { firstDayOfMonth, lastDayOfMonth } = getLastMonth();
       setStartDate(firstDayOfMonth);
       setendDate(lastDayOfMonth);
-   p.setDateRange(firstDayOfMonth);
-   p.setEndDateC(lastDayOfMonth);
-
+      p.setDateRange(firstDayOfMonth);
+      p.setEndDateC(lastDayOfMonth);
     }
-
-
   };
 
   const changeStartDate = (e) => {
     selectValuec("all");
 
-   setStartDate(e.target.value);
-   p.setDateRange(e.target.value);
+    setStartDate(e.target.value);
+    p.setDateRange(e.target.value);
   };
   const changeEndDate = (e) => {
     selectValuec("all");
-   setendDate(e.target.value);
-   p.setEndDateC(e.target.value);
+    setendDate(e.target.value);
+    p.setEndDateC(e.target.value);
   };
-
 
   return (
     <div className={c.inputContainerDate}>
@@ -95,12 +92,7 @@ const DateCriteria = (p) => {
       </div>
       <div className={c.labelC}>
         <label htmlFor="to">to</label>
-        <input
-          id="to"
-          type="date"
-          value={endDate}
-          onChange={changeEndDate}
-        />
+        <input id="to" type="date" value={endDate} onChange={changeEndDate} />
       </div>
     </div>
   );

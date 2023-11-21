@@ -40,7 +40,6 @@ let body = {
   startDate: 0,
   endDate: 0,
 };
-console.log(body);
 let monthChange = false;
 let monthHour;
 const DashBoard = (p) => {
@@ -57,20 +56,19 @@ const DashBoard = (p) => {
   const [reset, setReset] = useState(classes.displayNone);
   const dispatch = useDispatch();
 
-  const resetAll=()=>{
+  const resetAll = () => {
     setTitre("All");
     setTitreFormation("All");
     setCategorie("All");
     setDepartement("All");
-  }
-  const clickResetHandler=e=>{
+  };
+  const clickResetHandler = (e) => {
     resetAll();
-  }
-  
+  };
+
   useEffect(() => {
     const keyDownHandler = (e) => {
       if (e.ctrlKey && (e.key === "b" || e.key === "B")) {
-        console.log("shortcut");
         resetAll();
       }
     };
@@ -96,8 +94,7 @@ const DashBoard = (p) => {
         "http://localhost:8081/formation/formations/Dashboard",
         body
       );
-      console.log(data);
-      console.log("can dispatch");
+
       setIsLoading(false);
       setNotify(false);
       if (data.hasOwnProperty("_embedded")) {
@@ -111,11 +108,8 @@ const DashBoard = (p) => {
   }, [dispatch, startDate, endDate, dashboards.dashboardData]);
 
   useEffect(() => {
-    console.log("useEffect dashboard");
     dispatchType();
   }, [dispatchType]);
-
-  console.log(dashboards.dashboardData);
 
   const { nomberPF, nombreSF, totalHeure } = totalDataC(
     dashboards.dashboardData
@@ -125,7 +119,6 @@ const DashBoard = (p) => {
     monthHour = nbMonth(dashboards.dashboardData);
     monthChange = true;
   }
-  console.log(monthHour);
 
   const filtredDashboard = filterFormation(
     dashboards.dashboardData,
@@ -135,10 +128,7 @@ const DashBoard = (p) => {
     departement
   );
 
-  console.log(filtredDashboard);
-
   const { catPerHour, catForHour } = nbHour(filtredDashboard);
-  console.log(catForHour, catPerHour);
 
   const chooseDate = (data) => {
     setStartDate(data.startDate);
@@ -157,7 +147,6 @@ const DashBoard = (p) => {
       setTitreFormation("All");
     }
   };
-  console.log(tittre);
   const chooseCategoriePer = (data) => {
     setCategorie(data);
   };
@@ -167,11 +156,9 @@ const DashBoard = (p) => {
   const chooseTitreFormation = (data) => {
     setTitreFormation(data);
   };
-  console.log(categorie, departement, titreFormation, startDate, endDate);
   const logic = tittre !== undefined && tittre !== "All";
 
   useEffect(() => {
-    console.log("class effect run");
     if (departement !== "All" || categorie !== "All" || tittre !== "All") {
       setReset(classes.resetIN);
     }
@@ -251,14 +238,14 @@ const DashBoard = (p) => {
             {(departement !== "All" ||
               categorie !== "All" ||
               tittre !== "All") && (
-                <button className={classes.icon} onClick={clickResetHandler}>
-                  <FontAwesomeIcon
-                    icon={faRotateRight}
-                    fade
-                    size="2xl"
-                    style={{ color: "#972121" }}
-                  />
-                </button>
+              <button className={classes.icon} onClick={clickResetHandler}>
+                <FontAwesomeIcon
+                  icon={faRotateRight}
+                  fade
+                  size="2xl"
+                  style={{ color: "#972121" }}
+                />
+              </button>
             )}
 
             <DashboardDateRange
@@ -266,7 +253,13 @@ const DashBoard = (p) => {
               endDate={endDate}
               chooseDate={chooseDate}
             />
-            <DashboardTotal total={!notify ? { nomberPF, nombreSF, totalHeure } : { nomberPF:0, nombreSF:0, totalHeure:0 }} />
+            <DashboardTotal
+              total={
+                !notify
+                  ? { nomberPF, nombreSF, totalHeure }
+                  : { nomberPF: 0, nombreSF: 0, totalHeure: 0 }
+              }
+            />
           </div>
           {notify ? (
             <Notification />

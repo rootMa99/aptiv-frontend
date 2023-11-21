@@ -21,9 +21,9 @@ const EmployeeSlice = createSlice({
       const payload = p.payload;
 
       if (Object.values(s.empl).includes(payload.matricule)) {
-        console.log("it's already exist");
         if (Object.keys(payload).includes("formations")) {
-          s.empl.formations.length!==payload.formations.length && (s.empl.formations=payload.formations);
+          s.empl.formations.length !== payload.formations.length &&
+            (s.empl.formations = payload.formations);
         }
         return;
       }
@@ -50,7 +50,6 @@ const EmployeeSlice = createSlice({
       const id = p.payload;
 
       const existing = s.empl.formations.find((f) => f.formationId === id);
-      console.log(existing);
       if (existing !== undefined) {
         s.empl.formations = s.empl.formations.filter(
           (f) => f.formationId !== id
@@ -58,17 +57,13 @@ const EmployeeSlice = createSlice({
       }
     },
     addFormation(s, p) {
-      console.log("this method is running");
-      const matricule = p.payload.matricule;
-      console.log(matricule);
+      //  const matricule = p.payload.matricule;
       const foramtion = p.payload.formation;
-      console.log(foramtion);
       s.empl.formations.push(foramtion);
       s.empl.formations.sort((a, b) => b.dateDebut - a.dateDebut);
     },
     updateFormation(s, p) {
-      const matricule = p.payload.matricule;
-      console.log(matricule);
+      // const matricule = p.payload.matricule;
       const formation = p.payload.formation;
       const index = s.empl.formations.findIndex(
         (f) => f.formationId === formation.formationId

@@ -12,27 +12,27 @@ const Inputs = (p) => {
     } else {
       setIsvalid(true);
     }
-    switch (p.label){
+    switch (p.label) {
       case "MODALITE":
         p.chooseModalite(e.target.value);
         break;
-    case "DUREE PAR HEURE":
+      case "DUREE PAR HEURE":
         p.chooseDph(e.target.value);
         break;
-    case "DATE DE DEBUT":
+      case "DATE DE DEBUT":
         p.chooseDateDebut(e.target.value);
         break;
-    case "DATE DE FIN":
+      case "DATE DE FIN":
         p.chooseDateFin(e.target.value);
         break;
-    case "PRESTATAIRE":
+      case "PRESTATAIRE":
         p.choosePrestataire(e.target.value);
         break;
-    case "FORMATTEUR":
+      case "FORMATTEUR":
         p.chooseFormatteur(e.target.value);
         break;
-    default:
-      break;
+      default:
+        break;
     }
   };
 

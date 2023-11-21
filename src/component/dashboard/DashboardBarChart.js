@@ -69,14 +69,13 @@ const DashboardBarChart = (p) => {
           meta.data.forEach((bar, barIndex) => {
             const data = dataset.data[barIndex].toFixed(2);
             const xPos = bar.x;
-            const yPos = bar.y - 10; 
+            const yPos = bar.y - 10;
 
             ctx.save();
             ctx.textAlign = "center";
             ctx.fillStyle = "#B9B4C7";
             ctx.font = "12px Arial";
 
-            
             ctx.fillText(data, xPos, yPos);
 
             ctx.restore();

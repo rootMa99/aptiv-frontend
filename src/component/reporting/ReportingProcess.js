@@ -2,28 +2,22 @@ import { useState } from "react";
 import c from "./ReportingProcess.module.css";
 
 const ReportingProcess = (p) => {
+  const [fileName, setFileName] = useState("");
 
-const [fileName, setFileName]=useState("");
-
-
-const onchangeHandler=e=>{
-  
+  const onchangeHandler = (e) => {
     setFileName(e.target.value);
-    if(e.target.value.trim()===""){
-     p.modifyFileExcelName('EXPORTED_DATA') 
-    }else{
+    if (e.target.value.trim() === "") {
+      p.modifyFileExcelName("EXPORTED_DATA");
+    } else {
       p.modifyFileExcelName(e.target.value);
     }
-  
-} 
+  };
 
-  const submitHandler=(e)=>{
+  const submitHandler = (e) => {
     e.preventDefault();
     p.submitDataTofetch();
-    setFileName('')
-
-  }
-
+    setFileName("");
+  };
 
   return (
     <form className={c.formc} onSubmit={submitHandler}>
@@ -41,7 +35,6 @@ const onchangeHandler=e=>{
               type="text"
               value={fileName}
               onChange={onchangeHandler}
-
             />
             <span className={`${c.inputborder} ${c.inputborderalt}`}></span>
           </div>
@@ -51,7 +44,7 @@ const onchangeHandler=e=>{
           </p>
         </div>
       </div>
-      <button className={c['ui-btn']}>
+      <button className={c["ui-btn"]}>
         <span>process report</span>
       </button>
     </form>

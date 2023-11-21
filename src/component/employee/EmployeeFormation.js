@@ -7,7 +7,7 @@ const EmployeeFormation = (p) => {
   };
   const onEditHandler = (e) => {
     p.onSetIdEdit({
-      formationId:p.id,
+      formationId: p.id,
       type: p.type,
       categorieFormation: p.categorieFormation,
       modalite: p.modalite,
