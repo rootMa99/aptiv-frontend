@@ -9,6 +9,13 @@ import {
 import { Bar } from "react-chartjs-2";
 
 const DashboardBarChart = (p) => {
+  const handleHover = (event) => {
+    if (event.element) {
+      document.body.style.cursor = 'pointer';
+    } else {
+      document.body.style.cursor = 'default';
+    }
+  };
   const data = {
     labels: p.data.map((m) => m.name),
     datasets: [
@@ -16,14 +23,16 @@ const DashboardBarChart = (p) => {
         label: p.nameLabel,
         data: p.data.map((m) => m.nbrHour),
         backgroundColor: "rgb(99, 3, 3)",
-        borderColor: "#f3f3f34f",
-        borderWidth: 2,
+        hoverBackgroundColor: "#950101",
+        borderColor: "#FAF0E6",
+        borderWidth: 1,
       },
     ],
   };
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
   const options = {
+    onHover: handleHover,
     maintainAspectRatio: false,
     responsive: true,
     scales: {
@@ -32,7 +41,7 @@ const DashboardBarChart = (p) => {
           color: "#f3f3f34f",
         },
         ticks: {
-          color: "white",
+          color: "#FAF0E6",
           fontWeight: "bold",
         },
       },
@@ -41,7 +50,7 @@ const DashboardBarChart = (p) => {
           color: "#f3f3f34f",
         },
         ticks: {
-          color: "white",
+          color: "#FAF0E6",
           fontWeight: "bold",
         },
         beginAtZero: true,
@@ -51,7 +60,7 @@ const DashboardBarChart = (p) => {
     plugins: {
       legend: {
         labels: {
-          color: "white",
+          color: "#FAF0E6",
         },
       },
       datalabels: {
@@ -73,7 +82,7 @@ const DashboardBarChart = (p) => {
 
             ctx.save();
             ctx.textAlign = "center";
-            ctx.fillStyle = "#B9B4C7";
+            ctx.fillStyle = "#FAF0E6";
             ctx.font = "12px Arial";
 
             ctx.fillText(data, xPos, yPos);

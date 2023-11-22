@@ -30,12 +30,12 @@ const DashboardLineChart = (p) => {
       {
         label: p.labelName,
         data: p.data.map((d) => d.nbHour),
-        backgroundColor: "#B9B4C7",
+        backgroundColor: "#FAF0E6",
         pointHoverBorderColor: "rgb(0, 3, 3)",
         borderColor: "rgb(188, 3, 3)",
         fill: false,
         tension: 0.3,
-        borderWidth: 2,
+        borderWidth: 3,
         borderCapStyle: "round",
         //borderDash: [5, 5],
         pointHoverBackgroundColor: "rgb(88, 3, 3)",
@@ -96,7 +96,7 @@ const DashboardLineChart = (p) => {
 
             ctx.save();
             ctx.textAlign = "center";
-            ctx.fillStyle = "#B9B4C7";
+            ctx.fillStyle = "#FAF0E6";
             ctx.font = "12px Arial";
 
             ctx.fillText(value, xPos, yPos);
