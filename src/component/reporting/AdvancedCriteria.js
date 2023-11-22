@@ -130,7 +130,7 @@ const AdvancedCriteria = (p) => {
   return (
     <div className={c.inputContainerUC}>
       <div className={c.labelC}>
-        <label htmlFor="ac">trainig title</label>
+        <label htmlFor="ac">trainig type</label>
         <Select
           id="ac"
           value={selectedOption}
@@ -147,7 +147,7 @@ const AdvancedCriteria = (p) => {
       {trainigType.length > 0 && (
         <React.Fragment>
           <div className={`${c.labelC}`}>
-            <label htmlFor="act">trainig type</label>
+            <label htmlFor="act">trainig title</label>
             <Select
               id="act"
               value={selectedOptionType}

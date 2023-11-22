@@ -157,7 +157,7 @@ const EmployeeCard = (p) => {
         </tbody>
       </table>
       <div className={c.pcon}>
-        <p>EAF: évaluation à frois*</p>
+        <p>EAF: évaluation à froid*</p>
       </div>
     </div>
   );

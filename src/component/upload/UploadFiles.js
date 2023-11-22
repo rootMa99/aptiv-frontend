@@ -112,7 +112,7 @@ const UploadFiles = (p) => {
         )}
         <form onSubmit={submmitHandler} className={c.form}>
           <label htmlFor="arquivo" className={c.label}>
-            upload Employee data to data base:
+            upload Employee data to database:
           </label>
           <input
             accept=".xlsx"
@@ -138,7 +138,7 @@ const UploadFiles = (p) => {
         )}
         <form onSubmit={submmitHandlerFormation} className={c.form}>
           <label htmlFor="arquivo" className={c.label}>
-            upload formation data to data base:
+            upload formation data to database:
           </label>
           <input
             accept=".xlsx"
