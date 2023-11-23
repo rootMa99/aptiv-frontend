@@ -33,7 +33,9 @@ const getData = async (url, body) => {
     }
     const data = await response.json();
     return data;
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };
 
 let body = {
@@ -94,7 +96,7 @@ const DashBoard = (p) => {
         "http://localhost:8081/formation/formations/Dashboard",
         body
       );
-
+      console.log(data);
       setIsLoading(false);
       setNotify(false);
       if (data.hasOwnProperty("_embedded")) {
@@ -111,15 +113,6 @@ const DashBoard = (p) => {
     dispatchType();
   }, [dispatchType]);
 
-  const { nomberPF, nombreSF, totalHeure } = totalDataC(
-    dashboards.dashboardData
-  );
-
-  if (!monthChange && dashboards.dashboardData.length > 0) {
-    monthHour = nbMonth(dashboards.dashboardData);
-    monthChange = true;
-  }
-
   const filtredDashboard = filterFormation(
     dashboards.dashboardData,
     titreFormation,
@@ -127,6 +120,15 @@ const DashBoard = (p) => {
     categorie,
     departement
   );
+  console.log(filtredDashboard, dashboards.dashboardData);
+
+  const { nomberPF, nombreSF, totalHeure } = totalDataC(filtredDashboard[0]);
+
+  if (!monthChange && filtredDashboard.length > 0) {
+    monthHour = nbMonth(filtredDashboard[0]);
+    //monthChange = true;
+  }
+  console.log("here", nomberPF, nombreSF, totalHeure, monthHour);
 
   const { catPerHour, catForHour } = nbHour(filtredDashboard);
 
@@ -183,58 +185,60 @@ const DashBoard = (p) => {
           </div>
 
           <div className={classes.filterContainer}>
-            <div className={classes.filterItem}>
-              <h3>category </h3>
-              <DashboardFilterSelect
-                option={typos.categoriePersonel}
-                identif="CP"
-                chooseCategoriePer={chooseCategoriePer}
-                value={{
-                  value: categorie,
-                  label: categorie,
-                }}
-              />
-            </div>
-            <div className={classes.filterItem}>
-              <h3>departement </h3>
-              <DashboardFilterSelect
-                option={typos.departement}
-                identif="DP"
-                chooseDepartement={chooseDepartement}
-                value={{
-                  value: departement,
-                  label: departement,
-                }}
-              />
-            </div>
-            <div className={classes.filterItem}>
-              <h3>training title </h3>
-              <DashboardFilterSelect
-                option={typos.catList}
-                cf={true}
-                identif="CF"
-                chooseTitre={chooseTitre}
-                value={{
-                  value: tittre,
-                  label: tittre,
-                }}
-              />
-            </div>
-            {logic && (
+            <div className={classes.filterItems}>
               <div className={classes.filterItem}>
-                <h3>training type </h3>
+                <h3>category </h3>
                 <DashboardFilterSelect
-                  option={typos.catList[tittre]}
-                  tittre={tittre}
-                  identif="CTF"
-                  chooseTitreFormation={chooseTitreFormation}
+                  option={typos.categoriePersonel}
+                  identif="CP"
+                  chooseCategoriePer={chooseCategoriePer}
                   value={{
-                    value: titreFormation,
-                    label: titreFormation,
+                    value: categorie,
+                    label: categorie,
                   }}
                 />
               </div>
-            )}
+              <div className={classes.filterItem}>
+                <h3>departement </h3>
+                <DashboardFilterSelect
+                  option={typos.departement}
+                  identif="DP"
+                  chooseDepartement={chooseDepartement}
+                  value={{
+                    value: departement,
+                    label: departement,
+                  }}
+                />
+              </div>
+              <div className={classes.filterItem}>
+                <h3>training title </h3>
+                <DashboardFilterSelect
+                  option={typos.catList}
+                  cf={true}
+                  identif="CF"
+                  chooseTitre={chooseTitre}
+                  value={{
+                    value: tittre,
+                    label: tittre,
+                  }}
+                />
+              </div>
+              {logic && (
+                <div className={classes.filterItem}>
+                  <h3>training type </h3>
+                  <DashboardFilterSelect
+                    option={typos.catList[tittre]}
+                    tittre={tittre}
+                    identif="CTF"
+                    chooseTitreFormation={chooseTitreFormation}
+                    value={{
+                      value: titreFormation,
+                      label: titreFormation,
+                    }}
+                  />
+                </div>
+              )}
+            </div>
             {(departement !== "All" ||
               categorie !== "All" ||
               tittre !== "All") && (

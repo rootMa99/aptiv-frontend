@@ -78,7 +78,7 @@ const Employee = (p) => {
   return (
     <div className={c.container}>
       <div className={c.inputHolder}>
-        <input type="number" value={dataC} placeholder="Search By matricule" onChange={onChangeHandler}/>
+        <input type="number" value={dataC} min={1} placeholder="Search By matricule" onChange={onChangeHandler}/>
         <button onClick={onClickHandler}>Search</button>
       </div>
       {!isLoading ? <EmployeeCard /> : <Loading />}

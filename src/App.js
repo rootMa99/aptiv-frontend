@@ -27,7 +27,9 @@ const getData = async (url) => {
     }
     const data = await response.json();
     return data;
-  } catch (error) {}
+  } catch (error) {
+    return "error";
+  }
 };
 
 const curretDate = new Date();
@@ -49,6 +51,10 @@ function App() {
   const dispatchType = useCallback(async () => {
     //http req
     const data = await getData("http://localhost:8081/formation/allType");
+    if(data==="error"){
+      alert('no connection with backend');
+      return ;
+    }
     setIsLoading(false);
     dispatch(typeAction.addtypes(data));
   }, [dispatch, setIsLoading]);

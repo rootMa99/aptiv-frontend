@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 
 const months = [
@@ -24,6 +25,10 @@ const months = [
   "December",
 ];
 const DashboardLineChart = (p) => {
+
+  const [isHover, setIsHover]=useState(0);
+
+
   const data = {
     labels: months,
     datasets: [
@@ -49,6 +54,14 @@ const DashboardLineChart = (p) => {
   const options = {
     maintainAspectRatio: false,
     responsive: true,
+    onHover: (event, elements) => {
+      if (elements && elements.length > 0) {
+        const dataIndex = elements[0].index;
+        setIsHover(dataIndex+1);
+      } else{
+        setIsHover(0)
+      }
+    },
     scales: {
       x: {
         grid: {
@@ -115,8 +128,9 @@ const DashboardLineChart = (p) => {
     Tooltip,
     Legend
   );
+  const styleC= isHover>0 ?   {"cursor": "pointer"} :  {"cursor": "default"};
 
-  return <Line data={data} options={options} />;
+  return <Line data={data} options={options} style={styleC} />;
 };
 
 export default DashboardLineChart;

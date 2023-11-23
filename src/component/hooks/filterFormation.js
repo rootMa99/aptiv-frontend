@@ -213,8 +213,13 @@ export const filterFormation = (
 export const totalDataC = (data) => {
   const matricule = [];
   let nomberPF = 0;
-  const nombreSF = data.length;
+  let nombreSF;
+  console.log(data);
   let totalHeure = 0;
+  if (data===undefined){
+    return { nomberPF, nombreSF, totalHeure };
+  }
+  nombreSF=data.length;
   data.map((m) => {
     if (matricule.length === 0) {
       matricule.push(m.matricule);

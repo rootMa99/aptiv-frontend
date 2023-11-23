@@ -6,16 +6,12 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 
-const DashboardBarChart = (p) => {
-  const handleHover = (event) => {
-    if (event.element) {
-      document.body.style.cursor = 'pointer';
-    } else {
-      document.body.style.cursor = 'default';
-    }
-  };
+const DashboardBarChart = (p) =>{
+  const [isHover, setIsHover]=useState(0);
+
   const data = {
     labels: p.data.map((m) => m.name),
     datasets: [
@@ -32,9 +28,16 @@ const DashboardBarChart = (p) => {
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
   const options = {
-    onHover: handleHover,
     maintainAspectRatio: false,
     responsive: true,
+    onHover: (event, elements) => {
+      if (elements && elements.length > 0) {
+        const dataIndex = elements[0].index;
+        setIsHover(dataIndex+1);
+      } else{
+        setIsHover(0)
+      }
+    },
     scales: {
       x: {
         grid: {
@@ -94,7 +97,11 @@ const DashboardBarChart = (p) => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+ 
+  const styleC= isHover>0 ?   {"cursor": "pointer"} :  {"cursor": "default"};
+
+
+  return <Bar data={data} options={options} style={styleC} />;
 };
 
 export default DashboardBarChart;

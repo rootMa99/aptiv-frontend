@@ -4,8 +4,8 @@ import Select from "react-select";
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    width: "100%",
-    height: "6rem",
+    width: "18rem",
+    height: "3rem",
     fontWeight: "600",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
