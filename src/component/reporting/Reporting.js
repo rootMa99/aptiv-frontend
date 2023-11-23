@@ -26,7 +26,9 @@ const Reporting = (p) => {
   const [trainingCriteria, setTrainingCriteria] = useState(null);
   const [fileExcelName, setFileExcelName] = useState("EXPORTED_DATA");
   const [isEmpty, setIsEmpty] = useState(true);
+  const [isChecked, setIsChecked]= useState(false);
 
+  console.log(isChecked);
   const { data, loading, fetchData } = useGetData();
   const exportToExcel = useExportData();
 
@@ -48,7 +50,9 @@ const Reporting = (p) => {
   const modifyFileExcelName = (data) => {
     setFileExcelName(data);
   };
-
+const checkBoxchanged= data=>{
+  setIsChecked(data);
+}
   const submitDataTofetch = async () => {
     const dataBody = {
       type: trainingCriteria,
@@ -57,11 +61,12 @@ const Reporting = (p) => {
       startDate: datecriteria,
       endDate: endDate,
     };
-
-    await fetchData(
-      "http://localhost:8081/formation/formations/type/categorie/percat",
-      dataBody
-    );
+    if(!isChecked){
+      await fetchData(
+        "http://localhost:8081/formation/formations/type/categorie/percat",
+        dataBody
+      );
+    }
   };
   useEffect(() => {
     if ("_embedded" in data) {
@@ -106,6 +111,7 @@ const Reporting = (p) => {
             option={typos.catList}
             advancedC={advancedCriteriaData}
             trainingC={trainingCriteriaData}
+            checked={checkBoxchanged}
           />
           <div className={c.title}>
             <h3>process Reporting</h3>

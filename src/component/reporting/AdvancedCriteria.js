@@ -5,7 +5,7 @@ import Select from "react-select";
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    width: "33rem",
+    width: "40rem",
     fontWeight: "600",
     borderRadius: "5px",
     fontFamily: `Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -66,12 +66,13 @@ const AdvancedCriteria = (p) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionType, setSelectedOptionType] = useState(null);
   const [trainigType, setTrainigType] = useState([]);
+  const [checkBox, setCheckBox] = useState(false);
 
   const options = useMemo(() => {
     return [
       {
         value: null,
-        label: "none",
+        label: "ALL",
       },
     ];
   }, []);
@@ -106,7 +107,7 @@ const AdvancedCriteria = (p) => {
     });
 
     if (existing !== undefined && Object.keys(p.option).length > 0) {
-      const types = [{ value: null, label: "none" }];
+      const types = [{ value: null, label: "ALL" }];
       p.option[opt].map((m) => {
         return types.push({ value: m, label: m });
       });
@@ -126,7 +127,11 @@ const AdvancedCriteria = (p) => {
     setSelectedOptionType(e);
     p.trainingC(e.value);
   };
-
+  const checkBoxChanged = (e) => {
+    p.checked(!checkBox)
+    setCheckBox(!checkBox);
+  };
+  console.log(checkBox);
   return (
     <div className={c.inputContainerUC}>
       <div className={c.labelC}>
@@ -155,6 +160,17 @@ const AdvancedCriteria = (p) => {
               options={trainigType}
               styles={customStyles}
             />
+          </div>
+          <div className={c.checkBox}>
+            <label className={c["cyberpunk-checkbox-label"]}>
+              <input
+                type="checkbox"
+                className={c["cyberpunk-checkbox"]}
+                checked={checkBox}
+                onChange={checkBoxChanged}
+              />
+              not completed
+            </label>
           </div>
           <p className={c.parg}>
             (classification that distinguishes the method or format of the

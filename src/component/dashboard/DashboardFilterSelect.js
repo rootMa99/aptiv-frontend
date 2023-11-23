@@ -4,7 +4,7 @@ import Select from "react-select";
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    width: "18rem",
+    width: "22rem",
     height: "3rem",
     fontWeight: "600",
     borderRadius: "5px",

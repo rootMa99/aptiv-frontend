@@ -251,19 +251,24 @@ const DashBoard = (p) => {
                 />
               </button>
             )}
-
-            <DashboardDateRange
-              startDate={startDate}
-              endDate={endDate}
-              chooseDate={chooseDate}
-            />
-            <DashboardTotal
-              total={
-                !notify
-                  ? { nomberPF, nombreSF, totalHeure }
-                  : { nomberPF: 0, nombreSF: 0, totalHeure: 0 }
-              }
-            />
+            <div className={classes.wraperCon}>
+              <h3>select Date</h3>
+              <DashboardDateRange
+                startDate={startDate}
+                endDate={endDate}
+                chooseDate={chooseDate}
+              />
+            </div>
+            <div className={classes.wraperCon}>
+            <h3>select Date</h3>
+              <DashboardTotal
+                total={
+                  !notify
+                    ? { nomberPF, nombreSF, totalHeure }
+                    : { nomberPF: 0, nombreSF: 0, totalHeure: 0 }
+                }
+              />
+            </div>
           </div>
           {notify ? (
             <Notification />

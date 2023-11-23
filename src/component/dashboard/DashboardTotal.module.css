@@ -1,7 +1,6 @@
 .container {
-  width: 17%;
+  width: 100%;
   height: 10rem;
-  margin-top: 1rem;
   border: 3px solid rgb(99, 3, 3);
   padding: 1rem;
   background-color: #474b4d;
