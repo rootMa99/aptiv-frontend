@@ -27,11 +27,12 @@
     margin-right: 1rem;
 
   }
-  .parg{
+  .parg,
+  .checkBox p{
     font-size: small;
     font-weight:400;
     color: #F5E8C7;
-    text-align: center;
+    text-align: left;
   }
   .parg span{
     color: #FFD28F;
@@ -51,7 +52,11 @@
 
 .checkBox{
   margin: auto;
-  width: 10rem;
+  width: 60%;
+  display: flex;
+}
+.checkBox p{
+  margin-left: 1rem;
 }
 
 .cyberpunk-checkbox {

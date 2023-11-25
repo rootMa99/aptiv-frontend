@@ -1,10 +1,10 @@
 import * as XLSX from "xlsx";
 
 const useExportData = () => {
-  const exportToExcel = (fileName, data) => {
+  const exportToExcel = (fileName, data, notComplete) => {
     const newData = [];
     data.map((m) => {
-      const nd = {
+      const nd = !notComplete ? {
         matricule: m.personelDetails.matricule,
         nom: m.personelDetails.nom,
         prenom: m.personelDetails.prenom,
@@ -20,8 +20,13 @@ const useExportData = () => {
         month: m.month,
         prestataire: m.prestataire,
         formatteur: m.formatteur,
-        "evaluation à Frois": m.evaluationAFrois,
-        bilan: m.bilan,
+      } : {
+        matricule: m.matricule,
+        nom: m.nom,
+        prenom: m.prenom,
+        categorie: m.categorie,
+        "fonction Entreprise": m.fonctionEntreprise,
+        departement: m.departement,
       };
       return newData.push(nd);
     });

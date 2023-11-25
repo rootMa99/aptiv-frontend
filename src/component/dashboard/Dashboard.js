@@ -96,7 +96,6 @@ const DashBoard = (p) => {
         "http://localhost:8081/formation/formations/Dashboard",
         body
       );
-      console.log(data);
       setIsLoading(false);
       setNotify(false);
       if (data.hasOwnProperty("_embedded")) {
@@ -120,7 +119,6 @@ const DashBoard = (p) => {
     categorie,
     departement
   );
-  console.log(filtredDashboard, dashboards.dashboardData);
 
   const { nomberPF, nombreSF, totalHeure } = totalDataC(filtredDashboard[0]);
 
@@ -128,7 +126,6 @@ const DashBoard = (p) => {
     monthHour = nbMonth(filtredDashboard[0]);
     //monthChange = true;
   }
-  console.log("here", nomberPF, nombreSF, totalHeure, monthHour);
 
   const { catPerHour, catForHour } = nbHour(filtredDashboard);
 
@@ -211,7 +208,7 @@ const DashBoard = (p) => {
                 />
               </div>
               <div className={classes.filterItem}>
-                <h3>training title </h3>
+                <h3>training type </h3>
                 <DashboardFilterSelect
                   option={typos.catList}
                   cf={true}
@@ -225,7 +222,7 @@ const DashBoard = (p) => {
               </div>
               {logic && (
                 <div className={classes.filterItem}>
-                  <h3>training type </h3>
+                  <h3>training title </h3>
                   <DashboardFilterSelect
                     option={typos.catList[tittre]}
                     tittre={tittre}
@@ -260,7 +257,7 @@ const DashBoard = (p) => {
               />
             </div>
             <div className={classes.wraperCon}>
-            <h3>select Date</h3>
+              <h3>total</h3>
               <DashboardTotal
                 total={
                   !notify

@@ -14,11 +14,13 @@ import { formatDate } from "./component/hooks/dateCriteriaFunctions";
 import { dashboardActions } from "./store/dashboardSlice";
 import UploadFiles from "./component/upload/UploadFiles";
 
+
 const getData = async (url) => {
   try {
     const response = await fetch(url, {
       method: "GET",
       headers: {
+
         "Content-Type": "application/json",
       },
     });
@@ -56,6 +58,7 @@ function App() {
       return ;
     }
     setIsLoading(false);
+    console.log(data);
     dispatch(typeAction.addtypes(data));
   }, [dispatch, setIsLoading]);
 

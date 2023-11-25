@@ -128,10 +128,9 @@ const AdvancedCriteria = (p) => {
     p.trainingC(e.value);
   };
   const checkBoxChanged = (e) => {
-    p.checked(!checkBox)
+    p.checked(!checkBox);
     setCheckBox(!checkBox);
   };
-  console.log(checkBox);
   return (
     <div className={c.inputContainerUC}>
       <div className={c.labelC}>
@@ -161,6 +160,10 @@ const AdvancedCriteria = (p) => {
               styles={customStyles}
             />
           </div>
+          <p className={c.parg}>
+            (classification that distinguishes the method or format of the
+            employee's training - <span>(this field is optional)</span> )*
+          </p>
           <div className={c.checkBox}>
             <label className={c["cyberpunk-checkbox-label"]}>
               <input
@@ -171,11 +174,20 @@ const AdvancedCriteria = (p) => {
               />
               not completed
             </label>
+            <div>
+              <p>
+                (note: TRAINING TITLE is{" "}
+                <span style={{ color: "red", fontSize:"14px", borderBottom:"1px solid red", paddingBottom:"3px" }}>
+                  required*
+                </span>{" "}
+                if you checked this checkBox)*
+              </p>
+              <p>
+                (Leave this checkbox unchecked to view only the completed
+                training.)*
+              </p>
+            </div>
           </div>
-          <p className={c.parg}>
-            (classification that distinguishes the method or format of the
-            employee's training - <span>(this field is optional)</span> )*
-          </p>
         </React.Fragment>
       )}
     </div>

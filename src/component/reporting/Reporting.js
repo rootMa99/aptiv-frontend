@@ -26,9 +26,8 @@ const Reporting = (p) => {
   const [trainingCriteria, setTrainingCriteria] = useState(null);
   const [fileExcelName, setFileExcelName] = useState("EXPORTED_DATA");
   const [isEmpty, setIsEmpty] = useState(true);
-  const [isChecked, setIsChecked]= useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-  console.log(isChecked);
   const { data, loading, fetchData } = useGetData();
   const exportToExcel = useExportData();
 
@@ -50,9 +49,9 @@ const Reporting = (p) => {
   const modifyFileExcelName = (data) => {
     setFileExcelName(data);
   };
-const checkBoxchanged= data=>{
-  setIsChecked(data);
-}
+  const checkBoxchanged = (data) => {
+    setIsChecked(data);
+  };
   const submitDataTofetch = async () => {
     const dataBody = {
       type: trainingCriteria,
@@ -61,9 +60,15 @@ const checkBoxchanged= data=>{
       startDate: datecriteria,
       endDate: endDate,
     };
-    if(!isChecked){
+    if (!isChecked) {
       await fetchData(
         "http://localhost:8081/formation/formations/type/categorie/percat",
+        dataBody
+      );
+    } else {
+      console.log("sending...");
+      await fetchData(
+        "http://localhost:8081/personel/personels/notComplete",
         dataBody
       );
     }
@@ -78,7 +83,17 @@ const checkBoxchanged= data=>{
 
   const getReport = (e) => {
     if ("_embedded" in data) {
-      exportToExcel(fileExcelName, data._embedded.formationPersonelRests);
+      !isChecked
+        ? exportToExcel(
+            fileExcelName,
+            data._embedded.formationPersonelRests,
+            isChecked
+          )
+        : exportToExcel(
+            fileExcelName,
+            data._embedded.personelRestReportings,
+            isChecked
+          );
     }
   };
 

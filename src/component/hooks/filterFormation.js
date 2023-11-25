@@ -214,7 +214,6 @@ export const totalDataC = (data) => {
   const matricule = [];
   let nomberPF = 0;
   let nombreSF;
-  console.log(data);
   let totalHeure = 0;
   if (data===undefined){
     return { nomberPF, nombreSF, totalHeure };
